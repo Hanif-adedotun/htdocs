@@ -1,0 +1,12 @@
+$sql = "INSERT INTO `directive`(`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `Key Number`)
+ VALUES 
+ (\'Petroleum product\',\'NLNG\',\'2020-03-14\',\'231\',\'2020-12-12\',\'2020-11-11\',\'The oil was spilled\',\'Updated\',\'78676\')";
+
+
+How to add values to the database;
+* There should be an add button below, 
+   when clicked it appends a row at the end, 
+   then it collects the values and write them to the database.
+
+
+

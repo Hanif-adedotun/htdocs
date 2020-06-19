@@ -1,0 +1,97 @@
+<html>
+    <head>
+    <title>Ajax Library test file</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .tests{
+            background-color: rgb(199, 201, 202);
+            position: relative;
+            width: max-content;
+            text-align: center;
+            padding: 2%;
+            margin: 5%;
+            border-color: black;
+            border-radius: 5px;
+        }
+        ul li {
+            text-align: start;
+        }
+    </style>
+    <script type='text/javascript' src ='downloadText.js'></script>
+    <script type = "text/javascript" src = "downloadXML.js"></script>
+    <script language='javascript'>
+    function getmes1(){
+       downloadText('data.txt', function(text){
+           document.getElementById('results').innerHTML = text;
+        });
+    }
+
+    function getmes2(){
+       downloadText('data2.txt', function(text){
+           document.getElementById('results').innerHTML = text;
+        });
+
+    }
+    function getxml(){
+        downloadXml('data.php?data=2', function(xmlRes){
+        var res = document.getElementById('xmlResult');
+        colors =  xmlRes.getElementsByTagName('color');
+        res.innerHTML = 'The fetched colors:<ul>';
+            for(i=0; i<colors.length; i++){
+                res.innerHTML += '<li>' + colors[i].firstChild.data + '</li>';
+            }
+        res.innerHTML += '</ul>';
+        })
+    }
+    function getDocumentElement(){
+      downloadXml('party.xml', function(newRes){
+         // document.getElementById('newXmlResult').innerHTML = "The document element is &lt;" + newRes.nodeName + ">.";
+         
+         var firstNameNode, lastNameNode, displayText, target;
+         var personNode;
+        firstNameNode = newRes.getElementsByTagName('first_name');
+        lastNameNode = newRes.getElementsByTagName('last_name');
+        personNode = newRes.getElementsByTagName('person');
+        attributes = personNode.attributes;
+        attendancePerson = attributes.getNamedItem('attendance');
+
+         displayText = 'The second guest was ' + firstNameNode[1].firstChild.nodeValue + ' ' + lastNameNode[1].firstChild.nodeValue + ' was ' + attendancePerson.nodeValue;
+         target = document.getElementById('newXmlResult');
+         target.innerHTML = displayText;
+      })
+    }
+    </script>
+   
+</head>
+    <body>
+        <h1>Test file for Ajax Library</h1>
+        <div class='tests'>
+            <h2>Test for .txt file</h2>
+        <form>
+            <input id='mess1' type='button' value= 'Get message 1' onclick='getmes1()'>
+            <input  id='mess1' type = 'button' value='Get Message 2' onclick='getmes2()'>
+
+            <div >
+              <p id='results'>The placeholder</p>
+            </div>
+        </form>
+    </div>
+    <div class='tests'>
+        <h2>Test for .xml file</h2>
+    <form>
+        <input id='xml' type='button' value= 'Get xml' onclick='getxml()'>
+        <div >
+          <p id='xmlResult'>The placeholder</p>
+        </div>
+    </form>
+    </div>
+    <div class='tests'>
+    <form>
+        <input type = "button" value = "Get the document element" onclick = "getDocumentElement()">
+        <p id='newXmlResult'>The placeholder</p>
+    </form>
+    </div>
+    </body>
+</html>

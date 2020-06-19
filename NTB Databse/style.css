@@ -1,0 +1,22 @@
+/* style for the NTB table database */
+body{
+    background-color: whitesmoke;
+    text-align: center;
+}
+
+table{
+    text-align: center;
+    margin-top: 3em;
+}
+
+.thead{
+    background-color: gainsboro;
+}
+
+table tr td{
+    padding: 5px;
+}
+
+#error{
+    color: red;
+}
