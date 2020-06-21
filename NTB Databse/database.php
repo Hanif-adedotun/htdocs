@@ -26,25 +26,27 @@ echo "Cannot see database";
         echo "<td class='thead'><b>" .$val->name . "</b></td>";
     }
     echo "</tr>"; 
-
+    
+    
     
     while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
         echo "<tr contenteditable='true'>";
-        foreach ($row as $value){
+        foreach ($row as $value){ 
+            echo "<td>" . $value .  "</td>";
 
-            if ($value == 'Directive Date' || $value == 'Directive Deadline' || $value == 'Revert Date'){
-                echo "<td><input type='date' placeholder='yyyy-mm-dd' value =" .$value. "/></td>";
-            }else{
-                echo "<td>" . $value .  "</td>";
-            }
-            
-
+          /*foreach ($info as $val){
+            if ($val->name == 'Directive Date' || $val->name == 'Directive Deadline' || $val->name == 'Revert Date'){
+            echo "<td><input type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
+          }   */      
         }
         echo "<td><button class='delete' onclick='delTable()' >Delete</button></td>";
-        echo "</tr>";
+       
+    }
+    echo "</tr>";
     }
     echo "</table>";
-}}
+}
+
 
 //Get it to delete the particular element in the directive table
 //  if(isset($_GET['document']) == "delete"){
