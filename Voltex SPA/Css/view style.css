@@ -1,0 +1,185 @@
+/*style for the view page of Voltex SPA*/
+/*Remember to use the online version of Montserrat font*/
+*{
+    padding: 0;
+    margin: 0;
+}
+/*Use this code to develope all the feautures you want
+ for your mobile website/application. e.g the navigation
+ and the footer*/
+
+ 
+body{
+    margin: 0;
+    min-width: 50%;
+    background-color: snow;
+    font-family: Montserrat, Verdana, Geneva, Tahoma, sans-serif;
+    text-align: center;
+    font-size: medium;
+}
+
+header{
+    background-color: black;
+    text-align: left;
+    height: 20%;
+    z-index: 99;
+}
+
+.sticky {
+    position: fixed;
+    top: 0;
+  }
+
+  header div{
+    text-align: center;
+}
+header img{
+      display: inline-block;
+      color: white;
+      position: relative;
+      text-align: left;
+      padding: 0;
+      margin-left: 5%;
+      width: 25%;
+      height: 40%;
+}
+
+nav{
+      display: inline-block;
+      color: white;
+      text-align: center;
+      height: 20%;
+      background-color: black;
+      margin: 0;
+      padding: 0;
+}
+
+ nav ul li{
+          display: inline-block; 
+          text-align: center;
+          list-style-type: none;
+          text-decoration: none;
+          padding-right: 1em;
+          line-height: 100%;
+          cursor: pointer;
+          margin: 0;
+          padding-top: 0;
+          padding-bottom: 0.5em;
+          color: white;
+ 
+}
+
+nav ul li a{
+   color: white;
+   text-decoration: none;
+   text-align: center;
+ }
+
+nav ul li a:hover{
+background-color: white;
+color: black;
+border-radius: 3px;
+font-weight: bold;
+}
+
+
+ h1{
+     padding-top: 0.5em;
+ }
+ 
+
+h2 {
+    margin-top: 1em;
+    margin-bottom: .5em;
+}
+ span{
+     color: white;
+ }
+/*This code is for a division if we want our page to be black*/
+.layoutBoy{
+    background-color: black;
+    position: relative;
+    text-align: center;
+    margin-top: 1em;
+    width: 100%;
+    height: 100%;
+    color: white;
+}
+.Titterlinks {
+    position: absolute;
+    padding-left: 15%;
+    text-align: center;
+    width: 70%;
+   
+}
+/*It is rendered from from the js file to animate the H1*/
+.bigger{ 
+    font-size: xx-large;
+}
+.fLinks{
+   
+   position: sticky;
+   text-align: right;
+}
+/*footer of the page*/
+
+.footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: black;
+    color: white;
+    display: inline-block;
+  }
+
+  .footer p{
+   font-weight: lighter;
+    font-size: small;
+    text-align: left;
+    margin-left: 2%;
+
+}
+#socialMedia{
+    margin-top: 1%;
+}
+.footImg{
+    height: 2.5%;
+    width: 2.5%;
+    padding-left: .25%;
+}
+
+.ImgBigger{
+    height: 3%;
+    width: 3%;
+}
+
+.footer span{
+    text-align: right;
+       
+    }
+
+#news{
+    width: 10%;
+    text-align: right;
+}
+@media only screen and (max-width: 600px) {
+    body {
+    background-color: lightblue;
+    }
+    .Titterlinks {
+        position: absolute;
+        padding-left: 5%;
+        text-align: center;
+        width: 100%;
+    }
+    .footImg{
+        height: 5%;
+        width: 5%;
+        padding-left: 1%;
+    }
+    .ImgBigger{
+        height: 6%;
+        width: 6%;
+    }
+    }

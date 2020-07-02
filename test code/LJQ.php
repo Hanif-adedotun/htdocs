@@ -43,12 +43,18 @@ $query2 = "SELECT * FROM users";
    if (!$result) die("Fatal Error<br>");
 
 $rows = $result->num_rows;
+
+$info = mysqli_fetch_field_direct($result, 0);
+$info2 = mysqli_fetch_field_direct($result, 1);
+
 for($i=0; $i<$rows; ++$i)
 {
     $row = $result->fetch_array(MYSQLI_ASSOC);
 
     echo 'Username: '.htmlspecialchars($row['Username']).'<br>';
-    echo 'Password: '.htmlspecialchars($row['Password']).'<br><br>';
+    echo 'Password: '.htmlspecialchars($row['Password']).'<br>';
+    echo 'Type of username: ' .$info->type.'<br>';//type 10 == Date, 253 $ 254 == char
+    echo 'Type of password: ' .$info2->type.'<br><br>';
 }
 if (isset($_POST['delpass'])){
 $deletepassword = $_POST['delpass'];
