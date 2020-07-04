@@ -95,6 +95,12 @@ h2 {
  span{
      color: white;
  }
+ iframe{
+     width: 70%;
+     height: 70%;
+     border-radius: 5%;
+     margin-top: 5%;
+ }
 /*This code is for a division if we want our page to be black*/
 .layoutBoy{
     background-color: black;
