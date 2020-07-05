@@ -7,12 +7,13 @@ XMLHttpRequestObject = new XMLHttpRequest();
 XMLHttpRequestObject = new
 ActiveXObject("Microsoft.XMLHTTP");
 }
-if(XMLHttpRequestObject) {
+if(XMLHttpRequestObject)  {
 XMLHttpRequestObject.open("GET", url, true);
 XMLHttpRequestObject.onreadystatechange = function()
 {
-if (XMLHttpRequestObject.readyState == 4 &&
-XMLHttpRequestObject.status == 200) {
+ var status = XMLHttpRequestObject.status;
+ 
+if (XMLHttpRequestObject.readyState == 4 && (status === 0 || (status >= 200 && status < 400))) {
 callbackFunction(XMLHttpRequestObject.responseText);
 delete XMLHttpRequestObject;
 XMLHttpRequestObject = null;
@@ -21,3 +22,13 @@ XMLHttpRequestObject = null;
 XMLHttpRequestObject.send(null);
 }
 }
+
+if(xhr.readyState === XMLHttpRequest.DONE) {
+    var status = xhr.status;
+    if () {
+      // The request has been completed successfully
+      console.log(xhr.responseText);
+    } else {
+      // Oh no! There has been an error with the request!
+    }
+  }

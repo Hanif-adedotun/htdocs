@@ -2,31 +2,10 @@
 
 include 'openDB.php';
 
-class functions{
-
-public function startConnection(){
-$db_hostname = 'localhost';
-$db_database = 'ntb directive register';
-$db_username = 'hanif';
-$db_password = 'hanif_mysql';
-
-$conn = new mysqli($db_hostname, $db_username, $db_password);
-
-mysqli_select_db($conn, $db_database) or die('Unable to load Databse');
-  
-if($conn->connect_error){
-  echo 'Cannot connect to Server, check connection' . mysqli_error();
-}else{
-  return $conn;
-}
-}
-}
-
 function ShowDatabase($databaseName){
 
- $func = new functions();
- $func->startConnection();
-
+include_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
+  
 $query = "SELECT * FROM $databaseName";
 $result = $conn->query($query);
 
@@ -38,7 +17,8 @@ echo "Cannot see database";
     echo "<table border='1' >";
 
     $info = $result->fetch_fields();
-
+   
+    //show table headers
     echo "<tr>";
     foreach ($info as $val){
         echo "<td class='thead'><b>" .$val->name . "</b></td>";
@@ -46,16 +26,16 @@ echo "Cannot see database";
     echo "</tr>"; 
     
     
-   
+   //show all rows
     while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
         echo "<tr contenteditable='true'>";
         
-        for($i = 0; $i < mysqli_num_fields($result);){
+        for($i = 0; $i < mysqli_num_fields($result);){ //for date checker
         foreach ($row as $value){ 
           
          //To check if value is a date
           $rtype = mysqli_fetch_field_direct($result, $i);
-          if ($rtype->type == 10){
+          if ($rtype->type == 10){ //10 is a date type
             echo "<td><input type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
           } else{
             echo "<td>" . $value .  "</td>";
@@ -83,4 +63,13 @@ echo "Cannot see database";
 
 $conn->close();
 }
+
+/*
+function addRecord(){
+ after all codes
+
+ ShowDatabase("directives");
+ Refresh/show the table, but check without this code first
+} 
+*/
 ?>
