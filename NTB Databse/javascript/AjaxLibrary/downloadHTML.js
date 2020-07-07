@@ -12,7 +12,7 @@ XMLHttpRequestObject.open("GET", url, true);
 XMLHttpRequestObject.onreadystatechange = function()
 {
  var status = XMLHttpRequestObject.status;
- 
+
 if (XMLHttpRequestObject.readyState == 4 && (status === 0 || (status >= 200 && status < 400))) {
 callbackFunction(XMLHttpRequestObject.responseText);
 delete XMLHttpRequestObject;
@@ -22,13 +22,3 @@ XMLHttpRequestObject = null;
 XMLHttpRequestObject.send(null);
 }
 }
-
-if(xhr.readyState === XMLHttpRequest.DONE) {
-    var status = xhr.status;
-    if () {
-      // The request has been completed successfully
-      console.log(xhr.responseText);
-    } else {
-      // Oh no! There has been an error with the request!
-    }
-  }

@@ -9,6 +9,11 @@ mysqli_select_db($conn, $db_database) or die("Unable to select database: " . mys
 echo <<<_END
 <html>
 <head><title>Database with PHP and Mysql</title></head>
+<script type=text/javascript>
+function refresh(){
+    location.reload(true);
+}
+</script>
 <body>
 <form action='LJQ.php' method='post'>
 <span>Enter Username: <input type='text' name='user'></span><br>
@@ -73,7 +78,7 @@ echo <<<_END
 <form action='LJQ.php' method='post'>
 <span> Delete User from password</span><br>
 <span>Password: <input type='text' name='delpass'></span>
-<input type='submit' value='Delete User'>
+<input type='submit' onclick='refresh()' value='Delete User'>
 </form>
 _END;
 

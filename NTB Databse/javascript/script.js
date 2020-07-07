@@ -14,6 +14,7 @@ function getTable(){ //sends request to the database and waits for response
     downloadHTML('../NTB Databse/database.php?document=table', function(result){
         var table = document.getElementById('tableResult');
         table.innerHTML = result; //render result to html
+        
     });
 
 }
@@ -30,6 +31,7 @@ Table.focusout = editTable();
 
 //Module 3
 //Function to Delete a field from the table (directive), edit the functions later
+
 function delTable(){
     var con = confirm("Are you sure you want to delete this field?");
     if (con == true){
@@ -44,6 +46,22 @@ function delTable(){
 
 //Module 4
 //Function to add a new record to the database
+
+
+//check error here
+function addRecord(){
+var inputadd = document.getElementById("addF");
+const addField = document.getElementById('addField');//button for add field
+
+var addLocation = document.querySelector(".tables");//select the table
+
+inputadd.style.display = '';
+inputadd.classList.remove('hidden');
+//addLocation.innerHTML = addLocation; //add a row to it
+console.log('Add Record worked');
+addField.disabled = true; //disable the button after press
+
+}
 
 
 

@@ -25,3 +25,21 @@ table tr td{
 #error{
     color: red;
 }
+
+#addField{
+    margin-top: .5em;
+    position: absolute;
+    float: left;
+}
+#reload{
+    height: 10px;
+    width: 10px;
+}
+#addF{
+    margin: 0;
+    padding: 0;
+}
+.hidden{
+    visibility: hidden;
+    /*visibility: visible;*/
+}

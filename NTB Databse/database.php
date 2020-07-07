@@ -12,9 +12,9 @@ $result = $conn->query($query);
 if (!$result){
 echo "Cannot see database";
 }else{
-    if (isset($_GET['document']) == "table" ? $_GET['document'] : "table"){
+    if (isset($_GET['document']) == "table" ){  //? $_GET['document'] : "table" : to set it to document:table
 
-    echo "<table border='1' >";
+    echo "<table class='tables' border='1' >";
 
     $info = $result->fetch_fields();
    
@@ -54,7 +54,7 @@ echo "Cannot see database";
 
 //Get it to delete the particular element in the directive table
 //  if(isset($_GET['document']) == "delete"){
-//     $query = "DELETE FROM directive WHERE ";
+//     $query = "DELETE FROM directive WHERE ";id number tied from js delete value+1
 //     $result = $conn->query($query);
 //     if(!$result)
 //     echo "<p>Cannot delete from database</p>" ;
@@ -66,6 +66,15 @@ $conn->close();
 
 /*
 function addRecord(){
+  include_once 'login.php';
+
+  //if(isset($_GET))
+
+  $conn->close();
+}*/
+
+/*
+function {
  after all codes
 
  ShowDatabase("directives");
