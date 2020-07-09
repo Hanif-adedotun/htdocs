@@ -21,20 +21,22 @@
         
           <!--Check for error-->
           <div id='newTable'>
+            <form method="GET">
           <table border='1' id='addF' class='hidden'>
             <tr>
-                <td ><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Description" value=""/></td>
-                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Action party" value=""/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Meeting Number" value=""/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Remark" value=""/></td>
-                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Status Update" value=""/></td>
-                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Key Number" value=""/></td>
-                <td><input type="submit" value='Submit'/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Description" name="description"/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Action party" name="party"/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="directiveDate"/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Meeting Number" name="meetingNumber"/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="directiveDeadline"/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="revertDate"/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Remark" name="remark"/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Status Update" name="status"/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Key Number" name="keyNumber"/></td>
+                <td><input type="submit" id='submit 'name='submit' value='Submit' onclick='uploadValues()'/></td>
             </tr>
-            </table>
+         </table>
+        </form>
         </div>
             <button onclick='addRecord()' id='addField' name='add_field'>Add field</button>
         

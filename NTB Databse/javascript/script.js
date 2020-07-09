@@ -68,14 +68,60 @@ addField.disabled = true; //disable the button after press
 
 //Validationg each input against the main validator
 function alertDOM(){
-    alert('keyup');
-    clientValidation();
+    var input = document.getElementsByClassName('addval');
+    var tester = false;
+
+if (!(input.value == '')){ //check if an input is not empty
+   if (input.type == 'text'){
+      if (input.name == "meetingNumber" && input.length < 6){
+           tester = true;
+      }  else if(input.length < 9){
+        tester = true;
+      }
+      else{
+          tester = false;
+        document.getElementById('error').innerHTML = '<b>Enter a valid text</b>';
+      }
+   }
+   else if (input.type == 'number'){
+     if (input.name ==' keyNumber' && input.length < '128'){
+        tester = true;
+     }
+     else if (input.length < '9'){
+        tester = true;
+     }else{
+         tester = false;
+        document.getElementById('error').innerHTML = '<b>Enter a valid number</b>';
+      }
+
+   }
+   else if (input.type == 'date'){
+    if (input.length < '9'){
+        tester = true;
+    }else{
+        tester = false;
+        document.getElementById('error').innerHTML = '<b>Enter a valid date</b>';
+      }
+   }
+}else{
+    tester = false;
+    document.getElementById('error').innerHTML = '<b>Do not leave any field empty</b>';
+}
+return tester;
 }
 
-function clientValidation(){
-    console.log('Validating the input...');
+
+//Upload data values
+function uploadValues(){
+    if (tester == true){
+    console.log('Talking to the server...');
+    downloadHTML('../NTB Databse/database.php?document=addvalue', function(result){
+        var span = document.getElementById('error');//check display option later
+        span.innerHTML = result;
+    });
+}else{
+    document.getElementById('error').innerHTML = '<b>Enter a value</b>';
 }
-
-
+}
 
 

@@ -47,8 +47,9 @@ echo "Cannot see database";
        
     }
     echo "</tr>";
-    }
     echo "</table>";
+    }
+    
 }
 
 
@@ -64,14 +65,43 @@ echo "Cannot see database";
 $conn->close();
 }
 
-/*
-function addRecord(){
+
+function addRecord($databaseName){ //in the other script add addRecord('directive)
   include_once 'login.php';
 
-  //if(isset($_GET))
+  //Add if Delete Element was set
+ 
+  if(isset($_GET['submit']) && !($_GET['submit']== '')){
+    $description = $_GET['description'];
+    $party =  $_GET['party'];
+    $directiveDate = $_GET['directiveDate'];
+    $meetingNum = $_GET['meetingNumber'];
+    $directiveDeadline = $_GET['directiveDeadline'];
+    $revertDate = $_GET['revertDate'];
+    $remark = $_GET['remark'];
+    $status = $_GET['status'];
+    $keyNumber = $_GET['keyNumber'];
+
+    $sql = $conn->prepare("INSERT INTO '$databaseName'('Directive Description', 'Action Party', 'Directive Date', 'NTB Meeting Number', 'Directive Deadline', 'Revert Date', 'Remark', 'Status Update', 'Key Number') VALUES(?,?,?,?,?,?,?,?,?)");
+    $sql->bind_param('ssiiiissi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $keyNumber);
+    $sql->execute();
+
+
+    if(!$sql){
+      echo "<b>Unable to enter values into database</b><br>";
+    }else{
+      echo "<b>Added to database</b>";
+    }
+  
+  } else{
+    echo "<b>Enter a Value</b><br>";
+  }
+
 
   $conn->close();
-}*/
+  $sql->close();
+}
+
 
 /*
 function {
