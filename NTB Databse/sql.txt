@@ -9,4 +9,23 @@ How to add values to the database;
    then it collects the values and write them to the database.
 
 
+//To Prevent input from SQL injections
 
+function add_user($conn, $fn, $sn, $un, $pw)
+{
+$stmt = $conn->prepare('INSERT INTO users VALUES(?,?,?,?)');
+$stmt->bind_param('ssss', $fn, $sn, $un, $pw);
+$stmt->execute();
+$stmt->close();
+}
+
+
+function sanitizeString($server, $var)
+{
+if (get_magic_quotes_gpc())
+$var = mysqli_real_escape_string($server, $var);
+$var = stripslashes($var);
+$var = strip_tags($var);
+$var = htmlentities($var);
+return $var;
+}

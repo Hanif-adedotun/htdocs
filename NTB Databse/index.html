@@ -5,9 +5,9 @@
     <!-- <script type = "text/javascript" src = "AjaxLibrary/downloadXML.js"></script> -->
     <script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
     <!-- <script type = "text/javascript" src = "jquery-3.3.1.js"></script> -->
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <script type="text/javascript" src='javascript/script.js' ></script>
     
+    <script type="text/javascript" src='javascript/script.js' ></script>
+    <link rel="stylesheet" href="css/style.css" type="text/css"/>
     
 </head>
 <body>
@@ -15,23 +15,27 @@
     <div id='table'>
         <!-- <button name='reload' ><img id='reload' src='images/refresh-logo.png' height='20px' width='20px' onclick='refresh()'/></button> -->
         <form id ='tableResult'>
-            <p>There is a problem with your Server, check connection again.</p>
+            <p>There is a problem with your Server, or javascript is disabled check connection settings again.</p>
         </form>
        
         
           <!--Check for error-->
+          <div id='newTable'>
           <table border='1' id='addF' class='hidden'>
-            <tr   contenteditable="true">
-                <td ><input type="text"  placeholder="Description" value=""/></td>
-                <td ><input type="text" placeholder="Action party" value=""/></td>
-                <td><input type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td ><input type="number" placeholder="Meeting Number" value=""/></td>
-                <td><input type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td><input type='date' placeholder='yyyy-mm-dd' value=""/></td>
-                <td><input type="text"  placeholder="Remark" value=""/></td>
-                <td ><input type="text" placeholder="Status Update" value=""/></td>
-                <td ><input type="number" placeholder="Key Number" value=""/></td>
+            <tr>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Description" value=""/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Action party" value=""/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Meeting Number" value=""/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' value=""/></td>
+                <td><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Remark" value=""/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Status Update" value=""/></td>
+                <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Key Number" value=""/></td>
+                <td><input type="submit" value='Submit'/></td>
+            </tr>
             </table>
+        </div>
             <button onclick='addRecord()' id='addField' name='add_field'>Add field</button>
         
         <span id="error"></span>

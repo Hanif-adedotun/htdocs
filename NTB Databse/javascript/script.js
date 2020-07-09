@@ -51,6 +51,8 @@ function delTable(){
 //check error here
 function addRecord(){
 var inputadd = document.getElementById("addF");
+document.getElementById('newTable').classList.add('addoverflow');//Add srollbar to new table
+
 const addField = document.getElementById('addField');//button for add field
 
 var addLocation = document.querySelector(".tables");//select the table
@@ -61,6 +63,17 @@ inputadd.classList.remove('hidden');
 console.log('Add Record worked');
 addField.disabled = true; //disable the button after press
 
+//document.querySelector('.addval').onkeyup = 
+}
+
+//Validationg each input against the main validator
+function alertDOM(){
+    alert('keyup');
+    clientValidation();
+}
+
+function clientValidation(){
+    console.log('Validating the input...');
 }
 
 

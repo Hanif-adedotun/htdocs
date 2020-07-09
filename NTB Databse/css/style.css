@@ -27,9 +27,8 @@ table tr td{
 }
 
 #addField{
-    margin-top: .5em;
-    position: absolute;
-    float: left;
+    margin-top: .3em;
+
 }
 #reload{
     height: 10px;
@@ -38,8 +37,12 @@ table tr td{
 #addF{
     margin: 0;
     padding: 0;
+    max-width: 100%
 }
 .hidden{
     visibility: hidden;
     /*visibility: visible;*/
+}
+.addoverflow{
+    overflow: auto;
 }
