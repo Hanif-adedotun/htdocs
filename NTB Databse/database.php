@@ -72,7 +72,7 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
   //Add if Delete Element was set
  
   if(isset($_GET['submit']) && !($_GET['submit']== '')){
-    $description = $_GET['description'];
+    /*$description = $_GET['description'];
     $party =  $_GET['party'];
     $directiveDate = $_GET['directiveDate'];
     $meetingNum = $_GET['meetingNumber'];
@@ -91,16 +91,17 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       echo "<b>Unable to enter values into database</b><br>";
     }else{
       echo "<b>Added to database</b>";
-    }
-  
+    }*/
+    
   } else{
     echo "<b>Enter a Value</b><br>";
   }
-
-
   $conn->close();
-  $sql->close();
 }
+
+
+ 
+
 
 
 /*

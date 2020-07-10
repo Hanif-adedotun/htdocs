@@ -60,7 +60,7 @@ var addLocation = document.querySelector(".tables");//select the table
 inputadd.style.display = '';
 inputadd.classList.remove('hidden');
 //addLocation.innerHTML = addLocation; //add a row to it
-console.log('Add Record worked');
+console.log('Opened add fields.');
 addField.disabled = true; //disable the button after press
 
 //document.querySelector('.addval').onkeyup = 
@@ -70,6 +70,12 @@ addField.disabled = true; //disable the button after press
 function alertDOM(){
     var input = document.getElementsByClassName('addval');
     var tester = false;
+
+    console.log(input.type + ' ' + input[2]);
+ 
+    console.log(input);
+    console.log(input.lenght);
+      
 
 if (!(input.value == '')){ //check if an input is not empty
    if (input.type == 'text'){
@@ -113,6 +119,7 @@ return tester;
 
 //Upload data values
 function uploadValues(){
+    alertDOM();
     if (tester == true){
     console.log('Talking to the server...');
     downloadHTML('../NTB Databse/database.php?document=addvalue', function(result){
