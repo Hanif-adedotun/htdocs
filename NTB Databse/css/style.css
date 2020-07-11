@@ -22,7 +22,7 @@ table tr td{
     padding: 5px;
 }
 
-#error{
+#error{/*error from the client*/
     color: red;
 }
 
@@ -43,9 +43,9 @@ table tr td{
     visibility: hidden;
     /*visibility: visible;*/
 }
-.addoverflow{
+.addoverflow{/*for the addField to scroll*/
     overflow: auto;
 }
-.class{
-    background-color: blue;
+.derror{/*error from the database*/
+    color: red;
 }

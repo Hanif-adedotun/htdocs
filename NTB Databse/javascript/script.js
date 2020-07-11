@@ -67,67 +67,80 @@ addField.disabled = true; //disable the button after press
 }
 
 //Validationg each input against the main validator
+var tester;
 function alertDOM(){
-    var input = document.getElementsByClassName('addval');
-    var tester = false;
+    var input =  document.getElementsByClassName('addval');
+    
+    
+Array.from(input).forEach(function(element, index, array){
+    
+     tester = false;
 
-    console.log(input.type + ' ' + input[2]);
- 
-    console.log(input);
-    console.log(input.lenght);
+    console.log(element.type);
+    console.log(element.name);
+    console.log(element.value.length);
+    var error = document.getElementById('error');
       
 
-if (!(input.value == '')){ //check if an input is not empty
-   if (input.type == 'text'){
-      if (input.name == "meetingNumber" && input.length < 6){
-           tester = true;
-      }  else if(input.length < 9){
+if (!(element.value == '')){ //check if an input is not empty
+   if (element.type == 'text'){
+        if(element.value.length < '120'){
         tester = true;
+        error.innerHTML = '';
+        
       }
       else{
           tester = false;
-        document.getElementById('error').innerHTML = '<b>Enter a valid text</b>';
+          error.innerHTML = '<b>Enter a valid text</b>';
       }
    }
-   else if (input.type == 'number'){
-     if (input.name ==' keyNumber' && input.length < '128'){
+   else if (element.type == 'number'){
+     if (element.name ==' keyNumber' && element.value.length < '9'){
         tester = true;
+        error.innerHTML = '';
      }
-     else if (input.length < '9'){
+     else if (element.name == "meetingNumber" && element.value.length < '6'){
         tester = true;
+        error.innerHTML = '';
+   }
+     else if (element.value.length < '9'){
+        tester = true;
+        error.innerHTML = '';
      }else{
          tester = false;
-        document.getElementById('error').innerHTML = '<b>Enter a valid number</b>';
+         error.innerHTML = '<b>Enter a valid number</b>';
       }
 
    }
-   else if (input.type == 'date'){
-    if (input.length < '9'){
+   else if (element.type == 'date'){
+    if (element.value.length < '11'){
         tester = true;
+        error.innerHTML = '';
     }else{
         tester = false;
-        document.getElementById('error').innerHTML = '<b>Enter a valid date</b>';
+        error.innerHTML = '<b>Enter a valid date</b>';
+        
       }
    }
 }else{
     tester = false;
-    document.getElementById('error').innerHTML = '<b>Do not leave any field empty</b>';
 }
 return tester;
+});
 }
 
 
 //Upload data values
 function uploadValues(){
-    alertDOM();
+    //alertDOM();
     if (tester == true){
     console.log('Talking to the server...');
     downloadHTML('../NTB Databse/database.php?document=addvalue', function(result){
-        var span = document.getElementById('error');//check display option later
+        var span = document.getElementById('tableResult');//check display option later
         span.innerHTML = result;
     });
 }else{
-    document.getElementById('error').innerHTML = '<b>Enter a value</b>';
+    document.getElementById('error').innerHTML = '<b>One or more fields are without values</b>';
 }
 }
 

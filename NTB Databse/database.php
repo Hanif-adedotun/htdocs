@@ -12,7 +12,7 @@ $result = $conn->query($query);
 if (!$result){
 echo "Cannot see database";
 }else{
-    if (isset($_GET['document']) == "table" ){  //? $_GET['document'] : "table" : to set it to document:table
+    //? $_GET['document'] : "table" : to set it to document:table
 
     echo "<table class='tables' border='1' >";
 
@@ -48,7 +48,7 @@ echo "Cannot see database";
     }
     echo "</tr>";
     echo "</table>";
-    }
+    
     
 }
 
@@ -72,31 +72,40 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
   //Add if Delete Element was set
  
   if(isset($_GET['submit']) && !($_GET['submit']== '')){
-    /*$description = $_GET['description'];
-    $party =  $_GET['party'];
-    $directiveDate = $_GET['directiveDate'];
-    $meetingNum = $_GET['meetingNumber'];
-    $directiveDeadline = $_GET['directiveDeadline'];
-    $revertDate = $_GET['revertDate'];
-    $remark = $_GET['remark'];
-    $status = $_GET['status'];
-    $keyNumber = $_GET['keyNumber'];
+    $description = sanitizeString($conn, $_GET['description']);
+    $party =  sanitizeString($conn, $_GET['party']);
+    $directiveDate = sanitizeString($conn, $_GET['directiveDate']);
+    $meetingNum = sanitizeString($conn, $_GET['meetingNumber']);
+    $directiveDeadline = sanitizeString($conn, $_GET['directiveDeadline']);
+    $revertDate = sanitizeString($conn, $_GET['revertDate']);
+    $remark = sanitizeString($conn, $_GET['remark']);
+    $status = sanitizeString($conn, $_GET['status']);
+    $keyNumber = sanitizeString($conn, $_GET['keyNumber']);
 
     $sql = $conn->prepare("INSERT INTO '$databaseName'('Directive Description', 'Action Party', 'Directive Date', 'NTB Meeting Number', 'Directive Deadline', 'Revert Date', 'Remark', 'Status Update', 'Key Number') VALUES(?,?,?,?,?,?,?,?,?)");
     $sql->bind_param('ssiiiissi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $keyNumber);
     $sql->execute();
-
+    
 
     if(!$sql){
-      echo "<b>Unable to enter values into database</b><br>";
+      echo "<b class='derror'>Unable to enter values into database</b><br>";
     }else{
       echo "<b>Added to database</b>";
-    }*/
+    }
     
   } else{
-    echo "<b>Enter a Value</b><br>";
+    echo "<b class='derror'>Enter a Value: from the Server</b><br>";
   }
-  $conn->close();
+ // $sql->close();
+ function sanitizeString($server, $var)
+{
+if (get_magic_quotes_gpc())
+$var = mysqli_real_escape_string($server, $var);
+$var = stripslashes($var);
+$var = strip_tags($var);
+$var = htmlentities($var);
+return $var;
+}
 }
 
 
