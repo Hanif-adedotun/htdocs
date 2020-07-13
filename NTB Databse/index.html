@@ -12,6 +12,9 @@
 </head>
 <body>
     <h1>NTB Database</h1>
+    <div id='showtime'>
+        
+    </div>
     <div id='table'>
         <!-- <button name='reload' ><img id='reload' src='images/refresh-logo.png' height='20px' width='20px' onclick='refresh()'/></button> -->
         <form id ='tableResult'>
@@ -21,8 +24,8 @@
         
           <!--Check for error-->
           <div id='newTable'>
-            <form method="GET">
-          <table border='1' id='addF' class='hidden'>
+            <form id='sendForm'>
+          <table name='addform' border='1' id='addF' class='hidden'>
             <tr>
                 <td ><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Description" name="description"/></td>
                 <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Action party" name="party"/></td>
@@ -40,7 +43,8 @@
         </div>
             <button onclick='addRecord()' id='addField' name='add_field'>Add field</button>
         
-        <P id="error"></P>
+        <p id="error"></p>
+        <p id='NewTableresult'></p>
     </div>
     <!-- <p><input type="date"  placeholder="yyyy-mm-dd" value="2020-02-02"/></p> -->
     <table border="1" contenteditable="true">

@@ -5,7 +5,7 @@ if (isset($_GET['document']) == "table" ){
 ShowDatabase('directive');
 }
 
-if ($_GET['document'] == 'addvalue'){
-    addRecord('directive');
-}
+// if ($_GET['document'] == 'addvalue'){
+//     addRecord('directive');
+// }
 ?>

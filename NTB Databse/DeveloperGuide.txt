@@ -1,0 +1,67 @@
+$sql = "INSERT INTO `directive`(`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `Key Number`)
+ VALUES 
+ (\'Petroleum product\',\'NLNG\',\'2020-03-14\',\'231\',\'2020-12-12\',\'2020-11-11\',\'The oil was spilled\',\'Updated\',\'78676\')";
+
+
+How to add values to the database;
+* There should be an add button below, 
+   when clicked it appends a row at the end, 
+   then it collects the values and write them to the database.
+
+
+//To Prevent input from SQL injections
+
+function add_user($conn, $fn, $sn, $un, $pw)
+{
+$stmt = $conn->prepare('INSERT INTO users VALUES(?,?,?,?)');
+$stmt->bind_param('ssss', $fn, $sn, $un, $pw);
+$stmt->execute();
+$stmt->close();
+}
+
+
+function sanitizeString($server, $var)
+{
+if (get_magic_quotes_gpc())
+$var = mysqli_real_escape_string($server, $var);
+$var = stripslashes($var);
+$var = strip_tags($var);
+$var = htmlentities($var);
+return $var;
+}
+
+//Before the sanitizeString is checked use empty($var), to check if
+the sent data instead of the ISSET function.
+
+
+
+         //Version 2 Update
+
+tableObject.cells(index) Returns a collection (array) of the cells in the row.
+
+tableObject.row(index) Returns the row index of the row. Useful for inserting and
+deleting rows.
+
+tableObject.insertCell(index) Inserts a new cell and returns the inserted <td> element
+(which will be empty), or null for failure. If index isn’t supplied, then the <td> element
+will be inserted at the end of the row.
+
+tableObject.deleteCell(index) Deletes a cell. The index value indicates the position in
+the cell collection to delete.
+
+
+
+<?php
+$link = mysqli_connect("127.0.0.1", "my_user", "my_password", "my_db");
+
+if (!$link) {
+    echo "Error: Unable to connect to MySQL." . PHP_EOL;
+    echo "Debugging errno: " . mysqli_connect_errno() . PHP_EOL;
+    echo "Debugging error: " . mysqli_connect_error() . PHP_EOL;
+    exit;
+}
+
+echo "Success: A proper connection to MySQL was made! The my_db database is great." . PHP_EOL;
+echo "Host information: " . mysqli_get_host_info($link) . PHP_EOL;
+
+mysqli_close($link);

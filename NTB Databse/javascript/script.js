@@ -8,7 +8,7 @@ Hanif Adedotun 2020
 //Module 1
 //Display the main table Directive by requesting from the PHP table
 var body = document.getElementsByTagName("body");
-body.onload = getTable();
+body.onload = getTable(), showTime();
 
 function getTable(){ //sends request to the database and waits for response
     downloadHTML('../NTB Databse/database.php?document=table', function(result){
@@ -16,6 +16,39 @@ function getTable(){ //sends request to the database and waits for response
         table.innerHTML = result; //render result to html
         
     });
+
+}
+
+//Extra module to show current time //check for error in the Totaltime;
+function showTime(){
+var currentDate = new Date();
+var currentHour = currentDate.getHours();
+var currentMinute  = currentDate.getMinutes();
+var meridian;
+
+
+if (currentHour >= 12 && currentHour < 24){
+    currentHour = currentHour - 12;
+    if (currentHour == '0'){
+        currentHour = 12;
+    }
+    meridian = 'pm';
+}else{
+    meridian = 'am';
+}
+
+//console.log(currentMinute);
+
+if(currentMinute < 10){//if the seconds is less than 10
+    currentMinute = '0' + currentDate.getMinutes();
+    
+}
+var Totaltime = currentHour + ':' + currentMinute + ' ' + meridian;
+toString(Totaltime);
+
+console.log(Totaltime);
+
+setTimeout(function(){showTime()}, 30000);//update after every 30 seconds
 
 }
 
@@ -135,12 +168,15 @@ function uploadValues(){
     //alertDOM();
     if (tester == true){
     console.log('Talking to the server...');
-    downloadHTML('../NTB Databse/database.php?document=addvalue', function(result){
-        var span = document.getElementById('tableResult');//check display option later
+    var formElem = document.getElementById('sendForm');
+    var dataF = new FormData(formElem); //create a form element to send to the server
+
+    downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function(result){
+        var span = document.getElementById('NewTableresult');//check display option later
         span.innerHTML = result;
     });
 }else{
-    document.getElementById('error').innerHTML = '<b>One or more fields are without values</b>';
+    document.getElementById('error').innerHTML = '<b>One or more fields are without values. Input values!</b>';
 }
 }
 
