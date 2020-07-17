@@ -50,6 +50,7 @@ tableObject.deleteCell(index) Deletes a cell. The index value indicates the posi
 the cell collection to delete.
 
 
+"DELETE FROM `directive` WHERE `directive`.`Serial Number` = 10"
 
 <?php
 $link = mysqli_connect("127.0.0.1", "my_user", "my_password", "my_db");

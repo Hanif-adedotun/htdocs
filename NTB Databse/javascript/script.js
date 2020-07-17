@@ -7,8 +7,10 @@ Hanif Adedotun 2020
 
 //Module 1
 //Display the main table Directive by requesting from the PHP table
-var body = document.getElementsByTagName("body");
-body.onload = getTable(), showTime();
+// var body = document.getElementsByTagName("body");
+window.onload = getTable(), showTime();
+
+
 
 function getTable(){ //sends request to the database and waits for response
     downloadHTML('../NTB Databse/database.php?document=table', function(result){
@@ -47,8 +49,9 @@ var Totaltime = currentHour + ':' + currentMinute + ' ' + meridian;
 toString(Totaltime);
 
 console.log(Totaltime);
+document.querySelector('#showtime').innerHTML = '<b>' + Totaltime + '</b>';
 
-setTimeout(function(){showTime()}, 30000);//update after every 30 seconds
+setTimeout(function(){showTime()}, 15000);//update after every 15 seconds
 
 }
 
@@ -62,22 +65,8 @@ Table.focusout = editTable();
 
 */
 
+
 //Module 3
-//Function to Delete a field from the table (directive), edit the functions later
-
-function delTable(){
-    var con = confirm("Are you sure you want to delete this field?");
-    if (con == true){
-        downloadHTML('../NTB Databse/database.php?document=delete', function(result){
-            var span = document.getElementById('error');
-            span.innerHTML = result;
-        });
-    } else{
-        alert("Good Descision"); 
-    }
-}
-
-//Module 4
 //Function to add a new record to the database
 
 
@@ -96,17 +85,15 @@ inputadd.classList.remove('hidden');
 console.log('Opened add fields.');
 addField.disabled = true; //disable the button after press
 
-//document.querySelector('.addval').onkeyup = 
 }
 
-//Validationg each input against the main validator
+//Validating each input against the main validator
 var tester;
 function alertDOM(){
     var input =  document.getElementsByClassName('addval');
     
     
 Array.from(input).forEach(function(element, index, array){
-    
      tester = false;
 
     console.log(element.type);
@@ -116,7 +103,7 @@ Array.from(input).forEach(function(element, index, array){
       
 
 if (!(element.value == '')){ //check if an input is not empty
-   if (element.type == 'text'){
+   if (element.type == 'text'){ //if input is a text
         if(element.value.length < '120'){
         tester = true;
         error.innerHTML = '';
@@ -127,7 +114,7 @@ if (!(element.value == '')){ //check if an input is not empty
           error.innerHTML = '<b>Enter a valid text</b>';
       }
    }
-   else if (element.type == 'number'){
+   else if (element.type == 'number'){//if input is a number
      if (element.name ==' keyNumber' && element.value.length < '9'){
         tester = true;
         error.innerHTML = '';
@@ -145,7 +132,9 @@ if (!(element.value == '')){ //check if an input is not empty
       }
 
    }
-   else if (element.type == 'date'){
+   else if (element.type == 'date'){//if input is a date
+       toString(element.value);
+       console.log(element.value);
     if (element.value.length < '11'){
         tester = true;
         error.innerHTML = '';
@@ -156,28 +145,59 @@ if (!(element.value == '')){ //check if an input is not empty
       }
    }
 }else{
-    tester = false;
+    tester = false;//fallback if none of the inputs have values
 }
 return tester;
 });
 }
 
 
-//Upload data values
+//Upload data values to the server
 function uploadValues(){
-    //alertDOM();
     if (tester == true){
     console.log('Talking to the server...');
     var formElem = document.getElementById('sendForm');
-    var dataF = new FormData(formElem); //create a form element to send to the server
+    var dataF = new FormData(formElem); //create a form array list to send to the server
 
     downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function(result){
-        var span = document.getElementById('NewTableresult');//check display option later
+        var span = document.getElementById('NewTableresult');//if an error occur from the database
         span.innerHTML = result;
+
+    
+    if (span.contains(document.getElementById('successful'))){
+        alert('successful!');
+        location.reload();
+    }
+    
     });
 }else{
     document.getElementById('error').innerHTML = '<b>One or more fields are without values. Input values!</b>';
 }
+
+
 }
 
+//Module 3
+//Function to Delete a field from the table (directive)
 
+
+function delTable(value){
+    var con = confirm("Are you sure you want to delete this field?");
+    if (con == true){
+         downloadHTML('../NTB Databse/database.php?document=delete&deletekey='+ value + '', function(result){
+            var span = document.getElementById('NewTableresult');
+            span.innerHTML = result;
+         });
+   
+        console.log('You deleted ' + value);
+        
+ if (span.contains(document.getElementById('successful'))){
+         alert('successful!');
+         location.reload();
+        }
+    
+
+    } else{
+        alert("Okay"); 
+    }
+}

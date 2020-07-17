@@ -6,15 +6,15 @@
     <script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
     <!-- <script type = "text/javascript" src = "jquery-3.3.1.js"></script> -->
     
-    <script type="text/javascript" src='javascript/script.js' ></script>
+    
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     
 </head>
 <body>
     <h1>NTB Database</h1>
-    <div id='showtime'>
-        
-    </div>
+
+        <p id='showtime'>Time</p>
+   
     <div id='table'>
         <!-- <button name='reload' ><img id='reload' src='images/refresh-logo.png' height='20px' width='20px' onclick='refresh()'/></button> -->
         <form id ='tableResult'>
@@ -24,19 +24,19 @@
         
           <!--Check for error-->
           <div id='newTable'>
-            <form id='sendForm'>
+            <form id='sendForm' method="POST">
           <table name='addform' border='1' id='addF' class='hidden'>
             <tr>
                 <td ><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Description" name="description"/></td>
                 <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Action party" name="party"/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="directiveDate"/></td>
+                <td><input class='addval' onblur='alertDOM()' type='date' placeholder='dd-mm-yyyy' name="directiveDate"/></td>
                 <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Meeting Number" name="meetingNumber"/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="directiveDeadline"/></td>
-                <td><input class='addval' onkeyup='alertDOM()' type='date' placeholder='yyyy-mm-dd' name="revertDate"/></td>
+                <td><input class='addval' onblur='alertDOM()' type='date' placeholder='dd-mm-yyyy' name="directiveDeadline"/></td>
+                <td><input class='addval' onblur='alertDOM()' type='date' placeholder='dd-mm-yyyy' name="revertDate"/></td>
                 <td><input class='addval' onkeyup='alertDOM()' type="text"  placeholder="Remark" name="remark"/></td>
                 <td ><input class='addval' onkeyup='alertDOM()' type="text" placeholder="Status Update" name="status"/></td>
                 <td ><input class='addval' onkeyup='alertDOM()' type="number" placeholder="Key Number" name="keyNumber"/></td>
-                <td><input type="submit" name="submit" onmouseover='uploadValues()' id="submit"/></td>
+                <td><input type="submit" name="submit" onclick='uploadValues(); return false' id="submit"/></td>
             </tr>
          </table>
         </form>
@@ -58,5 +58,5 @@
     </tr>
     </table>
 </body>
-
+<script type="text/javascript" src='javascript/script.js' ></script>
 </html>

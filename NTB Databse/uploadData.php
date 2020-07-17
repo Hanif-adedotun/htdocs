@@ -1,7 +1,6 @@
 <?php
-addRecord('directive');
 
-
+addRecord('directive');//To add a field to the database
 
 function addRecord($databaseName){ //in the other script add addRecord('directive)
   include_once 'login.php';
@@ -19,19 +18,19 @@ return $var;
 
     $description = sanitizeString($conn, $_POST['description']);
     $party =  sanitizeString($conn, $_POST['party']);
-    $directiveDate = sanitizeString($conn, $_POST['directiveDate']);
+    $directiveDate = $_POST['directiveDate'];
     $meetingNum = sanitizeString($conn, $_POST['meetingNumber']);
-    $directiveDeadline = sanitizeString($conn, $_POST['directiveDeadline']);
-    $revertDate = sanitizeString($conn, $_POST['revertDate']);
+    $directiveDeadline = $_POST['directiveDeadline'];
+    $revertDate = $_POST['revertDate'];
     $remark = sanitizeString($conn, $_POST['remark']);
     $status = sanitizeString($conn, $_POST['status']);
     $keyNumber = sanitizeString($conn, $_POST['keyNumber']);
 
     try {
-      $sql = $conn->prepare("INSERT INTO '$databaseName' ('Directive Description', 'Action Party', 'Directive Date', 'NTB Meeting Number', 'Directive Deadline', 'Revert Date', 'Remark', 'Status Update', 'Key Number') VALUES(?,?,?,?,?,?,?,?,?)");
-      $sql->bind_param('ssiiiissi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $keyNumber);
+      $sql = $conn->prepare("INSERT INTO `$databaseName`(`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `Key Number`) VALUES(?,?,?,?,?,?,?,?,?)");
+      $sql->bind_param('sssissssi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $keyNumber);
       $sql->execute();
-      echo "<b>Added to database</b>";
+      echo "<b id='successful' >Added to database</b>";
     } 
     catch (\Throwable $th) {
       $error = $conn->errno . ' ' . $conn->error ;

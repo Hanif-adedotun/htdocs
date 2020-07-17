@@ -1,5 +1,5 @@
 <?php
-
+//This is the function file to show all Database
 include 'openDB.php';
 
 function ShowDatabase($databaseName){
@@ -27,6 +27,7 @@ echo "Cannot see database";
     
     
    //show all rows
+   //$k = 1;//This is for the delete function, to get each row to delete
     while($row=mysqli_fetch_array($result, MYSQLI_ASSOC)){
         echo "<tr contenteditable='true'>";
         
@@ -43,7 +44,7 @@ echo "Cannot see database";
          } 
 
         }
-        echo "<td><button class='delete' onclick='delTable()' >Delete</button></td>";
+        echo "<td contenteditable='false'><button value='". $value . "'class='delete' onclick='delTable(this.value); return false' >Delete</button></td>";
        
     }
     echo "</tr>";
@@ -53,17 +54,35 @@ echo "Cannot see database";
 }
 
 
+
+$conn->close();
+}
+
 //Get it to delete the particular element in the directive table
-//  if(isset($_GET['document']) == "delete"){
-//     $query = "DELETE FROM directive WHERE ";id number tied from js delete value+1
-//     $result = $conn->query($query);
-//     if(!$result)
-//     echo "<p>Cannot delete from database</p>" ;
-// } 
+
+
+function delvalues($database, $position, $delkey){
+  include_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
+
+
+$query = "DELETE FROM `$database` WHERE `$database`.`$position` = $delkey";//id number tied from js delete value
+$result = $conn->query($query);
+
+if(!$result){
+  echo "<br><b class='derror'>Unable to delete row from database<br>";
+  echo "Error description: ".$conn->error . "</b>";
+  //check for the correct syntax of MariaDB sql delete 
+ }
+ else{
+  echo '<b id="successful">Succesfully Deleted!</b>';
+ }
 
 
 $conn->close();
 }
+
+
+
 
 
 
