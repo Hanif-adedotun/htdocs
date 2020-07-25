@@ -9,13 +9,17 @@ h1{
     padding-bottom: 0;
 }
 
-table{
-    text-align: center;
-    margin-top: 3em;
-}
 
 .thead{
     background-color: gainsboro;
+}
+
+tr{
+    text-align: center;
+}
+
+.maintables{
+text-align: center;
 }
 
 table tr td{

@@ -2,11 +2,27 @@
 
 //This file is to control all the functions that displays on our database
 
-if ($_GET['document'] == "table" ){
-ShowDatabase('directive');
+include 'tableNames.php';
+
+//Open all the Tables in the database
+if ($_GET['document'] == "table1" ){
+ShowDatabase($table1);
 }
 
+if($_GET['document'] == "table2"){
+  ShowDatabase($table2);
+}
+
+if($_GET['document'] == "table3"){
+  ShowDatabase($table3);
+}
+
+if($_GET['document'] == "table4"){
+  ShowDatabase($table4);
+}
+
+//Delete the tables
 if($_GET['document'] == "delete"){
-    delvalues('directive', 'Key Number', $_GET['deletekey']);
+    delvalues($_GET['database'], 'ID', $_GET['deletekey']);
   } 
 ?>

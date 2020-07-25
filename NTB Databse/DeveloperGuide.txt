@@ -8,27 +8,19 @@ How to add values to the database;
    when clicked it appends a row at the end, 
    then it collects the values and write them to the database.
 
-
-//To Prevent input from SQL injections
-
-function add_user($conn, $fn, $sn, $un, $pw)
-{
-$stmt = $conn->prepare('INSERT INTO users VALUES(?,?,?,?)');
-$stmt->bind_param('ssss', $fn, $sn, $un, $pw);
-$stmt->execute();
-$stmt->close();
-}
+//This mysql word is to check places to optimise your database
+EXPLAIN SELECT * FROM accounts WHERE number='12345';
 
 
-function sanitizeString($server, $var)
-{
-if (get_magic_quotes_gpc())
-$var = mysqli_real_escape_string($server, $var);
-$var = stripslashes($var);
-$var = strip_tags($var);
-$var = htmlentities($var);
-return $var;
-}
+// For the drop down menu to show fields in SBU/CSU table
+select first_name from friends where gender = 'f' or gender = 'm';
+
+//To join the two tables together (Relational database)
+> select * from $database left outer join  $secondary_table ON $database.$field = $secondary_table.$field;
+
+> select DISTINCT tc.chapter, tc.chapter_name from table_of_contents as tc, chapte
+r_topics as ct where  tc.chapter = ct.chapter;
+
 
 //Before the sanitizeString is checked use empty($var), to check if
 the sent data instead of the ISSET function.
