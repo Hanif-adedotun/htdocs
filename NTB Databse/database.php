@@ -16,14 +16,7 @@ echo "<br>Error: " . $conn->error . "</b>";
 }else{
     
   
-    //  function selectDB(){
-    //    $database2 = 'sbu/csu table';
-    //    include_once 'login.php';
-    //    $sql = "SELECT `SBU/CSU Abbreviation` FROM `$database2`";
-    //    $resultNew = $conn->query($sql);
-    //    if(!$resultNew) 
-    //    echo '<b class="derror">Cannot see SBU database</b>';
-    //  }
+    
   
   
    echo "<h2>" .strtoupper($databaseName) . "</h2>";
@@ -50,16 +43,39 @@ echo "<br>Error: " . $conn->error . "</b>";
         for($i = 0; $i < mysqli_num_fields($result);){ //loop through the table to check is a particular field is a date
         
          foreach ($row as $value){ //To loop through each field and input the value
-          
-          // if ($databaseName == 'directive table'){
 
-          // }
 
          //To check if value is a date
           $rtype = mysqli_fetch_field_direct($result, $i);//Check type of variable in a field
           if ($rtype->type == 10){ //10 is a date type
             echo "<td><input type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
-          } else{
+          } 
+          else if($rtype->name == 'Action Party'){//if the field name is action party
+            
+            if ($databaseName == 'directive table'){ //connect to SBU/CSU Database if it is a directive table
+              $database2 = 'sbu/csu table';
+              include_once 'login.php';
+              $sql = "SELECT `SBU/CSU Abbreviation` FROM `$database2`";
+              $resultNew = $conn->query($sql);
+              if(!$resultNew) 
+              echo '<b class="derror">Cannot see SBU database</b>';
+            }
+           
+            echo "<td>";//create row
+            echo '<select name="SBU/CSU" class="SBUCSU">';//create select element for each column
+            
+            while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
+              
+               foreach ($optionRow as $option){//to render each value to the option tag
+                
+                 echo '<option value='.$option.'>'.$option.'</option>';
+                }
+               
+             }
+             echo '</select>';
+             echo "</td>";
+          }
+          else{
             echo "<td>" . $value .  "</td>";
           }
            $i++;
@@ -67,7 +83,7 @@ echo "<br>Error: " . $conn->error . "</b>";
 
         }
         //The delete button for each row in each table
-        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onmouseover='delTable(this.value, ".$databaseName."); return false' >Delete</button></td>";
+        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onmouseover='delTable(this.value, ".$databaseName."); return false' >Delete</button></td>";//
        
     }
     echo "</tr>";

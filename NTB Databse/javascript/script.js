@@ -7,7 +7,7 @@ Hanif Adedotun 2020
 
 
 // This loads all the functions after the DOM loads
-window.onload = getTable(), showTime();
+window.onload = getTable(), showTime(), localget();
 
 
 //Module to show current time //check for error in the Totaltime;
@@ -79,8 +79,9 @@ Table.focusout = editTable();
 
 
 //check error here
-function addRecord(tableID, divTable, buttonID){
+function addRecord(tableIDV, divTable, buttonID){
 
+tableID = document.getElementById(tableIDV);
 divTable.classList.add('addoverflow');//Add srollbar to new table
 
 tableID.style.display = '';
@@ -90,6 +91,22 @@ tableID.classList.remove('hidden');//show table
 console.log('Opened table fields.');
 
 document.getElementById(buttonID).disabled = true;//disable the button after press
+
+if(tableIDV == 'addF'){//If it is the first table
+    console.log('First Table');
+    var finalOptions = document.getElementById('sbuOptions');
+    var options = document.querySelector('.SBUCSU').children;
+    
+    var optionArray = Array.from(options);//create array from values
+
+   for (let i = 0; i < optionArray.length; i++) {
+       const opt = '<option value='+optionArray[i].value+'>' + optionArray[i].value +'</option>'; 
+     
+       finalOptions.innerHTML += opt;
+   }
+
+}
+
 }
 
 
@@ -211,3 +228,24 @@ function delTable(value, databasename){
         alert("Okay"); 
     }
 }
+
+//Extra Module for localstorage
+function localstore(nameID){//To set the Value
+    var elem = document.getElementById(nameID).value;
+    //alert(elem);
+    console.log(elem);
+
+    if(window.localStorage){
+        window.localStorage.setItem('name', elem);
+        console.log('The value has been set');
+    }
+    
+}
+function localget(){//To get value after it has been set 
+    if(window.localStorage){
+        var valueGet = window.localStorage.getItem('name');
+        document.getElementById('location').value = valueGet;
+        console.log(valueGet);
+    }
+}
+

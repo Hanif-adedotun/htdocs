@@ -14,6 +14,8 @@
     <h1>NTB Database</h1>
 
         <p id='showtime'>Time</p>
+    
+<div id='AllTables'>
    
     <div id='table' class='maintables' >
         <!-- <button name='reload' ><img id='reload' src='images/refresh-logo.png' height='20px' width='20px' onclick='refresh()'/></button> -->
@@ -29,7 +31,12 @@
           <table name='addform'  id='addF' class='hidden'>
             <tr>
                 <td ><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text"  placeholder="Description" name="description"/></td>
-                <td ><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text" placeholder="Action party" name="party"/></td>
+                <td >
+                    <!-- <input  onkeyup='' type="text" placeholder="Action party" /> -->
+                    <select class='addval' id='sbuOptions' onblur='alertDOM(document.getElementById("NewTableresult"), this.className)' name="party">
+                    <option value="">SBU/CSU Options:</option>
+                   </select>
+                </td>
                 <td><input class='addval' onblur='alertDOM(document.getElementById("NewTableresult"), this.className)' type='date' placeholder='dd-mm-yyyy' name="directiveDate"/></td>
                 <td ><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="number" placeholder="Meeting Number" name="meetingNumber"/></td>
                 <td><input class='addval' onblur='alertDOM(document.getElementById("NewTableresult"), this.className)' type='date' placeholder='dd-mm-yyyy' name="directiveDeadline"/></td>
@@ -41,7 +48,7 @@
          </table>
         </form>
         </div>
-            <button onclick='addRecord(document.getElementById("addF"), document.getElementById("newTable"), this.id)' id='addField' name='add_field'>Add field</button>
+            <button onclick='addRecord("addF", document.getElementById("newTable"), this.id)' id='addField' name='add_field'>Add field</button>
         
         <p id='NewTableresult'></p>
     </div>
@@ -58,11 +65,11 @@
           
               <td ><input class='addval2' onkeyup='alertDOM(document.getElementById("NewTableresult2"), this.className)' type="text"  placeholder="Directorate Name" name="DirectorateName"/></td>
               <td ><input class='addval2' onkeyup='alertDOM(document.getElementById("NewTableresult2"), this.className)' type="text"  placeholder="SBU/CSU ID" name="SBU/CSUID"/></td>
-              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), document.getElementById("NewTableresult2")); return false' id="submit"/></td>
+              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), document.getElementById("NewTableresult2")); return false' id="submit2"/></td>
           </tr>
        </table>
       </form>
-    </div><button onclick = 'addRecord(document.getElementById("addF2"), document.getElementById("newTable2"), this.id)';  class='test' id='addField2' name='add_field'>Add field</button>
+    </div><button onclick = 'addRecord("addF2", document.getElementById("newTable2"), this.id)';  class='test' id='addField2' name='add_field'>Add field</button>
 
     <p id='NewTableresult2'></p>
     </div>
@@ -82,17 +89,17 @@
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Head of SBU" name="HeadofSBU"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Name" name="Name"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="number"  placeholder="Directive ID" name="DirectiveID"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), document.getElementById("NewTableresult3")); return false' id="submit"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), document.getElementById("NewTableresult3")); return false' id="submit3"/></td>
                  </tr>
               </table>
              </form>
         </div>
-        <button onclick = 'addRecord(document.getElementById("addF3"), document.getElementById("newTable3"), this.id)';  class='test' id='addField3' name='add_field'>Add field</button>
+        <button onclick = 'addRecord("addF3", document.getElementById("newTable3"), this.id)';  class='test' id='addField3' name='add_field'>Add field</button>
      
         <p id='NewTableresult3'></p>
     </div>
 
-    <div id='table4' >
+    <div id='table4' class="maintables">
         <form id='tableResult4'>
             <p>Table 4</p>
         </form>
@@ -104,15 +111,24 @@
                    
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  placeholder="Full name" name="Fullname"/></td>
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  maxlength="4" placeholder="Department" name="Department"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), document.getElementById("NewTableresult4")); return false' id="submit"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), document.getElementById("NewTableresult4")); return false' id="submit4"/></td>
                  </tr>
               </table>
              </form>
            </div>
-           <button onclick = 'addRecord(document.getElementById("addF4"), document.getElementById("newTable4"), this.id)';  class='test' id='addField4' name='add_field'>Add field</button>
+           <button onclick = 'addRecord("addF4", document.getElementById("newTable4"), this.id)';  class='test' id='addField4' name='add_field'>Add field</button>
            <p id='NewTableresult4'></p>
         </div>
 
+ </div>
+        
+<p>
+<select name="location" id="location" onchange ="localstore(this.id)">
+<option value="newyork" >New York</option>
+<option value="illionis">Chicago</option>
+<option value="california">San Francisco</option>
+</select>
+</p>
 </body>
 <script type="text/javascript" src='javascript/script.js' ></script>
 </html>
