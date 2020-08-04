@@ -73,15 +73,15 @@ function addRecord3($databaseName){
   include_once 'login.php';
 
  
-  $DirectorateName = sanitizeString($conn, $_POST['DirectorateName']);
+  $DirectorateName = sanitizeString($conn, $_POST['SBU/CSUAbbreviation']);
   $SBUFullName = sanitizeString($conn, $_POST['SBUFullName']);
   $HeadofSBU = sanitizeString($conn, $_POST['HeadofSBU']);
   $Name = sanitizeString($conn, $_POST['Name']);
-  $DirectiveID = sanitizeString($conn, $_POST['DirectiveID']);
+
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SCU-SBU Name full`, `Head of SBU`, `Name`, `Directive ID`) VALUES(?,?,?,?,?)");
-    $sql->bind_param('ssssi', $DirectorateName, $SBUFullName, $HeadofSBU, $Name, $DirectiveID);
+    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SCU-SBU Name full`, `Head of SBU`, `Name`) VALUES(?,?,?,?)");
+    $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
     $sql->execute();
     echo "<b id='successful' >Added to database</b>";
   } 

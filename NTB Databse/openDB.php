@@ -21,6 +21,11 @@ if($_GET['document'] == "table4"){
   ShowDatabase($table4);
 }
 
+//Get SBU/CSU Values from the ShowDatabase
+if($_GET['document'] == "SBUoptions"){
+  SBUTable();
+}
+
 //Delete the tables
 if($_GET['document'] == "delete"){
     delvalues($_GET['database'], 'ID', $_GET['deletekey']);

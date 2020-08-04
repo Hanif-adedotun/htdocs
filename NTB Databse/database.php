@@ -2,6 +2,27 @@
 //This is the function file to show all Database
 include 'openDB.php';
 
+function SBUTable(){//To show the SBU Table Options
+  include 'tableNames.php';//Import table names
+  include 'login.php';//Connect to the database
+
+  $sql = "SELECT `SBU/CSU Abbreviation` FROM `$table3`";
+  $resultNew = $conn->query($sql);
+  if(!$resultNew) 
+  echo '<b class="derror">Cannot see SBU database</b>';
+
+while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
+  
+   foreach ($optionRow as $option){//to render each value to the option tag
+    
+     echo '<option value='.$option.'>'.$option.'</option>';
+    }
+   
+ }
+ 
+}
+
+
 function ShowDatabase($databaseName){
 
 include_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
@@ -52,38 +73,23 @@ echo "<br>Error: " . $conn->error . "</b>";
           } 
           else if($rtype->name == 'Action Party'){//if the field name is action party
             
-            if ($databaseName == 'directive table'){ //connect to SBU/CSU Database if it is a directive table
-              $database2 = 'sbu/csu table';
-              include_once 'login.php';
-              $sql = "SELECT `SBU/CSU Abbreviation` FROM `$database2`";
-              $resultNew = $conn->query($sql);
-              if(!$resultNew) 
-              echo '<b class="derror">Cannot see SBU database</b>';
-            }
-           
             echo "<td>";//create row
             echo '<select name="SBU/CSU" class="SBUCSU">';//create select element for each column
-            
-            while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
-              
-               foreach ($optionRow as $option){//to render each value to the option tag
-                
-                 echo '<option value='.$option.'>'.$option.'</option>';
-                }
-               
-             }
-             echo '</select>';
-             echo "</td>";
+            SBUTable();//Call the values in option form.
+            echo '</select>';
+            echo "</td>";
+
+
           }
           else{
             echo "<td>" . $value .  "</td>";
           }
-           $i++;
+            $i++;
          } 
 
         }
         //The delete button for each row in each table
-        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onmouseover='delTable(this.value, ".$databaseName."); return false' >Delete</button></td>";//
+        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onmouseover='delTable(this.value, ".$databaseName."); return false'>Delete</button></td>";//
        
     }
     echo "</tr>";

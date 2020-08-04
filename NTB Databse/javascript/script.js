@@ -88,13 +88,15 @@ tableID.style.display = '';
 tableID.classList.remove('hidden');//show table
 
 //addLocation.innerHTML = addLocation; //add a row to it
-console.log('Opened table fields.');
+console.log('Opened table ' + tableIDV + ' fields.');
 
 document.getElementById(buttonID).disabled = true;//disable the button after press
 
-if(tableIDV == 'addF'){//If it is the first table
-    console.log('First Table');
-    var finalOptions = document.getElementById('sbuOptions');
+//To render the SBU/CSU options to the upload values, from the values 
+//rendered to the first table.
+
+function createOptions(optionID){//Set the options to SBU/CSU ID
+    var finalOptions = document.getElementById(optionID);
     var options = document.querySelector('.SBUCSU').children;
     
     var optionArray = Array.from(options);//create array from values
@@ -104,7 +106,20 @@ if(tableIDV == 'addF'){//If it is the first table
      
        finalOptions.innerHTML += opt;
    }
+}
 
+if(tableIDV == 'addF' ){//If it is the first table
+    downloadHTML('../NTB Databse/database.php?document=SBUoptions', function(result){//Directive Table
+        var table = document.getElementById('sbuOptions');
+        table.innerHTML = result; //render result to html
+        
+    });
+}else if(tableIDV == 'addF2'){//If it is the second table
+    downloadHTML('../NTB Databse/database.php?document=SBUoptions', function(result){//Directive Table
+        var table = document.getElementById('sbuOptions2');
+        table.innerHTML = result; //render result to html
+        
+    });
 }
 
 }
@@ -209,21 +224,19 @@ function uploadValues(formElem, spanresult){
 
 
 function delTable(value, databasename){
+    console.log('code error');
     var con = confirm("Are you sure you want to delete this field?");
     if (con == true){
          downloadHTML('../NTB Databse/database.php?document=delete&database='+ databasename +'&deletekey='+ value + '', function(result){
             var span = document.getElementById('NewTableresult');
             span.innerHTML = result;
          });
-   
-        console.log('You deleted ' + value);
-        
+          
  if (span.contains(document.getElementById('successful'))){
+         console.log('You deleted row ' + value + ' from ' + databasename);
          alert('successfully Deleted Row!');
          location.reload();
         }
-    
-
     } else{
         alert("Okay"); 
     }
@@ -244,8 +257,16 @@ function localstore(nameID){//To set the Value
 function localget(){//To get value after it has been set 
     if(window.localStorage){
         var valueGet = window.localStorage.getItem('name');
-        document.getElementById('location').value = valueGet;
+        var location = document.getElementById('location');
+
+        if(valueGet == null){
+            location.value = location.firstElementChild.value;
+            console.log('options are empty');
+        }else{
+        location.value = valueGet;
         console.log(valueGet);
+       // window.localStorage.clear('name');
+        }
     }
 }
 

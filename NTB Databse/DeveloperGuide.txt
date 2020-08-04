@@ -1,12 +1,7 @@
-$sql = "INSERT INTO `directive`(`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `Key Number`)
- VALUES 
- (\'Petroleum product\',\'NLNG\',\'2020-03-14\',\'231\',\'2020-12-12\',\'2020-11-11\',\'The oil was spilled\',\'Updated\',\'78676\')";
-
-
-How to add values to the database;
-* There should be an add button below, 
-   when clicked it appends a row at the end, 
-   then it collects the values and write them to the database.
+//Link the SBU/CSU database together
+> Default of Directive ID in SBU/CSU should be null
+> Link SBU/CSU ID in directorate table to ID of SBU/CSU
+> Link directive ID to chosen SBU/CSU in directive table
 
 //This mysql word is to check places to optimise your database
 EXPLAIN SELECT * FROM accounts WHERE number='12345';
