@@ -10,16 +10,15 @@ EXPLAIN SELECT * FROM accounts WHERE number='12345';
 // For the drop down menu to show fields in SBU/CSU table
 select first_name from friends where gender = 'f' or gender = 'm';
 
-//To join the two tables together (Relational database)
-> select * from $database left outer join  $secondary_table ON $database.$field = $secondary_table.$field;
+//To check if a value in the database is entered correctly
+CONSTRAINT check_role_in_list CHECK (user_role IN('Admin', 'Staff')),
 
-> select DISTINCT tc.chapter, tc.chapter_name from table_of_contents as tc, chapte
-r_topics as ct where  tc.chapter = ct.chapter;
-
+//Properties the database has to check before carrying out queries
+license_id varchar(10) REFERENCES licenses (license_id) ON DELETE CASCADE,
+CONSTRAINT registration_key PRIMARY KEY (registration_id, license_id)
 
 //Before the sanitizeString is checked use empty($var), to check if
 the sent data instead of the ISSET function.
-
 
 
          //Version 2 Update

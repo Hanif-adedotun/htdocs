@@ -34,6 +34,7 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       $sql->bind_param('sssissss', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status);
       $sql->execute();
       echo "<b id='successful' >Added to database</b>";
+      echo "<b>The id for the new row is " . mysqli_insert_id($sql). "</b>";
     } 
     catch (\Throwable $th) {
       $error = $conn->errno . ' ' . $conn->error ;

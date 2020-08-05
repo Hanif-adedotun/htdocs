@@ -71,16 +71,16 @@ echo "<br>Error: " . $conn->error . "</b>";
           if ($rtype->type == 10){ //10 is a date type
             echo "<td><input type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
           } 
-          else if($rtype->name == 'Action Party'){//if the field name is action party
+          // else if($rtype->name == 'Action Party'){//if the field name is action party
             
-            echo "<td>";//create row
-            echo '<select name="SBU/CSU" class="SBUCSU">';//create select element for each column
-            SBUTable();//Call the values in option form.
-            echo '</select>';
-            echo "</td>";
+          //   echo "<td>";//create row
+          //   echo '<select name="SBU/CSU" class="SBUCSU">';//create select element for each column
+          //   SBUTable();//Call the values in option form.
+          //   echo '</select>';
+          //   echo "</td>";
 
 
-          }
+          // }
           else{
             echo "<td>" . $value .  "</td>";
           }
