@@ -40,7 +40,7 @@ function showTime(){
     console.log(Totaltime);
     document.querySelector('#showtime').innerHTML = '<b>' + Totaltime + '</b>';
     
-    setTimeout(function(){showTime()}, 15000);//update after every 15 seconds
+    setTimeout(function(){showTime();}, 15000);//update after every 15 seconds
     
 }
 
@@ -50,7 +50,7 @@ function showTime(){
 //Display All the tables by requesting from MySQL using PHP server
 
 function getTable(){ //sends request to the database and waits for response
-    for (let index = 1; index < 5; index++) {
+    for (let index = 1; index < 5; index++) {//Assumed number of tables is 4
         downloadHTML('../NTB Databse/database.php?document=table'+index, function(result){//Directive Table
             var table = document.getElementById('tableResult'+index);
             table.innerHTML = result; //render result to html
@@ -92,21 +92,8 @@ console.log('Opened table ' + tableIDV + ' fields.');
 
 document.getElementById(buttonID).disabled = true;//disable the button after press
 
-//To render the SBU/CSU options to the upload values, from the values 
-//rendered to the first table.
 
-function createOptions(optionID){//Set the options to SBU/CSU ID
-    var finalOptions = document.getElementById(optionID);
-    var options = document.querySelector('.SBUCSU').children;
-    
-    var optionArray = Array.from(options);//create array from values
-
-   for (let i = 0; i < optionArray.length; i++) {
-       const opt = '<option value='+optionArray[i].value+'>' + optionArray[i].value +'</option>'; 
-     
-       finalOptions.innerHTML += opt;
-   }
-}
+//To render the SBU/CSU options to the upload values, from the values in the database table SBU/CSU
 
 if(tableIDV == 'addF' ){//If it is the first table
     downloadHTML('../NTB Databse/database.php?document=SBUoptions', function(result){//Directive Table
@@ -144,7 +131,7 @@ Array.from(input).forEach(function(element, index, array){
     
       
 
-if (!(element.value == '')){ //check if an input is not empty
+//if (!(element.value == '')){ //check if an input is not empty
    if (element.type == 'text'){ //if input is a text
         if(element.value.length < '120'){
         tester = true;
@@ -186,9 +173,9 @@ if (!(element.value == '')){ //check if an input is not empty
         
       }
    }
-}else{
-    tester = false;//fallback if none of the inputs have values
-}
+// }else{
+//     tester = false;//fallback if none of the inputs have values
+// }
 return tester;
 });
 }
@@ -206,10 +193,10 @@ function uploadValues(formElem, spanresult){
         spanresult.innerHTML = result;
 
     
-    if (spanresult.contains(document.getElementById('successful'))){
-        alert('Successfully added to database!');
-        location.reload();
-    }
+    // if (spanresult.contains(document.getElementById('successful'))){
+    //     alert('Successfully added to database!');
+    //     location.reload();
+    // }
     
     });
 }else{

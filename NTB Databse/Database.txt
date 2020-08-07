@@ -1,0 +1,42 @@
+directive table
+CREATE TABLE `directive table` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `Directive Description` text NOT NULL,
+  `Action Party` varchar(7) NOT NULL,
+  `Directive Date` date NOT NULL,
+  `NTB Meeting Number` int(10) NOT NULL,
+  `Directive Deadline` date NOT NULL,
+  `Revert Date` date NOT NULL,
+  `Remark` text NOT NULL,
+  `Status Update` text NOT NULL,
+  `SBU/CSU ID` int(10) NOT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `SBU/CSU ID` (`SBU/CSU ID`),
+  CONSTRAINT `directive table_ibfk_1` FOREIGN KEY (`SBU/CSU ID`) REFERENCES `sbu/csu table` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4
+directorate table
+CREATE TABLE `directorate table` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `Directorate Name` text NOT NULL,
+  `SBU/CSU ID` varchar(10) NOT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8mb4
+sbu/csu table
+CREATE TABLE `sbu/csu table` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `SBU/CSU Abbreviation` tinytext NOT NULL,
+  `SBU-CSU Name full` text NOT NULL,
+  `Head of SBU` text NOT NULL,
+  `Name` text NOT NULL,
+  `Directorate ID` int(10) DEFAULT NULL,
+  PRIMARY KEY (`ID`),
+  KEY `Directorate ID` (`Directorate ID`),
+  CONSTRAINT `sbu/csu table_ibfk_2` FOREIGN KEY (`Directorate ID`) REFERENCES `directorate table` (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4
+employees table
+CREATE TABLE `employees table` (
+  `ID` int(10) NOT NULL AUTO_INCREMENT,
+  `Full name` text DEFAULT NULL,
+  `Department` char(3) DEFAULT NULL,
+  PRIMARY KEY (`ID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4

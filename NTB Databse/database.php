@@ -2,21 +2,23 @@
 //This is the function file to show all Database
 include 'openDB.php';
 
+
 function SBUTable(){//To show the SBU Table Options
   include 'tableNames.php';//Import table names
   include 'login.php';//Connect to the database
 
-  $sql = "SELECT `SBU/CSU Abbreviation` FROM `$table3`";
+  $sql = "SELECT `SBU/CSU Abbreviation`,`ID` FROM `$table3`";
   $resultNew = $conn->query($sql);
   if(!$resultNew) 
   echo '<b class="derror">Cannot see SBU database</b>';
 
-while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
+while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_BOTH)){//while the rows are available in the database
   
-   foreach ($optionRow as $option){//to render each value to the option tag
+    $sbu_abbreviation = $optionRow['SBU/CSU Abbreviation'];
+    $sbu_id = $optionRow['ID'];
     
-     echo '<option value='.$option.'>'.$option.'</option>';
-    }
+     echo '<option value='.$sbu_abbreviation.'>'.$sbu_id.' - '.$sbu_abbreviation.'</option>';//Show options in the values
+  
    
  }
  
@@ -35,10 +37,6 @@ echo "<b class='derror'>Server: Cannot see database with name (". $databaseName 
 echo "<br>Error: " . $conn->error . "</b>";
 
 }else{
-    
-  
-    
-  
   
    echo "<h2>" .strtoupper($databaseName) . "</h2>";
 
@@ -65,7 +63,6 @@ echo "<br>Error: " . $conn->error . "</b>";
         
          foreach ($row as $value){ //To loop through each field and input the value
 
-
          //To check if value is a date
           $rtype = mysqli_fetch_field_direct($result, $i);//Check type of variable in a field
           if ($rtype->type == 10){ //10 is a date type
@@ -89,7 +86,7 @@ echo "<br>Error: " . $conn->error . "</b>";
 
         }
         //The delete button for each row in each table
-        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onmouseover='delTable(this.value, ".$databaseName."); return false'>Delete</button></td>";//
+        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onclick='delTable(this.value, `".$databaseName."`); return false'>Delete</button></td>";
        
     }
     echo "</tr>";

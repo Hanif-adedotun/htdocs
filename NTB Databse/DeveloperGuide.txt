@@ -20,8 +20,11 @@ CONSTRAINT registration_key PRIMARY KEY (registration_id, license_id)
 //Before the sanitizeString is checked use empty($var), to check if
 the sent data instead of the ISSET function.
 
-
+Cannot add or update a child row: a foreign key constraint fails (`ntb directive register`.`sbu/csu table`, CONSTRAINT `sbu/csu table_ibfk_1` FOREIGN KEY (`Directorate ID`) REFERENCES `directive table` (`ID`))
          //Version 2 Update
+
+//When creating a new table
+"ALTER TABLE $table1 ADD CONSTRAINT student_id_key PRIMARY KEY (student_id);
 
 tableObject.cells(index) Returns a collection (array) of the cells in the row.
 

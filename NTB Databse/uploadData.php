@@ -29,6 +29,7 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
     $status = sanitizeString($conn, $_POST['status']);
 
 
+
     try {
       $sql = $conn->prepare("INSERT INTO `$databaseName` (`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`) VALUES(?,?,?,?,?,?,?,?)");
       $sql->bind_param('sssissss', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status);
@@ -81,7 +82,7 @@ function addRecord3($databaseName){
 
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SCU-SBU Name full`, `Head of SBU`, `Name`) VALUES(?,?,?,?)");
+    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`) VALUES(?,?,?,?)");
     $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
     $sql->execute();
     echo "<b id='successful' >Added to database</b>";

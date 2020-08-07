@@ -1,0 +1,41 @@
+<html>
+
+<head>
+<title>Test File</title>
+<script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
+<script>
+function delTable(value, databasename){
+    console.log('Wants to delete');
+    var con = confirm("Are you sure you want to delete this field?");
+    if (con == true){
+         downloadHTML('../NTB Databse/database.php?document=delete&database='+ databasename +'&deletekey='+ value + '', function(result){
+            var span = document.getElementById('dbResult');
+            span.innerHTML = result;
+            
+         });
+          
+ if (span.contains(document.getElementById('successful'))){
+         console.log('You deleted row ' + value + ' from ' + databasename);
+         alert('successfully Deleted Row!');
+         location.reload();
+        }
+    }
+     else{
+        alert("Okay"); 
+    }
+
+}
+
+</script>
+</head>
+
+<body>
+<p>
+ <b>
+      Delete from 
+      <button value = '11' class='delete' onclick='delTable(this.value, `directorate table`); return false'>Delete</button>
+ </b>
+</p>
+<p id='dbResult'></p>
+</body>
+</html>
