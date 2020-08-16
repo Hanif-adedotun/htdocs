@@ -26,6 +26,10 @@ if($_GET['document'] == "SBUoptions"){
   SBUTable();
 }
 
+if($_GET['document'] == 'SBUAbbr'){
+  SBUAbbr();
+}
+
 //Delete the tables
 if($_GET['document'] == "delete"){
     delvalues($_GET['database'], 'ID', $_GET['deletekey']);

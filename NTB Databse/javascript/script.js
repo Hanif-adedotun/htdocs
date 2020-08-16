@@ -10,6 +10,7 @@ Hanif Adedotun 2020
 window.onload = getTable(), showTime(), localget();
 
 
+
 //Module to show current time //check for error in the Totaltime;
 function showTime(){
     var currentDate = new Date();
@@ -102,18 +103,13 @@ if(tableIDV == 'addF' ){//If it is the first table
         
     });
 }else if(tableIDV == 'addF2'){//If it is the second table
-    downloadHTML('../NTB Databse/database.php?document=SBUoptions', function(result){//Directive Table
+    downloadHTML('../NTB Databse/database.php?document=SBUoptions', function(result){//SBU/CSU Table
         var table = document.getElementById('sbuOptions2');
         table.innerHTML = result; //render result to html
         
     });
 }
-
 }
-
-
-
-
 
 //Validating each input against the main validator
 var tester;
@@ -130,10 +126,9 @@ Array.from(input).forEach(function(element, index, array){
     console.log(element.value.length);
     
       
-
-//if (!(element.value == '')){ //check if an input is not empty
+ //check if an input is not empty
    if (element.type == 'text'){ //if input is a text
-        if(element.value.length < '120'){
+        if(element.value.length < 120){
         tester = true;
         error.innerHTML = '';
         
@@ -173,9 +168,7 @@ Array.from(input).forEach(function(element, index, array){
         
       }
    }
-// }else{
-//     tester = false;//fallback if none of the inputs have values
-// }
+
 return tester;
 });
 }
@@ -189,14 +182,14 @@ function uploadValues(formElem, spanresult){
     var dataF = new FormData(formElem); //create a form array list to send to the server
 
     downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function(result){
-        //var span = document.getElementById('NewTableresult');//if an error occur from the database
-        spanresult.innerHTML = result;
+        
+        spanresult.innerHTML = result;//if an error occur from the database
 
     
-    // if (spanresult.contains(document.getElementById('successful'))){
-    //     alert('Successfully added to database!');
-    //     location.reload();
-    // }
+    if (spanresult.contains(document.getElementById('successful'))){
+        alert(result);
+        location.reload();
+    }
     
     });
 }else{

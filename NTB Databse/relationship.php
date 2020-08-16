@@ -18,15 +18,31 @@ include 'tableNames.php';//Import table names
 // $sql = "ALTER TABLE `$table2` AUTO_INCREMENT = 1"; CArry out after delete query
 
 
+
 $tables_array = array($table1, $table2, $table3, $table4);
 
 //$writeToFile = fopen('Database.txt', 'w') or die('Unable to open file');
 
-foreach($tables_array as $value){
+//foreach($tables_array as $value){
 
-$sql = "SHOW CREATE table `$value`";
+//$sql = "SHOW CREATE table `$table1`";
 
+// $sql_array = array("START TRANSACTION", "SELECT * FROM `$table2`");
+
+// $sql = "START TRANSACTION";
+// $conn->query($sql);
+
+//$sql = "UPDATE `$table2` SET `Directorate name` = `Voltex Oil and Cylinder` WHERE `Directorate name` = `Voltex Oil and Gas`";
+$sql = "SELECT `ID` FROM `$table3` WHERE `SBU/CSU Abbreviation`= 'VOL'";
 $resultNew = $conn->query($sql);
+
+// $sql = "SELECT * FROM `$table2`";
+// $resultNew = $conn->query($sql);
+
+// $sql = "ROLLBACK";
+// $conn->query($sql);
+
+
 
 if(!$resultNew){
   echo '<b>Cannot carry out query</b><br>';
@@ -36,8 +52,8 @@ if(!$resultNew){
 
   
     
-  echo '<br><b>'.$value.'</b>';
-    //echo 'Successful';
+  //echo '<br><b>'.$value.'</b>';
+    echo 'Successful';
 
     echo "<table class='tables' border='1' >";
 
@@ -51,7 +67,7 @@ if(!$resultNew){
     echo "</tr>";  
 
  while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
-  $res = $optionRow[1]; 
+  $res = $optionRow[0]; 
   echo "<tr>";
     foreach ($optionRow as $option){//to render each value to the option tag
      
@@ -69,7 +85,7 @@ if(!$resultNew){
 
 
 }
-}
+//}
 //fclose($writeToFile);
 
 $conn->close();

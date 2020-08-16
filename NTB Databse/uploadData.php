@@ -14,6 +14,7 @@ function sanitizeString($server, $var){
 
 function addRecord($databaseName){ //in the other script add addRecord('directive)
   include_once 'login.php';
+  include 'tableNames.php';
   // error_reporting(E_ALL);
   // ini_set('display_errors', 1);
  
@@ -31,11 +32,24 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
 
 
     try {
-      $sql = $conn->prepare("INSERT INTO `$databaseName` (`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`) VALUES(?,?,?,?,?,?,?,?)");
-      $sql->bind_param('sssissss', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status);
+      
+      //START TRANSACTION;
+      $sql = "SELECT `ID` FROM `$table3` WHERE `SBU/CSU Abbreviation`= '$party'";//To get the id number of sbu/csu to add it to the table last column
+      $result = $conn->query($sql);
+      while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+        foreach($row as $row_value){
+          $sbu_id = $row_value;//id number of sbu/csu to join tables
+        }
+      }
+
+      $sql = $conn->prepare("INSERT INTO `$databaseName` (`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `SBU/CSU ID`) VALUES(?,?,?,?,?,?,?,?,?)");
+      $sql->bind_param('sssissssi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $sbu_id);
       $sql->execute();
       echo "<b id='successful' >Added to database</b>";
-      echo "<b>The id for the new row is " . mysqli_insert_id($sql). "</b>";
+    
+      
+      echo "The id number of " .$party." is " .$sbu_id;
+      echo "<br><b>The id for the new row is " . mysqli_insert_id($conn). "</b>";
     } 
     catch (\Throwable $th) {
       $error = $conn->errno . ' ' . $conn->error ;
@@ -56,9 +70,11 @@ function addRecord2($databaseName){
   $SBUID = sanitizeString($conn, $_POST['SBU/CSUID']);
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`Directorate Name`, `SBU/CSU ID`) VALUES(?,?)");
-    $sql->bind_param('ss', $DirectName, $SBUID);
-    $sql->execute();
+    // $sql = $conn->prepare("INSERT INTO `$databaseName`(`Directorate Name`, `SBU/CSU ID`) VALUES(?,?)");
+    // $sql->bind_param('ss', $DirectName, $SBUID);
+    // $sql->execute();
+
+    echo mysqli_insert_id($conn) .' '. $SBUID;
     echo "<b id='successful' >Added to database</b>";
   } 
   catch (\Throwable $th) {
@@ -82,8 +98,8 @@ function addRecord3($databaseName){
 
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`) VALUES(?,?,?,?)");
-    $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
+    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`, `Directorate ID`) VALUES(?,?,?,?,?)");
+    $sql->bind_param('sssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name, NULL);
     $sql->execute();
     echo "<b id='successful' >Added to database</b>";
   } 

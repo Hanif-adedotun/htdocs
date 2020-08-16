@@ -1,14 +1,7 @@
-//Link the SBU/CSU database together
-> Default of Directive ID in SBU/CSU should be null
-> Link SBU/CSU ID in directorate table to ID of SBU/CSU
-> Link directive ID to chosen SBU/CSU in directive table
 
 //This mysql word is to check places to optimise your database
 EXPLAIN SELECT * FROM accounts WHERE number='12345';
 
-
-// For the drop down menu to show fields in SBU/CSU table
-select first_name from friends where gender = 'f' or gender = 'm';
 
 //To check if a value in the database is entered correctly
 CONSTRAINT check_role_in_list CHECK (user_role IN('Admin', 'Staff')),
@@ -17,10 +10,22 @@ CONSTRAINT check_role_in_list CHECK (user_role IN('Admin', 'Staff')),
 license_id varchar(10) REFERENCES licenses (license_id) ON DELETE CASCADE,
 CONSTRAINT registration_key PRIMARY KEY (registration_id, license_id)
 
-//Before the sanitizeString is checked use empty($var), to check if
-the sent data instead of the ISSET function.
+//Transaction for the insert query in the diretive table
+START TRANSACTION; or BEGIN;
+UPDATE meat_poultry_egg_inspect
+SET company = 'AGRO Merchantss Oakland LLC'
+WHERE company = 'AGRO Merchants Oakland, LLC';
 
-Cannot add or update a child row: a foreign key constraint fails (`ntb directive register`.`sbu/csu table`, CONSTRAINT `sbu/csu table_ibfk_1` FOREIGN KEY (`Directorate ID`) REFERENCES `directive table` (`ID`))
+SELECT company
+FROM meat_poultry_egg_inspect
+WHERE company LIKE 'AGRO%'
+ORDER BY company;
+if (error){ROLLBACK;}
+else{
+    COMMIT;
+}
+
+
          //Version 2 Update
 
 //When creating a new table

@@ -3,26 +3,20 @@
 <head>
 <title>Test File</title>
 <script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
+
 <script>
-function delTable(value, databasename){
-    console.log('Wants to delete');
-    var con = confirm("Are you sure you want to delete this field?");
-    if (con == true){
-         downloadHTML('../NTB Databse/database.php?document=delete&database='+ databasename +'&deletekey='+ value + '', function(result){
-            var span = document.getElementById('dbResult');
-            span.innerHTML = result;
-            
-         });
-          
- if (span.contains(document.getElementById('successful'))){
-         console.log('You deleted row ' + value + ' from ' + databasename);
-         alert('successfully Deleted Row!');
-         location.reload();
-        }
-    }
-     else{
-        alert("Okay"); 
-    }
+function uploadValues(formElem, spanresult){
+   
+    console.log('Talking to the server...');
+    //var formElem = document.getElementById('sendForm');
+    var dataF = new FormData(formElem); //create a form array list to send to the server
+    
+     downloadHTMLPost('../NTB Databse/relationship.php', dataF, function(result){
+        
+        spanresult.innerHTML = result;//if an error occur from the database
+
+    });
+
 
 }
 
@@ -30,12 +24,23 @@ function delTable(value, databasename){
 </head>
 
 <body>
-<p>
- <b>
-      Delete from 
-      <button value = '11' class='delete' onclick='delTable(this.value, `directorate table`); return false'>Delete</button>
- </b>
+     <p align='center'>
+     <form id='testform'>
+     <input type="text" maxlength="6" name="testname" placeholder="Enter anything"/>
+
+     <select class='addval2' id='sbuOptions2'  name="SBU/CSUID">
+            <option value="">SBU/CSU Options:</option>
+            <option value="hi">Hi</option>
+            <option value="hello">Hello</option>
+            <option value="there">There</option>
+     </select>
+ 
+
+
+     <input type="submit"  onmouseover="uploadValues(document.getElementById('testform'), document.getElementById('resultspan')); return false"/>
+   
+     <span id='resultspan'></span>
+</form>
 </p>
-<p id='dbResult'></p>
 </body>
 </html>

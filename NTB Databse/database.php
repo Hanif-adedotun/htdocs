@@ -3,7 +3,7 @@
 include 'openDB.php';
 
 
-function SBUTable(){//To show the SBU Table Options
+function SBUTable(){//To show the SBU Table Abbreviations
   include 'tableNames.php';//Import table names
   include 'login.php';//Connect to the database
 
@@ -19,11 +19,9 @@ while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_BOTH)){//while the rows a
     
      echo '<option value='.$sbu_abbreviation.'>'.$sbu_id.' - '.$sbu_abbreviation.'</option>';//Show options in the values
   
-   
  }
  
 }
-
 
 function ShowDatabase($databaseName){
 
@@ -120,11 +118,5 @@ if(!$result){
 
 $conn->close();
 }
-
-
-
-
-
-
 
 ?>
