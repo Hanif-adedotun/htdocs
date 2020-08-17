@@ -1,0 +1,201 @@
+<html>
+<head>
+    <title> Numbers to words</title>
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png">
+</head>
+  <style>
+   span{
+       display: inline;
+   }
+   body{
+     font-style: normal;
+     font-family: Montserrat;
+     text-align: center;
+     background-color: #030d47;
+     text-align: center;
+     color: white;
+    /* 
+    background-image: url(bg.jpg);
+     background-repeat: no-repeat;
+     background-position: 0%;
+     background-size: 100%; */ 
+   }
+    
+   h1{
+     margin-top: 10%;
+     margin-bottom: 5%;
+   }
+
+   #convertNumber{
+     margin-right: 5%;
+     border-radius: 5px;
+     font-weight: bold;
+   } 
+   
+   #refresh {
+        border-radius: 5px;
+   }
+
+   footer{
+     position: absolute;
+     bottom: .8em;
+     left: .8em;
+   }
+   
+   .error{
+     color: red;
+     font-weight: bold;
+   }
+    .good{
+      color: lightgreen;
+      font-weight: bold;
+    }
+
+   input{
+     border-radius: 5px;
+   }
+
+   .disabled{
+     color: rgb(172, 171, 171);
+     background-color: ghostwhite;
+     border-radius: 0;
+   }
+
+    </style>
+<script>
+    
+//This function here was written by https://stackoverflow.com/users/1220550/peter-b 
+/*This funcion is the engine of this code that takes in the value and coverts it.*/
+function NumInWords (number) {
+  const first = ['','One ','Two ','Three ','Four ', 'Five ','Six ','Seven ','Eight ','Nine ','Ten ','Eleven ','Twelve ','Thirteen ','Fourteen ','Fifteen ','Sixteen ','Seventeen ','Eighteen ','Nineteen '];
+  const tens = ['', '', 'Twenty','Thirty','Forty','Fifty', 'Sixty','Seventy','Eighty','Ninety'];
+  const mad = ['', 'Thousand,', 'Million,', 'Billion,', 'Trillion,'];
+  let word = '';
+
+  for (let i = 0; i < mad.length; i++) {
+    let tempNumber = number%(100*Math.pow(1000,i));
+    if (Math.floor(tempNumber/Math.pow(1000,i)) !== 0) {
+      if (Math.floor(tempNumber/Math.pow(1000,i)) < 20) {
+        word = first[Math.floor(tempNumber/Math.pow(1000,i))] + mad[i] + ' ' + word ;
+      } else {
+        word = tens[Math.floor(tempNumber/(10*Math.pow(1000,i)))] + '-' + first[Math.floor(tempNumber/Math.pow(1000,i))%10] + mad[i] + ' ' + word ;
+      }
+    }
+
+    tempNumber = number%(Math.pow(1000,i+1));
+    if (Math.floor(tempNumber/(100*Math.pow(1000,i))) !== 0) word = first[Math.floor(tempNumber/(100*Math.pow(1000,i)))] + 'hunderd and ' + word;
+  }
+    return word;
+    return first;
+}
+
+
+//and it validates the input at the same time
+
+function Vinput(){
+  var GetNumber = document.getElementById('number').value;
+    var GetTypeNumber = isNaN(GetNumber);
+    const disButton = document.getElementById('convertNumber');
+   
+    if(GetTypeNumber == true){
+      document.getElementById('error2').classList.remove("good");
+      document.getElementById('error2').innerHTML = 'Please Enter a valid number';
+       document.getElementById('error2').classList.add("error");
+       disButton.classList.add('disabled');
+       disButton.disabled = true;
+       console.log("found");
+     
+      }  else if (GetNumber.indexOf('-') != -1){
+        document.getElementById('error2').classList.remove("good");
+        document.getElementById('error2').innerHTML = 'Please a positive number';
+       document.getElementById('error2').classList.add("error");
+       disButton.classList.add('disabled');
+       disButton.disabled = true;
+     
+      } else if(GetTypeNumber == false){
+        document.getElementById('error2').innerHTML = 'Good';
+         document.getElementById('error2').classList.add("good");
+         disButton.classList.remove('disabled');
+         disButton.disabled = false;
+         if (GetNumber.indexOf('.') != -1) {
+            var characters = GetNumber.slice(GetNumber.indexOf('.'), GetNumber.indexOf('.')+4);
+            if (typeof characters[3] == 'string'){
+                console.log(typeof characters[3] == 'number');
+                 document.getElementById('error2').classList.remove("good");
+                  document.getElementById('error2').innerHTML = 'Please limit the decimal to 2 numbers';
+                  document.getElementById('error2').classList.add("error");
+                  disButton.classList.add('disabled');
+                  disButton.disabled = true;
+                }
+           }
+          }
+          
+         
+}
+
+  
+//to call the function above to convert the numbers to words
+function ConvertNumbers(){
+  var GetNumber = document.getElementById('number').value;
+    var GetTypeNumber = isNaN(GetNumber);
+   
+           
+          if ( GetNumber.indexOf('.') != -1) {
+            var characters = GetNumber.slice(GetNumber.indexOf('.'), GetNumber.indexOf('.')+4);
+            var nChar = characters[1] + characters[2];
+            var CfN = NumInWords(nChar);
+            var fcharacters1 = '<b>Naira</b>' + ', ' + CfN + '<b>kobo</b>' ;
+            
+         var fNN = NumInWords(GetNumber).concat(fcharacters1);
+         var fN = document.getElementById('words').innerHTML = fNN ;
+         document.getElementById('error2').classList.remove("error");
+         document.getElementById('error2').innerHTML = '';
+                if (typeof characters[3] == 'number'){
+                  document.getElementById('error2').innerHTML = 'Please limit the decimal to 2 numbers';
+                  document.getElementById('error2').classList.add("error");
+                }
+           } else {
+        
+         var fNN = NumInWords(GetNumber).concat('<b>Naira</b>');
+         var fN = document.getElementById('words').innerHTML = fNN ;
+         document.getElementById('error2').classList.remove("error");
+         document.getElementById('error2').innerHTML = '';
+           }
+           
+          
+         
+      
+      
+}
+
+function reloadPage(){
+  location.reload(true);
+}
+ 
+function focusObj(){
+  document.getElementById("number").focus();
+}
+
+
+//Created by Hanif Adedotun 2020
+</script>
+<body onload= 'focusObj()'>
+    <div>
+<h1 id="inputImport">Input a number to convert it to words</h1>
+<input onkeyup = 'Vinput()' id="number" type="text" placeholder="Enter any number "/>
+
+<p><span id="error2"></span></p>
+  
+<p>
+      <button id="convertNumber" onclick="ConvertNumbers()">Convert</button>
+      <span><button id="refresh"><img id="refreshImage" onclick ='reloadPage()' src="refresh-logo.png" height="15px" width="15px"/></button></span>
+  </p>
+<p> Your numbers in words is:</p><span id="words"></span>
+</div>
+
+<footer>
+ <span id="footerImg" ><img src="banner2.png" id="footImg" height="50px" width="160px" /></span>
+</footer>
+
+</body>
+</html>

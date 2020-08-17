@@ -25,7 +25,14 @@ else{
     COMMIT;
 }
 
+//Muliple query statements to the server
+mysqli_multi_query();
+**Note: You canot use prepared statements and multi query together 
 
+
+//Javascript form data
+new Formdata(form element);
+Formdata.append(key, value);
          //Version 2 Update
 
 //When creating a new table

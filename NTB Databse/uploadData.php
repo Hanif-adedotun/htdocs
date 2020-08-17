@@ -34,6 +34,8 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
     try {
       
       //START TRANSACTION;
+      $conn->query("START TRANSACTION");
+
       $sql = "SELECT `ID` FROM `$table3` WHERE `SBU/CSU Abbreviation`= '$party'";//To get the id number of sbu/csu to add it to the table last column
       $result = $conn->query($sql);
       while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
@@ -46,15 +48,20 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       $sql->bind_param('sssissssi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $sbu_id);
       $sql->execute();
       echo "<b id='successful' >Added to database</b>";
-    
       
       echo "The id number of " .$party." is " .$sbu_id;
       echo "<br><b>The id for the new row is " . mysqli_insert_id($conn). "</b>";
+     
+      //COMMIT
+      $conn->query("COMMIT");
     } 
     catch (\Throwable $th) {
       $error = $conn->errno . ' ' . $conn->error ;
       echo "<b class='derror'>" . $error;
       echo "<br>Unable to enter values into database</b><br>";
+      
+      //ROLLBACK
+      $conn->query("ROLLBACK");
     }
      
     
@@ -64,22 +71,51 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
 function addRecord2($databaseName){
 
   include_once 'login.php';
+  include 'tableNames.php';
 
   
   $DirectName = sanitizeString($conn, $_POST['DirectorateName']);
   $SBUID = sanitizeString($conn, $_POST['SBU/CSUID']);
 
   try {
-    // $sql = $conn->prepare("INSERT INTO `$databaseName`(`Directorate Name`, `SBU/CSU ID`) VALUES(?,?)");
-    // $sql->bind_param('ss', $DirectName, $SBUID);
-    // $sql->execute();
+      //START TRANSACTION;
+      $conn->query("START TRANSACTION");
 
-    echo mysqli_insert_id($conn) .' '. $SBUID;
-    echo "<b id='successful' >Added to database</b>";
+      $sql = $conn->prepare("INSERT INTO `$databaseName`(`Directorate Name`, `SBU/CSU ID`) VALUES(?,?)");
+      $sql->bind_param('ss', $DirectName, $SBUID);
+      $sql->execute();//insert into directorate table
+      $table2_id = mysqli_insert_id($conn);//insert id of the value in directorate table
+
+
+      $sql2 = "SELECT `Directorate ID` FROM `$table3` WHERE `SBU/CSU Abbreviation`= '$SBUID'";//To get the id number of sbu/csu to add it to the table last column
+      $result = $conn->query($sql2);
+      while($row = mysqli_fetch_array($result, MYSQLI_NUM)){
+        foreach($row as $row_value){
+          $Directorate_id = $row_value;//id number of sbu/csu to join tables
+        }
+      }
+      
+      if ($Directorate_id == NULL){//if the value of the sbu/csu is null, ask dad for details
+
+        if ($table2_id != 0){//as long as the value has been inserted in the directorate table
+          //Update the sbu/csu table to add the directorate id
+        $sql =  "UPDATE `$table3` SET `Directorate ID` = '$table2_id' WHERE `SBU/CSU Abbreviation` = '$SBUID'";
+        $result = $conn->query($sql);
+        
+        echo "<br><b id='successful' >Added to database</b>";
+
+        //COMMIT
+        $conn->query("COMMIT");
+        }
+      }
+
+   
   } 
   catch (\Throwable $th) {
-    $error = $conn->errno . ' ' . $conn->error ;
-    echo $error;
+    //ROLLBACK
+    $conn->query("ROLLBACK");
+
+    echo $conn->errno . ' ' . $conn->error ;
     echo "<br><b class='derror'>Unable to enter values into database</b><br>";
   }
 
@@ -90,7 +126,9 @@ function addRecord2($databaseName){
 function addRecord3($databaseName){
   include_once 'login.php';
 
- 
+  //START TRANSACTION;
+  $conn->query("START TRANSACTION");
+
   $DirectorateName = sanitizeString($conn, $_POST['SBU/CSUAbbreviation']);
   $SBUFullName = sanitizeString($conn, $_POST['SBUFullName']);
   $HeadofSBU = sanitizeString($conn, $_POST['HeadofSBU']);
@@ -98,14 +136,20 @@ function addRecord3($databaseName){
 
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`, `Directorate ID`) VALUES(?,?,?,?,?)");
-    $sql->bind_param('sssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name, NULL);
+    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`0) VALUES(?,?,?,?)");
+    $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
     $sql->execute();
     echo "<b id='successful' >Added to database</b>";
+    
+
+     //COMMIT
+     $conn->query("COMMIT");
   } 
   catch (\Throwable $th) {
-    $error = $conn->errno . ' ' . $conn->error ;
-    echo $error;
+    //ROLLBACK
+    $conn->query("ROLLBACK");
+
+    echo  $conn->errno . ' ' . $conn->error;
     echo "<br><b class='derror'>Unable to enter values into database</b><br>";
   }
 
@@ -114,7 +158,9 @@ function addRecord3($databaseName){
 function addRecord4($databaseName){
 
   include_once 'login.php';
-
+ 
+  //START TRANSACTION;
+  $conn->query("START TRANSACTION");
  
   $FullName = sanitizeString($conn, $_POST['Fullname']);
   $Department = sanitizeString($conn, $_POST['Department']);
@@ -124,10 +170,16 @@ function addRecord4($databaseName){
     $sql->bind_param('ss', $FullName, $Department);
     $sql->execute();
     echo "<b id='successful' >Added to database</b>";
+    
+    //COMMIT
+    $conn->query("COMMIT");
+
   } 
   catch (\Throwable $th) {
-    $error = $conn->errno . ' ' . $conn->error ;
-    echo $error;
+    //ROLLBACK
+    $conn->query("ROLLBACK");
+
+    echo $conn->errno . ' ' . $conn->error;
     echo "<br><b class='derror'>Unable to enter values into database</b><br>";
   }
 

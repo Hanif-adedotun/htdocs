@@ -43,7 +43,7 @@
                 <td><input class='addval' onblur='alertDOM(document.getElementById("NewTableresult"), this.className)' type='date' placeholder='dd-mm-yyyy' name="revertDate"/></td>
                 <td><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text"  placeholder="Remark" name="remark"/></td>
                 <td ><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text" placeholder="Status Update" name="status"/></td>
-                <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm"), document.getElementById("NewTableresult")); return false' id="submit"/></td>
+                <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm"), document.getElementById("NewTableresult"), "tableResult1"); return false' id="submit"/></td>
             </tr>
          </table>
         </form>
@@ -65,11 +65,11 @@
           
               <td ><input class='addval2' onkeyup='alertDOM(document.getElementById("NewTableresult2"), this.className)' type="text"  placeholder="Directorate Name" name="DirectorateName"/></td>
               <td >
-                  <select class='addval2' id='sbuOptions2' onblur='alertDOM(document.getElementById("NewTableresult2"), this.className)' name="SBU/CSUID">
+                  <select class='addval2' id='sbuOptions2' onchange='alertDOM(document.getElementById("NewTableresult2"), this.className)' name="SBU/CSUID">
                     <option value="">SBU/CSU Options:</option>
                    </select>
             </td>
-              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), document.getElementById("NewTableresult2")); return false' id="submit2"/></td>
+              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), document.getElementById("NewTableresult2"), "tableResult2"); return false' id="submit2"/></td>
           </tr>
        </table>
       </form>
@@ -91,7 +91,7 @@
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="SCU-SBU Name full" name="SBUFullName"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Head of SBU" name="HeadofSBU"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Name of Head" name="Name"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), document.getElementById("NewTableresult3")); return false' id="submit3"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), document.getElementById("NewTableresult3"), "tableResult3"); return false' id="submit3"/></td>
                  </tr>
               </table>
              </form>
@@ -113,7 +113,7 @@
                    
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  placeholder="Full name" name="Fullname"/></td>
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  maxlength="4" placeholder="Department" name="Department"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), document.getElementById("NewTableresult4")); return false' id="submit4"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), document.getElementById("NewTableresult4"), "tableResult4"); return false' id="submit4"/></td>
                  </tr>
               </table>
              </form>

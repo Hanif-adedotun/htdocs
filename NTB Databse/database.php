@@ -36,7 +36,7 @@ echo "<br>Error: " . $conn->error . "</b>";
 
 }else{
   
-   echo "<h2>" .strtoupper($databaseName) . "</h2>";
+   echo "<h2 id='".$databaseName."' class='dbnames'>" .strtoupper($databaseName) . "</h2>";
 
     echo "<table class='tables' border='1' >";
 

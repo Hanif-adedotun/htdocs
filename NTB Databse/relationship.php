@@ -33,15 +33,10 @@ $tables_array = array($table1, $table2, $table3, $table4);
 // $conn->query($sql);
 
 //$sql = "UPDATE `$table2` SET `Directorate name` = `Voltex Oil and Cylinder` WHERE `Directorate name` = `Voltex Oil and Gas`";
-$sql = "SELECT `ID` FROM `$table3` WHERE `SBU/CSU Abbreviation`= 'VOL'";
+
+
+$sql = "SELECT * FROM `$table2`";
 $resultNew = $conn->query($sql);
-
-// $sql = "SELECT * FROM `$table2`";
-// $resultNew = $conn->query($sql);
-
-// $sql = "ROLLBACK";
-// $conn->query($sql);
-
 
 
 if(!$resultNew){
@@ -76,7 +71,6 @@ if(!$resultNew){
     // $optionWrite = $option."\n";
     // fwrite($writeToFile, $optionWrite);
 
-     }
     echo "</tr>";
   }
   echo '</ul>';

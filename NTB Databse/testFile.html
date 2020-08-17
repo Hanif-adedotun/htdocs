@@ -10,7 +10,7 @@ function uploadValues(formElem, spanresult){
     console.log('Talking to the server...');
     //var formElem = document.getElementById('sendForm');
     var dataF = new FormData(formElem); //create a form array list to send to the server
-    
+
      downloadHTMLPost('../NTB Databse/relationship.php', dataF, function(result){
         
         spanresult.innerHTML = result;//if an error occur from the database
