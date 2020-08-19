@@ -5,7 +5,7 @@ if ($conn->connect_error) die('Error Loading Database');
 
 mysqli_select_db($conn, $db_database) or die("Unable to select database: " . mysqli_error());
 
-/**/
+
 echo <<<_END
 <html>
 <head><title>Database with PHP and Mysql</title></head>

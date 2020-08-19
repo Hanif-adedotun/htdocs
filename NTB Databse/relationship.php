@@ -1,8 +1,9 @@
 <?php
 //The file for all the relationships in the NTB Database
 
-include 'login.php'; //Connect to database
-include 'tableNames.php';//Import table names
+require 'login.php'; //Connect to database
+require 'tableNames.php';//Import table names
+
 
 
 //$sql = "SELECT `SBU/CSU Abbreviation`,`Directorate Name`,`SBU-CSU Name full`, `Directorate ID` FROM `$table3`  LEFT JOIN `$table2` ON `SBU/CSU Abbreviation` = `SBU/CSU ID` ORDER BY `Directorate ID`";
@@ -41,10 +42,12 @@ $resultNew = $conn->query($sql);
 
 if(!$resultNew){
   echo '<b>Cannot carry out query</b><br>';
-  echo $conn->error;
+  //echo $conn->error;
+  include_once 'recordError.php';
+  recordError($conn->error);
+  
 
 }else{
-
   
     
   //echo '<br><b>'.$value.'</b>';
@@ -68,19 +71,15 @@ if(!$resultNew){
      
       echo '<td>'.$option.'</td>';
      
-    // $optionWrite = $option."\n";
-    // fwrite($writeToFile, $optionWrite);
-
-    echo "</tr>";
+      
   }
-  echo '</ul>';
- echo "</table>";
-
-
+  echo "</tr>";
+  
 
 }
+echo "</table>";
+}
 //}
-//fclose($writeToFile);
 
 $conn->close();
 

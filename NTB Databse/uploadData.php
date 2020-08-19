@@ -1,6 +1,6 @@
 <?php
 
-include 'openUploadDB.php'; //Control the functions in this file
+require 'openUploadDB.php'; //Control the functions in this file
 
 function sanitizeString($server, $var){
     
@@ -13,8 +13,10 @@ function sanitizeString($server, $var){
 
 
 function addRecord($databaseName){ //in the other script add addRecord('directive)
-  include_once 'login.php';
-  include 'tableNames.php';
+  require_once 'login.php';
+  require 'tableNames.php';
+  include_once 'recordError.php';//function that cointains error file 
+  
   // error_reporting(E_ALL);
   // ini_set('display_errors', 1);
  
@@ -47,7 +49,7 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       $sql = $conn->prepare("INSERT INTO `$databaseName` (`Directive Description`, `Action Party`, `Directive Date`, `NTB Meeting Number`, `Directive Deadline`, `Revert Date`, `Remark`, `Status Update`, `SBU/CSU ID`) VALUES(?,?,?,?,?,?,?,?,?)");
       $sql->bind_param('sssissssi', $description, $party, $directiveDate, $meetingNum, $directiveDeadline, $revertDate, $remark, $status, $sbu_id);
       $sql->execute();
-      echo "<b id='successful' >Added to database</b>";
+      echo "Added to database";
       
       echo "The id number of " .$party." is " .$sbu_id;
       echo "<br><b>The id for the new row is " . mysqli_insert_id($conn). "</b>";
@@ -56,12 +58,14 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       $conn->query("COMMIT");
     } 
     catch (\Throwable $th) {
-      $error = $conn->errno . ' ' . $conn->error ;
-      echo "<b class='derror'>" . $error;
-      echo "<br>Unable to enter values into database</b><br>";
-      
       //ROLLBACK
       $conn->query("ROLLBACK");
+
+      $error = $conn->errno . ' ' . $conn->error ;
+      recordError($error);//record error to error.log file
+      echo "Unable to enter values into database";
+      
+      
     }
      
     
@@ -70,8 +74,9 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
 }
 function addRecord2($databaseName){
 
-  include_once 'login.php';
-  include 'tableNames.php';
+  require_once 'login.php';
+  require 'tableNames.php';
+  include_once 'recordError.php';//function that cointains error file 
 
   
   $DirectName = sanitizeString($conn, $_POST['DirectorateName']);
@@ -102,7 +107,7 @@ function addRecord2($databaseName){
         $sql =  "UPDATE `$table3` SET `Directorate ID` = '$table2_id' WHERE `SBU/CSU Abbreviation` = '$SBUID'";
         $result = $conn->query($sql);
         
-        echo "<br><b id='successful' >Added to database</b>";
+        echo "Added to database";
 
         //COMMIT
         $conn->query("COMMIT");
@@ -115,8 +120,10 @@ function addRecord2($databaseName){
     //ROLLBACK
     $conn->query("ROLLBACK");
 
-    echo $conn->errno . ' ' . $conn->error ;
-    echo "<br><b class='derror'>Unable to enter values into database</b><br>";
+    $error = $conn->errno . ' ' . $conn->error ;
+    recordError($error);//record error to error.log file
+
+    echo "Unable to enter values into database";
   }
 
 
@@ -124,7 +131,8 @@ function addRecord2($databaseName){
 }
 
 function addRecord3($databaseName){
-  include_once 'login.php';
+  require_once 'login.php';
+  include_once 'recordError.php';//function that cointains error file 
 
   //START TRANSACTION;
   $conn->query("START TRANSACTION");
@@ -139,7 +147,7 @@ function addRecord3($databaseName){
     $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`0) VALUES(?,?,?,?)");
     $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
     $sql->execute();
-    echo "<b id='successful' >Added to database</b>";
+    echo "Added to database";
     
 
      //COMMIT
@@ -149,15 +157,18 @@ function addRecord3($databaseName){
     //ROLLBACK
     $conn->query("ROLLBACK");
 
-    echo  $conn->errno . ' ' . $conn->error;
-    echo "<br><b class='derror'>Unable to enter values into database</b><br>";
+    $error = $conn->errno . ' ' . $conn->error ;
+    recordError($error);//record error to error.log file
+    
+    echo "Unable to enter values into database";
   }
 
 
 }
 function addRecord4($databaseName){
 
-  include_once 'login.php';
+  require_once 'login.php';
+  include_once 'recordError.php';//function that cointains error file 
  
   //START TRANSACTION;
   $conn->query("START TRANSACTION");
@@ -169,7 +180,7 @@ function addRecord4($databaseName){
     $sql = $conn->prepare("INSERT INTO `$databaseName`(`Full name`, `Department`) VALUES(?,?)");
     $sql->bind_param('ss', $FullName, $Department);
     $sql->execute();
-    echo "<b id='successful' >Added to database</b>";
+    echo "Added to database";
     
     //COMMIT
     $conn->query("COMMIT");
@@ -179,8 +190,9 @@ function addRecord4($databaseName){
     //ROLLBACK
     $conn->query("ROLLBACK");
 
-    echo $conn->errno . ' ' . $conn->error;
-    echo "<br><b class='derror'>Unable to enter values into database</b><br>";
+    $error = $conn->errno . ' ' . $conn->error ;
+    recordError($error);//record error to error.log file
+    echo "Unable to enter values into database";
   }
 
 }

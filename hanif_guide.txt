@@ -1,0 +1,26 @@
+//This is my personal guide and programming tips
+
+
+//Connect Git hub Repo to VS Code
+git clone https://github.com/angular/angular-phonecat.git 
+
+Connect github repo(){
+Create a directory on the local file system.
+Create a repo on Github.
+Select Clone "Clone or download" on Github, copy the link
+In Visual Studio Code, sect File -> Add Folder to Workspace -> Select the newly created directory
+Select Terminal Window
+In the window, type:
+git config --global user.name <github userID>
+
+git clone <URL from github link copied earlier>
+}
+
+//Some PHP code snippets
+Date function(){
+function longdate($timestamp)
+{
+return date("l F jS, Y - g:ia", time());
+}
+echo longdate(time());
+}

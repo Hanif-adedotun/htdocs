@@ -190,15 +190,16 @@ function uploadValues(formElem, spanresult, databasename) {
         var dataF = new FormData(formElem); //create a form array list to send to the server
         dataF.append('DatabaseName', newdbname);//appends the name of the database and sends it to the validor to check for the database to add to
         console.log(newdbname);
+        
 
         downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function (result) {
 
             spanresult.innerHTML = result; //if an error occur from the database or any reply from the database
  
-            if (spanresult.contains(document.getElementById('successful'))) {
+            //if (spanresult.contains(document.getElementById('successful'))) {
                 alert(result);//Displays the result in an alert form
                 location.reload();
-            }
+           // }
           
         });
     } else {

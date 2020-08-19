@@ -1,16 +1,18 @@
 <?php
 //This is the function file to show all Database
-include 'openDB.php';
-
+require 'openDB.php';//command to call each function
 
 function SBUTable(){//To show the SBU Table Abbreviations
-  include 'tableNames.php';//Import table names
-  include 'login.php';//Connect to the database
+  require 'tableNames.php';//Import table names
+  require 'login.php';//Connect to the database
+  include_once 'recordError.php'; //Error file
 
   $sql = "SELECT `SBU/CSU Abbreviation`,`ID` FROM `$table3`";
   $resultNew = $conn->query($sql);
-  if(!$resultNew) 
+  if(!$resultNew) {
   echo '<b class="derror">Cannot see SBU database</b>';
+  recordError($conn->error);//record error to error.log file
+}
 
 while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_BOTH)){//while the rows are available in the database
   
@@ -25,14 +27,15 @@ while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_BOTH)){//while the rows a
 
 function ShowDatabase($databaseName){
 
-include_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
-  
+require_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
+include_once 'recordError.php'; //Error file
+
 $query = "SELECT * FROM `$databaseName`";
 $result = $conn->query($query);
 
 if (!$result){
 echo "<b class='derror'>Server: Cannot see database with name (". $databaseName . ")";
-echo "<br>Error: " . $conn->error . "</b>";
+recordError($conn->error);//record error to error.log file
 
 }else{
   
@@ -100,8 +103,8 @@ $conn->close();
 
 //Get it to delete the particular element in the a particular table
 function delvalues($database, $position, $delkey){
-  include_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
-
+  require_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
+  include_once 'recordError.php';
 
 $query = "DELETE FROM `$database` WHERE `$database`.`$position` = $delkey";//id number tied from js delete value
 $result = $conn->query($query);
@@ -109,11 +112,11 @@ $consoleError = 'console.log("This executed")';
 echo '<script>'. $consoleError . '</script>';
 
 if(!$result){
-  echo "<br><b class='derror'>Unable to delete row from database<br>";
-  echo "Error description: ". $conn->error . "</b>";
+  echo "Unable to delete row from database";
+  recordError($conn->error);//record error to error.log file
  }
  else{
-  echo '<b id="successful">Succesfully Deleted!</b>';
+  echo 'Succesfully Deleted!';
  }
 
 $conn->close();

@@ -25,9 +25,30 @@ else{
     COMMIT;
 }
 
+//Error.log file
+if (file_exists("testfile.txt")) echo "File exists";
+$fh = fopen("testfile.txt", 'a+') or die("Failed to create file");
+fwrite($fh, $text) or die("Could not write to file");
+fclose($fh);
+
+-r read -r+ read and write
+ -w write from the the beginning -w+ write and read from the beginning 
+ -a write at the end of the file -a+ write and read at the end
+
+fgets($file) to read the whole of the file
+
+if (flock($fh, LOCK_EX)){
+    //write, edit or delete a file
+   flock($fh, LOCK_UN);//unlock the file 
+}fclose($fh);
+
+
+
+
 //Muliple query statements to the server
 mysqli_multi_query();
 **Note: You canot use prepared statements and multi query together 
+** It is not as secured as a single query (Can allow sql injections)
 
 
 //Javascript form data

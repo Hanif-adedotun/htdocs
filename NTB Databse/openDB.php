@@ -2,7 +2,7 @@
 
 //This file is to control all the functions that displays on our database
 
-include 'tableNames.php';
+require 'tableNames.php';
 
 //Open all the Tables in the database
 if ($_GET['document'] == "table1" ){
@@ -26,9 +26,9 @@ if($_GET['document'] == "SBUoptions"){
   SBUTable();
 }
 
-if($_GET['document'] == 'SBUAbbr'){
-  SBUAbbr();
-}
+// if($_GET['document'] == 'SBUAbbr'){
+//   SBUAbbr();
+// }
 
 //Delete the tables
 if($_GET['document'] == "delete"){

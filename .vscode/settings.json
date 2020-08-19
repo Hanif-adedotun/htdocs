@@ -10,5 +10,6 @@
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
     "terminal.integrated.confirmOnExit": true,
-    "terminal.integrated.rightClickBehavior": "paste"
+    "terminal.integrated.rightClickBehavior": "paste",
+    "editor.renameOnType": true
 }
