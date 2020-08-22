@@ -53,4 +53,5 @@ table tr td{
 }
 .derror{/*error from the database*/
     color: red;
+    font-weight: bold;
 }

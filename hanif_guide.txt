@@ -17,10 +17,17 @@ git clone <URL from github link copied earlier>
 }
 
 //Some PHP code snippets
-Date function(){
+> Date function(){
 function longdate($timestamp)
 {
 return date("l F jS, Y - g:ia", time());
 }
 echo longdate(time());
 }
+> basename(file path); returns the suffix of the path
+> __FILE__ returns the file path
+> __DIR__ returns the directory of the file
+> $_SERVER["REQUEST_URI"]; web server returns the url of the file on the server 
+
+//Js code snippets
+> variable.includes('string'); returns true is a variable contains string

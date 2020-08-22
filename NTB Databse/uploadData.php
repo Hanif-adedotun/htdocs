@@ -63,6 +63,7 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
 
       $error = $conn->errno . ' ' . $conn->error ;
       recordError($error);//record error to error.log file
+      recordError($th);//record error to error.log file
       echo "Unable to enter values into database";
       
       
@@ -122,6 +123,7 @@ function addRecord2($databaseName){
 
     $error = $conn->errno . ' ' . $conn->error ;
     recordError($error);//record error to error.log file
+    recordError($th);//record error to error.log file
 
     echo "Unable to enter values into database";
   }
@@ -133,6 +135,7 @@ function addRecord2($databaseName){
 function addRecord3($databaseName){
   require_once 'login.php';
   include_once 'recordError.php';//function that cointains error file 
+  include 'tableNames.php';
 
   //START TRANSACTION;
   $conn->query("START TRANSACTION");
@@ -144,10 +147,26 @@ function addRecord3($databaseName){
 
 
   try {
-    $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`0) VALUES(?,?,?,?)");
-    $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
+    $sql = "SELECT `ID` FROM `$table2` WHERE `SBU/CSU ID` = '$DirectorateName'";
+    $resultNew = $conn->query($sql);
+    $row = mysqli_fetch_array($resultNew, MYSQLI_ASSOC);
+    $option = $row['ID'];
+
+    if (empty($option)){//if the sbu does not exist in the directorate table, it adds the value of NULL 
+
+      $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`) VALUES(?,?,?,?)");
+      $sql->bind_param('ssss', $DirectorateName, $SBUFullName, $HeadofSBU, $Name);
+      $sql->execute();
+      echo "Added to database";
+      
+    }else{//if it exists, it gets the id number and add its to the last row
+     $sql = $conn->prepare("INSERT INTO `$databaseName`(`SBU/CSU Abbreviation`, `SBU-CSU Name full`, `Head of SBU`, `Name`, `Directorate ID`) VALUES(?,?,?,?,?)");
+    $sql->bind_param('ssssi', $DirectorateName, $SBUFullName, $HeadofSBU, $Name, $option);
     $sql->execute();
     echo "Added to database";
+    }
+
+    
     
 
      //COMMIT
@@ -159,6 +178,7 @@ function addRecord3($databaseName){
 
     $error = $conn->errno . ' ' . $conn->error ;
     recordError($error);//record error to error.log file
+    recordError($th);//record error to error.log file
     
     echo "Unable to enter values into database";
   }
@@ -192,6 +212,8 @@ function addRecord4($databaseName){
 
     $error = $conn->errno . ' ' . $conn->error ;
     recordError($error);//record error to error.log file
+    recordError($th);//record error to error.log file
+    
     echo "Unable to enter values into database";
   }
 

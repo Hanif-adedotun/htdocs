@@ -12,14 +12,8 @@ function recordError($text){
   
     if (flock($file, LOCK_EX)){//prevent another user from using the file at the same time
     
-        // class datatime
-        // {
-        //   public $time_value;
-        // }
-        // $time_stamp = new datatime();
-        // $time_stamp->time_value = date("l, F jS, Y - g:i:sa", time()); 
-
-       $date_text =  date("l, F jS, Y - G:i:s a", time()).' [Error]: '. $text . "\n";
+       
+       $date_text =  date("l, F jS, Y - G:i:s a", time()).' [Error]: '. $text . ' File('.$_SERVER["REQUEST_URI"].')'. "\n";
        fwrite($file, $date_text) or die("Could not write to file");
 
        flock($file, LOCK_UN);//unlocks the file 

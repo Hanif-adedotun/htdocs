@@ -181,7 +181,7 @@ function alertDOM(error, inputClassName) {
 
 
 //Upload data values to the server
-function uploadValues(formElem, spanresult, databasename) {
+function uploadValues(formElem, databasename) {
     if (tester == true) {
         console.log('Talking to the server...');
 
@@ -194,16 +194,27 @@ function uploadValues(formElem, spanresult, databasename) {
 
         downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function (result) {
 
-            spanresult.innerHTML = result; //if an error occur from the database or any reply from the database
+            //spanresult.innerHTML = result; //if an error occur from the database or any reply from the database
  
-            //if (spanresult.contains(document.getElementById('successful'))) {
+            if (result.includes('Added')){
                 alert(result);//Displays the result in an alert form
                 location.reload();
-           // }
+           }else{
+               //if an error occur from the database or any reply from the database
+            
+            var error_span = document.createElement('p');//create element for error
+            error_span.classList.add('derror');//adds the error class
+            var span_error =  document.getElementById(databasename).parentElement.appendChild(error_span);//parent element to add error element
+            span_error.append(result);//append result from database
+
+           }
           
         });
     } else {
-        spanresult.innerHTML = '<b id="error">One or more fields are without values. Input values!</b>';
+        var error_span = document.createElement('p');//create element for error
+        error_span.classList.add('derror');//adds the error class
+        var span_error =  document.getElementById(databasename).parentElement.appendChild(error_span);//parent element to add error element
+        span_error.append('One or more fields are without values. Input values!');//append result from database
     }
 
 
@@ -214,19 +225,25 @@ function uploadValues(formElem, spanresult, databasename) {
 
 
 function delTable(value, databasename) {
-    console.log('code error');
+    
     var con = confirm("Are you sure you want to delete this field?");
     if (con == true) {
+        console.log('Deleting value...');
+
         downloadHTML('../NTB Databse/database.php?document=delete&database=' + databasename + '&deletekey=' + value + '', function (result) {
-            var span = document.getElementById('NewTableresult');
-            span.innerHTML = result;
+            
+            if(result.includes('Succesfully Deleted!')){
+                alert(result);
+               location.reload();
+            }else{
+                var error_span = document.createElement('p');//create element for error
+                error_span.classList.add('derror');//adds the error class
+                var span_error =  document.getElementById(databasename).parentElement.appendChild(error_span);//parent element to add error element
+                span_error.append(result);//append result from database
+            }
+            
         });
 
-        if (span.contains(document.getElementById('successful'))) {
-            console.log('You deleted row ' + value + ' from ' + databasename);
-            alert('successfully Deleted Row!');
-            location.reload();
-        }
     } else {
         alert("Okay");
     }

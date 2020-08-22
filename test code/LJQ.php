@@ -1,10 +1,5 @@
 <?php
-require_once 'login.php';
-$conn = new mysqli($db_hostname, $db_username, $db_password);
-if ($conn->connect_error) die('Error Loading Database');
-
-mysqli_select_db($conn, $db_database) or die("Unable to select database: " . mysqli_error());
-
+require 'login.php';
 
 echo <<<_END
 <html>
@@ -18,14 +13,35 @@ function refresh(){
 <form action='LJQ.php' method='post'>
 <span>Enter Username: <input type='text' name='user'></span><br>
 <span>Enter Password: <input type='password' name='pass'></span><br>
-<input type='submit' value='Enter'><br>
+<input type='submit' onclick='refresh()' value='Enter'><br>
 </form>
 </body>
 </html>
 _END;
 
 
-
+function showvalues(){
+    require 'login.php';
+    $query2 = "SELECT * FROM users";
+       $result = $conn->query($query2);
+       if (!$result) die("Fatal Error<br>");
+    
+    $rows = $result->num_rows;
+    
+    $info = mysqli_fetch_field_direct($result, 0);
+    $info2 = mysqli_fetch_field_direct($result, 1);
+    
+    for($i=0; $i<$rows; ++$i)
+    {
+        $row = $result->fetch_array(MYSQLI_ASSOC);
+    
+        echo 'Username: '.htmlspecialchars($row['Username']).'<br>';
+        echo 'Password: '.htmlspecialchars($row['Password']).'<br>';
+        echo 'Type of username: ' .$info->type.'<br>';//type 10 == Date, 253 $ 254 == char
+        echo 'Type of password: ' .$info2->type.'<br><br>';
+    }
+    }
+showvalues();
 
 if ((isset($_POST['user']) && isset($_POST['pass'])) && !($_POST['user']=='' || $_POST['pass']=='')){
     $username = $_POST['user'];
@@ -43,28 +59,11 @@ if ((isset($_POST['user']) && isset($_POST['pass'])) && !($_POST['user']=='' || 
     
 }
 
-$query2 = "SELECT * FROM users";
-   $result = $conn->query($query2);
-   if (!$result) die("Fatal Error<br>");
-
-$rows = $result->num_rows;
-
-$info = mysqli_fetch_field_direct($result, 0);
-$info2 = mysqli_fetch_field_direct($result, 1);
-
-for($i=0; $i<$rows; ++$i)
-{
-    $row = $result->fetch_array(MYSQLI_ASSOC);
-
-    echo 'Username: '.htmlspecialchars($row['Username']).'<br>';
-    echo 'Password: '.htmlspecialchars($row['Password']).'<br>';
-    echo 'Type of username: ' .$info->type.'<br>';//type 10 == Date, 253 $ 254 == char
-    echo 'Type of password: ' .$info2->type.'<br><br>';
-}
 if (isset($_POST['delpass'])){
 $deletepassword = $_POST['delpass'];
 $delete = "DELETE FROM users WHERE Password='$deletepassword'";
 $result = $conn->query($delete);
+
 if(!$result){
  echo'Error deleting User<br>';
 }
@@ -81,6 +80,5 @@ echo <<<_END
 <input type='submit' onclick='refresh()' value='Delete User'>
 </form>
 _END;
-
 
 ?>

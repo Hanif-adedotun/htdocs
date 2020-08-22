@@ -87,7 +87,7 @@ recordError($conn->error);//record error to error.log file
 
         }
         //The delete button for each row in each table
-        echo "<td contenteditable='false'><button value='". $primaryKey . "'class='delete' onclick='delTable(this.value, `".$databaseName."`); return false'>Delete</button></td>";
+        echo "<td contenteditable='false'><button  value='". $primaryKey . "'class='delete' onclick='delTable(this.value, `".$databaseName."`); return false;'>Delete</button></td>";
        
     }
     echo "</tr>";
@@ -106,18 +106,19 @@ function delvalues($database, $position, $delkey){
   require_once 'login.php'; //To connect to database, it will connect only once, call in other functions also
   include_once 'recordError.php';
 
+try {
+  
 $query = "DELETE FROM `$database` WHERE `$database`.`$position` = $delkey";//id number tied from js delete value
 $result = $conn->query($query);
-$consoleError = 'console.log("This executed")';
-echo '<script>'. $consoleError . '</script>';
+echo 'Succesfully Deleted!';
 
-if(!$result){
+
+} catch (\Throwable $th) {
   echo "Unable to delete row from database";
-  recordError($conn->error);//record error to error.log file
- }
- else{
-  echo 'Succesfully Deleted!';
- }
+
+  //recordError($conn->error);//record error to error.log file
+  recordError($th);//record error to error.log file
+}
 
 $conn->close();
 }

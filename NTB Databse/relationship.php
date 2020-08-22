@@ -28,7 +28,6 @@ $tables_array = array($table1, $table2, $table3, $table4);
 
 //$sql = "SHOW CREATE table `$table1`";
 
-// $sql_array = array("START TRANSACTION", "SELECT * FROM `$table2`");
 
 // $sql = "START TRANSACTION";
 // $conn->query($sql);
@@ -36,7 +35,7 @@ $tables_array = array($table1, $table2, $table3, $table4);
 //$sql = "UPDATE `$table2` SET `Directorate name` = `Voltex Oil and Cylinder` WHERE `Directorate name` = `Voltex Oil and Gas`";
 
 
-$sql = "SELECT * FROM `$table2`";
+$sql = "SELECT `ID` FROM `$table2` WHERE `SBU/CSU ID` = 'Aramco'";
 $resultNew = $conn->query($sql);
 
 
@@ -51,33 +50,40 @@ if(!$resultNew){
   
     
   //echo '<br><b>'.$value.'</b>';
-    echo 'Successful';
+   // echo 'Successful';
 
-    echo "<table class='tables' border='1' >";
+//     echo "<table class='tables' border='1' >";
 
-    $info = $resultNew->fetch_fields();
+//     $info = $resultNew->fetch_fields();
    
-    //show table headers
-    echo "<tr>";
-    foreach ($info as $val){
-        echo "<td><b>" .$val->name . "</b></td>";
-    }
-    echo "</tr>";  
+//     //show table headers
+//     echo "<tr>";
+//     foreach ($info as $val){
+//         echo "<td><b>" .$val->name . "</b></td>";
+//     }
+//     echo "</tr>";  
 
- while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_NUM)){//while the rows are available in the database
-  $res = $optionRow[0]; 
-  echo "<tr>";
-    foreach ($optionRow as $option){//to render each value to the option tag
-     
-      echo '<td>'.$option.'</td>';
-     
+  $optionRow=mysqli_fetch_array($resultNew, MYSQLI_ASSOC);//while the rows are available in the database
+//   $res = $optionRow[0]; 
+//   echo "<tr>";
+     //foreach ($optionRow as $option){//to render each value to the option tag
+     $option = $optionRow['ID'];
+
+      if (!empty($option)){
+        echo $option;
+        
+      }else{
+        echo 'There is no id number';
+      }
+
+//       echo '<td>'.$option.'</td>';
       
-  }
-  echo "</tr>";
+   
+//   echo "</tr>";
   
 
-}
-echo "</table>";
+ //}
+// echo "</table>";
 }
 //}
 

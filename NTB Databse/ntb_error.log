@@ -1,18 +1,136 @@
 
-Tuesday, August 18th, 2020 - 6:26:04pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 18:27:14pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:08:09pm [Error]: My name is Hanif, this is an error log
-Tuesday, August 18th, 2020 - 21:09:07pm [Error]: My name is Hanif, this is an error log
-Tuesday, August 18th, 2020 - 21:09:30pm [Error]: My name is Hanif, this is an error log
-Tuesday, August 18th, 2020 - 21:13:55pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:14pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:14pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:14pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '/csu table' at line 1
-Tuesday, August 18th, 2020 - 21:32:14pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:56 pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:56 pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:56 pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
-Tuesday, August 18th, 2020 - 21:32:56 pm [Error]: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '/csu table' at line 1
-Tuesday, August 18th, 2020 - 21:34:05 pm [Error]: 0 
-Tuesday, August 18th, 2020 - 21:34:20 pm [Error]: 0 
-Tuesday, August 18th, 2020 - 21:34:54 pm [Error]: 0 
+Wednesday, August 19th, 2020 - 16:21:57 pm [Error]: 
+Wednesday, August 19th, 2020 - 16:21:57 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Wednesday, August 19th, 2020 - 16:22:40 pm [Error]: 
+Wednesday, August 19th, 2020 - 16:22:40 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Wednesday, August 19th, 2020 - 17:07:46 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Wednesday, August 19th, 2020 - 17:08:21 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('directorate tab...', 'ID', '1')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Wednesday, August 19th, 2020 - 17:11:57 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Wednesday, August 19th, 2020 - 17:12:59 pm [Error]: Error: Call to undefined method mysqli::quey() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main}
+Thursday, August 20th, 2020 - 21:17:52 pm/NTB%20Databse/relationship.php [Error]: 1
+Thursday, August 20th, 2020 - 21:18:42 pm File(/NTB%20Databse/relationship.php)  [Error]: 1
+File(/NTB%20Databse/relationship.php) Thursday, August 20th, 2020 - 21:29:45 pm [Error]: 1
+Thursday, August 20th, 2020 - 21:30:55 pm [Error]: 1
+File(/NTB%20Databse/relationship.php)Thursday, August 20th, 2020 - 21:31:42 pm [Error]: 1 File(/NTB%20Databse/relationship.php)
+Thursday, August 20th, 2020 - 21:32:14 pm [Error]: 1 File(/NTB%20Databse/relationship.php)
+Thursday, August 20th, 2020 - 21:44:57 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:48:12 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:48:42 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:52:46 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:55:52 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:56:39 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:57:03 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 21:57:55 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:02:14 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:04:35 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:05:08 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:05:31 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:08:52 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:09:53 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:10:25 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:12:11 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('employees table', 'ID', '6')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=employees%20table&deletekey=6)
+Thursday, August 20th, 2020 - 22:12:59 pm [Error]: Error: Call to undefined method mysqli::qury() in C:\xampp\htdocs\NTB Databse\database.php:112
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openDB.php(35): delvalues('sbu/csu table', 'ID', '11')
+#1 C:\xampp\htdocs\NTB Databse\database.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/database.php?document=delete&database=sbu/csu%20table&deletekey=11)
+Thursday, August 20th, 2020 - 22:20:35 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Thursday, August 20th, 2020 - 22:20:35 pm [Error]: Error: Call to undefined method mysqli::prpare() in C:\xampp\htdocs\NTB Databse\uploadData.php:183
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(22): addRecord4('employees table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Thursday, August 20th, 2020 - 22:25:09 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Thursday, August 20th, 2020 - 22:25:09 pm [Error]: Error: Call to undefined method mysqli::prpare() in C:\xampp\htdocs\NTB Databse\uploadData.php:183
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(22): addRecord4('employees table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)

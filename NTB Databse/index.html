@@ -43,14 +43,14 @@
                 <td><input class='addval' onblur='alertDOM(document.getElementById("NewTableresult"), this.className)' type='date' placeholder='dd-mm-yyyy' name="revertDate"/></td>
                 <td><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text"  placeholder="Remark" name="remark"/></td>
                 <td ><input class='addval' onkeyup='alertDOM(document.getElementById("NewTableresult"), this.className)' type="text" placeholder="Status Update" name="status"/></td>
-                <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm"), document.getElementById("NewTableresult"), "tableResult1"); return false' id="submit"/></td>
+                <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm"), "tableResult1"); return false' id="submit"/></td>
             </tr>
          </table>
         </form>
         </div>
             <button onclick='addRecord("addF", document.getElementById("newTable"), this.id)' id='addField' name='add_field'>Add field</button>
         
-        <p id='NewTableresult'></p>
+      
     </div>
 
     <div id='table2' class='maintables'>
@@ -69,13 +69,13 @@
                     <option value="">SBU/CSU Options:</option>
                    </select>
             </td>
-              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), document.getElementById("NewTableresult2"), "tableResult2"); return false' id="submit2"/></td>
+              <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm2"), "tableResult2"); return false' id="submit2"/></td>
           </tr>
        </table>
       </form>
     </div><button onclick = 'addRecord("addF2", document.getElementById("newTable2"), this.id)';  class='test' id='addField2' name='add_field'>Add field</button>
 
-    <p id='NewTableresult2'></p>
+    
     </div>
 
     <div id='table3' class='maintables'>
@@ -91,14 +91,14 @@
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="SCU-SBU Name full" name="SBUFullName"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Head of SBU" name="HeadofSBU"/></td>
                      <td ><input class='addval3' onkeyup='alertDOM(document.getElementById("NewTableresult3"), this.className)' type="text"  placeholder="Name of Head" name="Name"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), document.getElementById("NewTableresult3"), "tableResult3"); return false' id="submit3"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm3"), "tableResult3"); return false' id="submit3"/></td>
                  </tr>
               </table>
              </form>
         </div>
         <button onclick = 'addRecord("addF3", document.getElementById("newTable3"), this.id)';  class='test' id='addField3' name='add_field'>Add field</button>
      
-        <p id='NewTableresult3'></p>
+       
     </div>
 
     <div id='table4' class="maintables">
@@ -113,13 +113,13 @@
                    
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  placeholder="Full name" name="Fullname"/></td>
                      <td ><input class='addval4' onkeyup='alertDOM(document.getElementById("NewTableresult4"), this.className)' type="text"  maxlength="4" placeholder="Department" name="Department"/></td>
-                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), document.getElementById("NewTableresult4"), "tableResult4"); return false' id="submit4"/></td>
+                     <td><input type="submit" name="submit" onclick='uploadValues(document.getElementById("sendForm4"), "tableResult4"); return false' id="submit4"/></td>
                  </tr>
               </table>
              </form>
            </div>
            <button onclick = 'addRecord("addF4", document.getElementById("newTable4"), this.id)';  class='test' id='addField4' name='add_field'>Add field</button>
-           <p id='NewTableresult4'></p>
+           
         </div>
 
  </div>

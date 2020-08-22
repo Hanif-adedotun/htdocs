@@ -26,6 +26,6 @@ try {
   echo $errorMessage;
   
   include_once 'recordError.php';//function that cointains error file 
-  recordError($errorMessage);//record error to error.log file
+  recordError($th);//record error to error.log file
 }
 ?>
