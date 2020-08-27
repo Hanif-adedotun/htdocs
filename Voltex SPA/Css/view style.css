@@ -35,7 +35,7 @@ header div{
     text-align: center;
 }
 
-header img{
+/* header img{
       display: inline-block;
       color: white;
       position: relative;
@@ -44,53 +44,94 @@ header img{
       margin-left: 5%;
       width: 25%;
       height: 40%;
+} */
+
+/* Control bootsrap styles */
+
+#voltex_navigation{
+    /* background-color: rgb(44, 120, 190); */
+    background-color: whitesmoke;
+    border: none; 
+    
+}
+
+#myTabs{
+    justify-content: center;
+    text-align: center;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+#myTabs li a{
+    
+    font-weight: bold;
+}
+#bs-example-navbar-collapse-1{
+    border: none;
+   
+}
+/* #myTabs li a:hover{
+    color: rgb(44, 120, 190);
+}
+#myTabs li .active{
+    color: white;
+} */
+.tab-pane{
+    margin-bottom: 5em;
+    margin-left: 2.5%;
+    margin-right: 2.5%;
+}
+
+#voltex_modal{
+    margin-bottom: 2em;
+}
+#submitSubscribe{
+    margin: .5em;
+}
+.modal-header{
+    background-color: rgb(44, 120, 190);
+    color: white;
+}
+#myModalLabel{
+    font-weight: bold;
+}
+#modal_close{
+    color: white;
+}
+.panel-primary{
+  margin-left: 7%;
+  margin-right: 5%;
+  margin-top: 1em;
+  width: initial;
+  text-align: center;
 }
 #head-logo{
+    padding-left: 0;
     padding-top: 0;
     margin-top: 0;
     width: 70%;
     height: 190%;
+    margin-left: 0;
+    margin-bottom: 1%;
 }
-
-nav{
-      display: inline-block;
-      color: white;
-      text-align: center;
-      height: 20%;
-      background-color: /*#315FAA*/ black;
-      margin: 0;
-      padding: 0;
+footer{
+    margin-bottom: 0;
 }
-
- nav ul li{
-          display: inline-block; 
-          text-align: center;
-          list-style-type: none;
-          text-decoration: none;
-          padding-right: 1em;
-          line-height: 100%;
-          cursor: pointer;
-          margin: 0;
-          padding-top: 0;
-          padding-bottom: 0.5em;
-          color: white;
- 
+#footer-text{
+    text-align: center; 
+    padding: 1em; 
+    margin: 2% ; 
+    background-color:rgb(44, 120, 190); 
+    color: white;
+    border-radius: 5px;
 }
-
-nav ul li a{
-   color: white;
-   text-decoration: none;
-   text-align: center;
- }
-
-nav ul li a:hover{
-background-color: white;
-color: black;
-border-radius: 3px;
-font-weight: bold;
+.glyphicon-cloud{
+    color: rgb(44, 120, 190);
+    /* background-color: black; */
 }
 
 
+/* End of bootstrap */
  h1{
      padding-top: 0.5em;
  }
@@ -130,66 +171,27 @@ h2 {
    text-align: right;
 }
 
-/*Question boxes on about page*/
-.QuestionBoxes{
-    position: sticky;
-    height: min-content;
-    width: 50%;
-    border-radius: 100px;
-    background-color: black;
-    text-align: center;
-    padding: .5em;
-}
-.QuestionBoxes .qhead{
-    text-align: center;
-width: fit-content;
-background-color: cadetblue;
-border-style: inherit;
-}
-
-.QuestionBoxes .qbody{
-    color: aliceblue;
-    
-}
 
 /*footer of the page*/
-
 .footer {
-    margin-top: 1em;
-    position: relative;
-    left: 0;
-    bottom: 0;
+    text-align: center;
     width: 100%;
     background-color: whitesmoke;
-    color: black;
-    display: inline-block;
   }
 
-  .footer p{
-   font-weight: lighter;
-    font-size: small;
-    text-align: left;
-    margin-left: 2%;
-
-}
 #socialMedia{
     margin-top: 1%;
 }
 .footImg{
-    height: 2.5%;
-    width: 2.5%;
+    height: 4%;
+    width: 4%;
     padding-left: .5%;
 }
 
 .ImgBigger{
-    height: 3%;
-    width: 3%;
+    height: 5%;
+    width: 5%;
 }
-
-.footer span{
-    text-align: right;
-       
-    }
 
 #news{
     width: 10%;
@@ -201,23 +203,16 @@ border-style: inherit;
  for your mobile website/application. e.g the navigation
  and the footer*/
  @media only screen and (max-width: 600px) {
-    body {
-    background-color: lightblue;
-    }
     .Titterlinks {
-        position: absolute;
+        position: relative;
         padding-left: 5%;
         text-align: center;
         width: 100%;
     }
     .footImg{
-        height: 5%;
-        width: 5%;
+        height: 9%;
+        width: 9%;
         padding-left: 1%;
-    }
-    .ImgBigger{
-        height: 6%;
-        width: 6%;
     }
     }
 

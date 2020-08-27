@@ -1,0 +1,191 @@
+<html>
+
+<head>
+<title>UI NTB Database </title>
+<script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
+<script type = "text/javascript" src="javascript/jquery-3.3.1.js" ></script>
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    font-family: Montserrat, 'Lucida Sans', 'Lucida Sans Regular';
+    background:-moz-linear-gradient(top, #4890dd, #224c83);
+    background:-webkit-gradient(linear, left top, left bottom, from(rgb(93, 150, 211)), to(#2e68b4));  
+    text-align: center;
+    color: white;
+    
+}
+
+h1{
+    margin: 2%;
+}
+#showtime{
+    font-weight: bold;
+}
+.footer{
+   
+    text-align: center;
+    background-color: transparent;
+    width: 100%;
+    height: max-content;
+    padding: .5%;
+    position: absolute;
+    bottom: 0;
+    
+}
+.foot_id{
+    font-weight: bold;
+    color: lightgray;
+}
+
+#toggle_directive{
+    /* float: right; */
+    font-weight: bold;
+    margin-top: 2%;
+}
+
+#checkbox_directive{
+    margin-left: .5%;
+    color: white;
+}
+
+#add_directive{
+    margin: 5%;
+}
+
+.input_directive{
+padding: .2%;
+display: inline-block;
+border: none;
+border-radius: 2px;
+/* box-shadow:2px 2px 5px gray; */
+margin: 1%;
+}
+
+#directive_table{
+margin-top: 5%;
+background-color: white;
+color: #224c83;
+text-align: center;
+margin-left: 1%;
+margin-right: 1%;
+}
+
+/* Switch */
+.onoffswitch{
+    position: relative;
+    margin-left: 47%;
+    margin-top: 0;
+    /* margin-bottom: 2%; */
+    width: 90px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.onoffswitch-checkbox{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label{
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 22px;
+}
+.onoffswitch-inner{
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner::before, .onoffswitch-inner::after{
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-family: Trebuchet, Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner::before{
+    content: "Show";
+    padding-left: 10px;
+    text-align: left;
+    background-color: #34A7C1;
+    color: #ffffff;
+}
+.onoffswitch-inner::after{
+    content: "Hide";
+    padding-right: 10px;
+    background-color: #eeeeee;
+    color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch{
+    display: block;
+    width: 18px;
+    margin: 6px;
+    background: #224c83;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 56px;
+    /* border: 2px solid #999999; */
+    border-radius: 22px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner{
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch{
+    right: 0px;
+}
+/* End of on off switch */
+</style>
+</head>
+
+<body>
+    <h1>Welcome to NTB Database</h1>
+    <p id='showtime'>Time</p>
+    
+    <div id='toggle_directive'>
+        <!-- <label>Show Directive table</label> -->
+        <div class='onoffswitch'>
+            <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id='myonoffswitch' tabindex='0'>
+            <label class="onoffswitch-label" for="myonoffswitch">
+                <span class='onoffswitch-inner'></span>
+                <span class='onoffswitch-switch'></span>
+            </label>
+        </div>
+    </div>
+   <div id='directive_cointainer'>
+
+   </div>
+    <div id='add_directive'>
+        <form method="POST">
+         <label for="first_input">First input:</label>
+         <input id='first_input' class="input_directive" type="text" placeholder="First input" name="first"/>
+         
+         <label for='second_input'>Second input:</label>
+             <input id='second_input' class="input_directive" type="text" placeholder="Second input" name="Second"/>
+        </form>
+    </div>
+
+
+<footer class="footer">
+    <p class="foot_id">&copy; Voltex Designs </p>
+</footer>
+
+</body>
+
+<script type = "text/javascript" src="javascript/ntb_ui.js" ></script>
+</html>
