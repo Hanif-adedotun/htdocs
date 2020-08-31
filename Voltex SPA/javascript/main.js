@@ -17,13 +17,11 @@
 //   }
 
 // };
-$(function () {
-   $('[data-toggle="popover"]').popover();
-   });
-
 $(document).ready(function(){
-   $('#banner').fadeIn('slow');
-  
+   
+   logoFadeIn();
+   footer_text();
+
    $('h2').hover(function(){
     $(this).addClass('bigger');
    },function(){
@@ -38,6 +36,28 @@ $(document).ready(function(){
 
 
 }); 
+
+function logoFadeIn(){
+   $('#head-logo')
+   .hide('slow')
+   .show('slow');
+    
+}
+
+$(function () {
+   $('[data-toggle="popover"]').popover();
+   });
+
+function footer_text(){
+   // Display the footer text with current year
+   var text_element = document.getElementById('footer-text');
+   var current_year = new Date().getFullYear();
+   console.log(current_year);
+   text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
+   }
+
+
+
 
 
 

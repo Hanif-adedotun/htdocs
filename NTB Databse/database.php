@@ -41,7 +41,7 @@ recordError($conn->error);//record error to error.log file
   
    echo "<h2 id='".$databaseName."' class='dbnames'>" .strtoupper($databaseName) . "</h2>";
 
-    echo "<table class='tables' border='1' >";
+    echo "<table class='tables' >";
 
     $info = $result->fetch_fields();
    
@@ -67,7 +67,7 @@ recordError($conn->error);//record error to error.log file
          //To check if value is a date
           $rtype = mysqli_fetch_field_direct($result, $i);//Check type of variable in a field
           if ($rtype->type == 10){ //10 is a date type
-            echo "<td><input type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
+            echo "<td><input class='date_input' type='date' placeholder='yyyy-mm-dd' value ='" .$value. "'/></td>";
           } 
           // else if($rtype->name == 'Action Party'){//if the field name is action party
             

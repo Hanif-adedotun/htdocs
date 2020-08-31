@@ -1,6 +1,9 @@
 // Javascript for NTB_UI 
-window.onload = showTime(), retreive_checkbox('myonoffswitch'), change('myonoffswitch');
-   
+
+
+// 'Use strict';
+window.onload = showTime(),  retreive_checkbox('myonoffswitch'), change('myonoffswitch'), footer_text();
+
 // var new_switch = document.getElementById('myonoffswitch');
 
 // new_switch.addEventListener('change', function(){
@@ -16,7 +19,7 @@ function showTime() {
 
     if (currentHour >= 12 && currentHour < 24) {//if its betweeen 12pm and 12am, the meridian changes
         currentHour = currentHour - 12;
-        if (currentHour == '0') {//if it is noon the hour changes to 12pm
+        if (currentHour == 0) {//if it is noon the hour changes to 12pm
             currentHour = '12';
         }
         meridian = 'pm';
@@ -33,7 +36,6 @@ function showTime() {
     var Totaltime = currentHour + ' : ' + currentMinute + ' ' + meridian;
     toString(Totaltime);
 
-    console.log(Totaltime);
     document.getElementById('showtime').innerHTML = '<b>' + Totaltime + '</b>';
 
     setTimeout(function () {
@@ -44,32 +46,50 @@ function showTime() {
 
 // Check the correct way to use an addEventListener
 var time_label = document.getElementById('showtime');
-time_label.addEventListener('click', function(){
+time_label.addEventListener('mouseout',  function(){
     say_hi();
 }, false);
 
 function say_hi(){
-    time_label.innerText = 'Hello today!';
+    var currentDate = new Date();
+    var currentHour = currentDate.getHours();
+
+    if (currentHour < 12 && currentHour > 0) {
+        time_label.innerText = 'Good Morning!';
+    } 
+    else if(currentHour >= 12 && currentHour < 17){
+        time_label.innerText = 'Good Afternoon!';
+    }
+    else if(currentHour >= 17){
+        time_label.innerText = 'Good Evening!';
+    }
+    else {
+        time_label.innerText = 'Hello today!';
+    }
 
     setTimeout(function () {
         showTime();
-    }, 3000); //update after every 15 seconds
+    }, 3000); 
 }
 
 
 //check if the show directive table is checked
 
-function getTable(id) { //sends request to the database and waits for response
+function getTable() { //sends request to the database and waits for response
         downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
             var result_element;
             if (document.getElementById('directive_table')){
                 result_element = document.getElementById('directive_table');
                 result_element.innerHTML = result; //render result to html
+
             }else{
                 result_element = document.createElement('div');
                 result_element.id = 'directive_table';
                 result_element.innerHTML = result; //render result to html
-                var res =  document.getElementById('directive_cointainer').appendChild(result_element);//parent element to add error element   
+
+                //var res =  document.querySelector('body');//parent element to add  element   
+                var add_dir = document.querySelector('#add_directive');//gets the add_directive div
+                add_dir.before(result_element);//insert new node before the add_directive div
             }
            
 
@@ -91,14 +111,15 @@ var checked_status = document.getElementById(id).checked;
 
 if (checked_status === true){
     
-    getTable(id);//call the function to show the table 
+    getTable();//call the function to show the table 
     console.log('Showing directive table');
 
 }else if(checked_status === false){
     console.log('clear the page');
-
-    if(document.querySelector('#directive_cointainer')){
-         document.querySelector('#directive_cointainer').innerHTML = '';//makes the directive table disspear 
+  
+    var table_div = document.querySelector('#directive_table');
+    if(table_div){//if it exists in the DOM tree 
+        table_div.remove();
     }
 }
 }
@@ -116,7 +137,7 @@ if(window.localStorage){
 function retreive_checkbox(id){//retrieve the saved value
     if(window.localStorage){
         var checked_value = window.localStorage.getItem('checked_status');
-        console.log(checked_value);
+        //console.log(checked_value);
         var set_item = document.getElementById(id);
         
 
@@ -127,8 +148,6 @@ function retreive_checkbox(id){//retrieve the saved value
 
         }else{
             var bool_checked;
-            
-                
             bool_checked = parseBoolean(checked_value);//converts it too boolean using the function 
                  
             console.log('The checkbox is '+ bool_checked);
@@ -138,12 +157,7 @@ function retreive_checkbox(id){//retrieve the saved value
         }
     }
 }
-// if($('#checkbox_directive[@checked=checked]') == true){
-//     console.log('good');
-// }else{
-//     console.log('not good');
-//     console.log($('#checkbox_directive[@checked]'));
-// }
+
 
 
 
@@ -183,4 +197,26 @@ function parseBoolean(string) {
         default:
             return undefined;
     }
+}
+
+function footer_text(){
+// Display the footer text with current year
+var text_element = document.getElementById('foot_text_id');
+var current_year = new Date().getFullYear();
+console.log(current_year);
+text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
+}
+
+
+var add_button = document.getElementById('add-to-database');
+add_button.addEventListener('click', function () {
+    console.log('');
+});//open_add();
+
+
+function open_add() {
+alertDOM('error', 'input-directive-textbox');
+var form_class = document.querySelector('.add-to-database-form');
+form_class.style.display = '';
+// tableID.classList.remove('hidden');
 }

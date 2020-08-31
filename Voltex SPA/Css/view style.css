@@ -5,7 +5,6 @@
 *{
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 
 
@@ -13,38 +12,18 @@
 body{
     margin: 0; 
     min-width: 50%;
-    background-color: snow;
+    background-color: violet;
     font-family: Montserrat, Verdana, Geneva, Tahoma, sans-serif;
     text-align: center;
     font-size: medium;
 }
 
-header{
-    background-color: /*#315FAA*/ black;
-    text-align: left;
-    height: 20%;
-    z-index: 99;
-}
+
 
 .sticky {
     position: fixed;
     top: 0;
 }
-
-header div{
-    text-align: center;
-}
-
-/* header img{
-      display: inline-block;
-      color: white;
-      position: relative;
-      text-align: left;
-      padding: 0;
-      margin-left: 5%;
-      width: 25%;
-      height: 40%;
-} */
 
 /* Control bootsrap styles */
 
@@ -52,7 +31,6 @@ header div{
     /* background-color: rgb(44, 120, 190); */
     background-color: whitesmoke;
     border: none; 
-    
 }
 
 #myTabs{
@@ -81,7 +59,11 @@ header div{
     margin-left: 2.5%;
     margin-right: 2.5%;
 }
+#carousel-container{ /*The size of the image slider*/
+height: 100%;
+width: 70%; 
 
+}
 #voltex_modal{
     margin-bottom: 2em;
 }
@@ -114,13 +96,30 @@ header div{
     margin-left: 0;
     margin-bottom: 1%;
 }
-footer{
-    margin-bottom: 0;
+
+/*footer of the page*/
+.footer {
+    margin: 5em 0em 1em 0em;
+    text-align: center;
+    width: 100%;
+    background-color: transparent;
+  }
+
+#socialMedia{
+    margin-top: 1%;
+}
+
+.footImg{
+    height: 3%;
+    width: 3%;
+    margin-left: .5%;
 }
 #footer-text{
     text-align: center; 
     padding: 1em; 
     margin: 2% ; 
+    margin-bottom: 0;
+    font-weight: bold;
     background-color:rgb(44, 120, 190); 
     color: white;
     border-radius: 5px;
@@ -132,6 +131,7 @@ footer{
 
 
 /* End of bootstrap */
+
  h1{
      padding-top: 0.5em;
  }
@@ -144,14 +144,8 @@ h2 {
  span{
      color: white;
  }
- iframe{
-     width: 70%;
-     height: 70%;
-     border-radius: 5%;
-     margin-top: 5%;
- }
 
-/*This code is for a division if we want our page to be black*/
+
 
 .Titterlinks {
     position: absolute;
@@ -172,25 +166,15 @@ h2 {
 }
 
 
-/*footer of the page*/
-.footer {
-    text-align: center;
-    width: 100%;
-    background-color: whitesmoke;
-  }
 
-#socialMedia{
-    margin-top: 1%;
-}
-.footImg{
-    height: 4%;
-    width: 4%;
-    padding-left: .5%;
-}
 
 .ImgBigger{
-    height: 5%;
-    width: 5%;
+
+    border-style: solid;
+    border-color: rgb(44, 120, 190);
+    border-radius: 100%;
+    border-width: 4px;
+    border-spacing: 0;
 }
 
 #news{
@@ -203,16 +187,22 @@ h2 {
  for your mobile website/application. e.g the navigation
  and the footer*/
  @media only screen and (max-width: 600px) {
+    #carousel-container{
+        height: 50%;
+        width: 100%; 
+        margin-left: 0;
+        margin-right: 0;
+        }
     .Titterlinks {
         position: relative;
-        padding-left: 5%;
+        margin-left: 5%;
         text-align: center;
         width: 100%;
     }
     .footImg{
         height: 9%;
         width: 9%;
-        padding-left: 1%;
+        margin-left: 1%;
     }
     }
 
