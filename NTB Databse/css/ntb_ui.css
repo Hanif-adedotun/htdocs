@@ -1,0 +1,289 @@
+/* Css file for UI NTB Databae */
+*{/*controls for all elements except where overrided*/
+    margin: 0;
+    padding: 0;
+    
+}
+body{/*the body element*/
+    /* font-family: 'Lucida Sans', 'Lucida Sans Regular'; */
+    background:-moz-linear-gradient(top, #4890dd, #224c83);
+    background:-webkit-gradient(linear, left top, left bottom, from(rgb(93, 150, 211)), to(#2e68b4));  
+    text-align: center;
+    color: white;  
+    scrollbar-3dlight-color: rgb(93, 150, 211);
+}
+
+h1{
+    margin: 1.5%;
+}
+#showtime{/*the element for time (p)*/
+    font-weight: bolder;
+    font-size: large;
+}
+
+.derror{/*Error comming from the database*/
+    color: red;
+    font-weight: bold;
+}
+
+/* Switch */
+.container{
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.onoffswitch{
+    font-weight: bold;
+    margin-top: 2%;
+    position: relative;  
+    text-align: center;
+    margin-left: 47%;
+    width: 90px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.onoffswitch-checkbox{
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+.onoffswitch-label{
+    display: block;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 22px;
+}
+.onoffswitch-inner{
+    display: block;
+    width: 200%;
+    margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner::before, .onoffswitch-inner::after{
+    display: block;
+    float: left;
+    width: 50%;
+    height: 30px;
+    padding: 0;
+    line-height: 30px;
+    font-size: 14px;
+    color: white;
+    font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner::before{
+    content: "Show";
+    padding-left: 10px;
+    text-align: left;
+    background-color: #3faac2;
+    color: #ffffff;
+}
+.onoffswitch-inner::after{
+    content: "Hide";
+    padding-right: 10px;
+    background-color: #eeeeee;
+    color: #888787;
+    text-align: right;
+}
+.onoffswitch-switch{
+    display: block;
+    width: 18px;
+    margin: 6px;
+    background: #224c83;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 56px;
+    border-radius: 22px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-switch::after{
+    background: #224c83;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner{
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch{
+    right: 0;
+}
+/* End of on off switch */
+
+
+/* Table styling */
+.dbnames{/*Table header (h2)*/
+    margin: 2%;
+}
+.tables{/*table class rendered from the server*/
+    color: white;
+    text-align: center;
+    line-height: 150%;
+    font-size: 100%;
+    display: inline;
+}
+.date_input{ /* date input of the table*/
+    background: white;
+    color: #224c83;
+    border: none;
+    text-align: center;
+    border-radius: 5px;
+}
+.thead{ /*head of the table*/
+    background-color: #305c96;
+    padding: 0 10px;
+    border-radius: 7px;
+}
+#directive_table{
+    margin-top: 5%;
+    text-align: center;
+    margin-left: 1%;
+    margin-right: 1%;
+}
+.delete{
+    background: white;
+    font-weight: bold;
+    color: #224c83;
+    border:none;
+    border-radius: 4px;
+    padding: 5%;
+}
+.delete:hover{
+    border-style: solid;
+    border-width: medium;
+    border-color: #224c83;
+    border-radius: 6px;
+}
+/*End of table styling*/
+
+#open-modal{/*container for form input fields to the table*/
+    margin-top: 4%;
+    background-color: #224c83;
+    padding: 1%;
+    border: none;
+    border-radius: 5px;
+    font-weight: bolder;
+    color: white;
+}
+#open-modal:hover{
+    background-color: #14559bc5;
+}
+#open-modal:focus{
+    border: none;
+}
+/* Modal styling */
+.modal{
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 5%;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+}
+
+
+/* Modal Header */
+.modal-header{
+padding: 2px 16px;
+background-color: #224c83;
+color: white;
+text-align: center;
+}
+/* Modal Body */
+.modal-body{
+    padding: 2px 16px;
+    align-content: center;
+}
+
+.input-directive{/*All inputs for the add to table*/
+    border: 2px solid gray;
+    padding: .2%;
+    display: block;
+    border-radius: 2px;
+    /* box-shadow:2px 2px 5px gray; */
+    margin: 1%;
+    width: 60%;
+    margin-left: 20%;
+}
+.input-directive:focus{
+    border: 2px solid #4890dd;
+}
+
+/* Modal Content */
+.modal-content{
+    position: relative;
+    background: whitesmoke;
+    margin: auto;
+    padding: 0;
+    border-radius: 10px;
+    width:70%;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19); 
+    -webkit-animation-name: animatetop;
+    -webkit-animation-duration: 0.6s;
+    animation-name: animatetop;
+    animation-duration: 0.6s;
+    color: #224c83;
+}
+/* Add Animation */
+@-webkit-keyframes animatetop{
+    from {top: -50px; opacity: 0}
+    to {top:0; opacity: 1}
+}
+
+@keyframes animatetop{
+    from {top: -50px; opacity: 0}
+    to {top:0; opacity: 1}
+}
+/* Modal footer */
+.modal-footer{
+    padding: 2px 16px;
+    background-color: #224c83;
+    color: white;
+}
+/* Close button */
+.close{
+    color: whitesmoke;
+    float: right;
+    font-size: large;
+    font-weight: bold;
+}
+.close:hover,
+.close:focus{
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/* End of Modal Styling */
+
+/*Footer of the page*/
+.footer{
+   position: relative;
+    text-align: center;
+    background-color: transparent;
+    width: 100%;
+    height: max-content;
+    padding: .5%;
+    bottom: 0;
+}
+.foot_text{
+    font-weight: bold;
+    color: lightgray;
+}
+/*End of footer*/
+
+/* If it is a mobile screen */
+@media only screen and (max-width: 600px) {
+    .input-directive{/*textbox inputs for the add to table*/
+        width: 80%;
+        margin-left: 10%;
+    }   
+    .tables{
+        display: none;
+        content: 'Your screen is too small to shoe the table, rotate device to see';
+    }
+}

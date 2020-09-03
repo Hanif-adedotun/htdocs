@@ -4,203 +4,7 @@
 <title>UI NTB Database </title>
 <script type = "text/javascript" src="javascript/AjaxLibrary/downloadHTML.js" ></script>
 <script type = "text/javascript" src="javascript/jquery-3.3.1.js" ></script>
-
-<style>
-*{/*controls for all elements except where overrided*/
-    margin: 0;
-    padding: 0;
-    
-}
-body{/*the body element*/
-    /* font-family: 'Lucida Sans', 'Lucida Sans Regular'; */
-    background:-moz-linear-gradient(top, #4890dd, #224c83);
-    background:-webkit-gradient(linear, left top, left bottom, from(rgb(93, 150, 211)), to(#2e68b4));  
-    text-align: center;
-    color: white;  
-}
-
-h1{
-    margin-top: 2%;
-}
-#showtime{/*the element for time (p)*/
-    font-weight: bolder;
-    font-size: large;
-}
-
-.derror{/*Error comming from the database*/
-    color: red;
-    font-weight: bold;
-}
-
-/* Switch */
-.container{
-    text-align: center;
-    justify-content: center;
-    width: 100%;
-}
-.onoffswitch{
-    font-weight: bold;
-    margin-top: 2%;
-    position: relative;  
-    text-align: center;
-    margin-left: 47%;
-    width: 90px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-}
-.onoffswitch-checkbox{
-    position: absolute;
-    opacity: 0;
-    pointer-events: none;
-}
-.onoffswitch-label{
-    display: block;
-    overflow: hidden;
-    cursor: pointer;
-    border-radius: 22px;
-}
-.onoffswitch-inner{
-    display: block;
-    width: 200%;
-    margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
-}
-.onoffswitch-inner::before, .onoffswitch-inner::after{
-    display: block;
-    float: left;
-    width: 50%;
-    height: 30px;
-    padding: 0;
-    line-height: 30px;
-    font-size: 14px;
-    color: white;
-    font-weight: bold;
-    box-sizing: border-box;
-}
-.onoffswitch-inner::before{
-    content: "Show";
-    padding-left: 10px;
-    text-align: left;
-    background-color: #3faac2;
-    color: #ffffff;
-}
-.onoffswitch-inner::after{
-    content: "Hide";
-    padding-right: 10px;
-    background-color: #eeeeee;
-    color: #888787;
-    text-align: right;
-}
-.onoffswitch-switch{
-    display: block;
-    width: 18px;
-    margin: 6px;
-    background: #224c83;
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    right: 56px;
-    border-radius: 22px;
-    transition: all 0.3s ease-in 0s;
-}
-.onoffswitch-switch::after{
-    background: #224c83;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner{
-    margin-left: 0;
-}
-.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch{
-    right: 0;
-}
-/* End of on off switch */
-
-
-/*Add fields to table*/
-
-#add_directive{/*container for form input fields to the table*/
-    margin: 5%;
-}
-
-.input-directive-textbox{/* textbox inputs for the add to table*/ 
-padding: .2%;
-display: inline-block;
-border: none;
-border-radius: 2px;
-/* box-shadow:2px 2px 5px gray; */
-margin: 1%;
-}
-.add-to-database-form{
-    /* visibility: hidden; */
-    display:none;
-}
-/*End of Add fiels*/
-
-
-/* Table styling */
-.dbnames{
-    margin-bottom: 2%;
-}
-.tables{/*table class rendered from the server*/
-    float: right;
-    color: white;
-    text-align: center;
-    line-height: 150%;
-    font-size: 100%;
-}
-.date_input{ /* date input of the table*/
-    background: white;
-    color: #224c83;
-    border: none;
-    text-align: center;
-    border-radius: 5px;
-}
-.thead{ /*head of the table*/
-    background-color: #305c96;
-    padding: 0 10px;
-    border-radius: 7px;
-}
-#directive_table{
-margin-top: 5%;
-text-align: center;
-margin-left: 1%;
-margin-right: 1%;
-}
-.delete{
-    background: white;
-    font-weight: bold;
-    color: #224c83;
-    border:none;
-    border-radius: 4px;
-    padding: 5%;
-}
-.delete:hover{
-    border-style: solid;
-    border-width: medium;
-    border-color: #224c83;
-    border-radius: 6px;
-}
-/*End of table styling*/
-
-
-/*Footer of the page*/
-.footer{
-   position: relative;
-    text-align: center;
-    background-color: transparent;
-    width: 100%;
-    height: max-content;
-    padding: .5%;
-    bottom: 0;
-}
-.foot_text{
-    font-weight: bold;
-    color: lightgray;
-}
-/*End of footer*/
-
-</style>
+<link rel="stylesheet" href="css/ntb_ui.css" type="text/css"/>
 </head>
 
 <body>
@@ -221,8 +25,7 @@ margin-right: 1%;
 
 
 
-    <div id='add_directive'>
-        <button id="add-to-database">Add to Database</button>
+    <!-- <div id='add_directive'>
         <form method="POST" class="add-to-database-form">
          <label for="first_input">First input:</label>
          <input id='first_input' class="input-directive-textbox" type="text" placeholder="First input" name="first"/>
@@ -230,7 +33,45 @@ margin-right: 1%;
          <label for='second_input'>Second input:</label>
              <input id='second_input' class="input-directive-textbox" type="text" placeholder="Second input" name="Second"/>
         </form>
+    </div> -->
+
+    <!-- Button to open Modal -->
+    <button id="open-modal">Add to Database</button>
+
+    <!-- The Modal -->
+    <div id='addModal' class='modal'>
+        <!-- Modal Content -->
+        <div class="modal-content">
+
+            <!-- Head of the modal -->
+            <div class="modal-header">
+                <span class="close">&times;</span>
+                <h2>Add to Directive Table</h2>
+            </div>
+
+            <!-- Body of the Modal -->
+            <div class="modal-body">
+                <form method="POST" class="add-to-database-form">
+                    <label for="first_input">First input</label>
+                    <input id='first_input' class="input-directive" type="text" placeholder="First input" name="first"/>
+                    
+                    <label for='second_input'>Second input</label>
+                        <input id='second_input' class="input-directive" type="text" placeholder="Second input" name="Second"/>
+
+                    <label for='sbuOptions'>Action Party</label><!--onblur='alertDOM(document.getElementById("NewTableresult"), this.className)'-->
+                    <select class='addval input-directive' id='sbuOptions'  name="party">
+                        <option value="">SBU/CSU Options:</option>
+                    </select>
+                </form>
+            </div>
+            <!-- Footer of the Modal -->
+            <div class="modal-footer">
+                <p>&copy; Voltex Designs</p>
+            </div>
+        </div>
     </div>
+
+
 
 
 <footer class="footer">

@@ -1,21 +1,30 @@
 // Javascript for NTB_UI 
 
 
-// 'Use strict';
-window.onload = showTime(),  retreive_checkbox('myonoffswitch'), change('myonoffswitch'), footer_text();
+//jquery functions
+$(document).ready(function() {
+    animate_objects();
+});
 
-// var new_switch = document.getElementById('myonoffswitch');
+function animate_objects() {
+    // $('h1').hide() //hide h1 first then show it 
+    // .fadeIn('slow')//make the h1 fade in 
+    // .fadeTo('slow',0.5)
+    $('h1')
+    // .slideUp('slow')
+    // .slideDown('slow')
+    .hide()
+    .fadeIn('slow');//make the h1 fade in 
 
-// new_switch.addEventListener('change', function(){
-//     console.log('The new switch is '+new_switch.checked);
-// });
+}
 
+
+//This function is to show the time, and it updates itself after every 15 seconds 
 function showTime() {
     var currentDate = new Date();
     var currentHour = currentDate.getHours();
     var currentMinute = currentDate.getMinutes();
     var meridian;
-
 
     if (currentHour >= 12 && currentHour < 24) {//if its betweeen 12pm and 12am, the meridian changes
         currentHour = currentHour - 12;
@@ -44,13 +53,13 @@ function showTime() {
 
 }
 
-// Check the correct way to use an addEventListener
-var time_label = document.getElementById('showtime');
-time_label.addEventListener('mouseout',  function(){
-    say_hi();
-}, false);
 
-function say_hi(){
+var time_label = document.getElementById('showtime');
+time_label.onmouseout = function (){
+    say_hi();//Greeting message depending on the time of the day
+};
+
+function say_hi(){//Greeting message depending on the time of the day
     var currentDate = new Date();
     var currentHour = currentDate.getHours();
 
@@ -68,73 +77,62 @@ function say_hi(){
     }
 
     setTimeout(function () {
-        showTime();
+        showTime();//calls the show time function after 3 seconds
     }, 3000); 
 }
 
 
-//check if the show directive table is checked
 
-function getTable() { //sends request to the database and waits for response
-        downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
-            var result_element;
-            if (document.getElementById('directive_table')){
-                result_element = document.getElementById('directive_table');
-                result_element.innerHTML = result; //render result to html
 
-            }else{
-                result_element = document.createElement('div');
-                result_element.id = 'directive_table';
-                result_element.innerHTML = result; //render result to html
+// Event Listener to check if the checkbox has been changed
+// When the value of the checkbox is changed it calls two function
+// @function change(this.id) is to either show or remove the table
+//@function save_checkbox(this.is) is to save the value to the localStorage
 
-                //var res =  document.querySelector('body');//parent element to add  element   
-                var add_dir = document.querySelector('#add_directive');//gets the add_directive div
-                add_dir.before(result_element);//insert new node before the add_directive div
-            }
-           
-
-        });
-}
-
-//Event Listener to check if the checkbox has been changed
 var directive_checkbox = document.getElementById('myonoffswitch');
-// console.log(directive_checkbox.checked);
-directive_checkbox.addEventListener('change', function(){
-    change(this.id);
-    save_checkbox(this.id);
-});
+directive_checkbox.onchange = function () {
+    change(this.id);//shows the table is checkbox is true
+    save_checkbox(this.id);//Saves the value to the localStorage
+};
 
-function change(id){//check if the checkbox has betweeen
+//This function is to either show or remove the table depending on the value of the checkbox
+//@param (id) is the id value of the checkbox
+function change(id){
+
 var checked_status = document.getElementById(id).checked;
 
-//console.log(checked_status);
+    if (checked_status === true){    
+        getDBResults.getDirectiveTable();//call the function to show the table 
+        console.log('Showing directive table');
 
-if (checked_status === true){
-    
-    getTable();//call the function to show the table 
-    console.log('Showing directive table');
-
-}else if(checked_status === false){
-    console.log('clear the page');
-  
-    var table_div = document.querySelector('#directive_table');
-    if(table_div){//if it exists in the DOM tree 
-        table_div.remove();
+    }else if(checked_status === false){
+        var table_div = document.querySelector('#directive_table');
+        
+        if(table_div){//if it exists in the DOM tree, remove it 
+            table_div.remove();
+        }
     }
 }
-}
 
-function save_checkbox(id){//save the value to localStorage
+//This function is to save the value of the textbox to local storage
+//@param (id) is the id value of the checkbox
+function save_checkbox(id){
 
 var checkbox_status = document.getElementById(id).checked;
-if(window.localStorage){
-    window.localStorage.clear('checked_status');
-    window.localStorage.setItem('checked_status', checkbox_status);
-    console.log('Checkbox has been set to '+ checkbox_status);
-}
+
+    if(window.localStorage){//if localStorage exists
+        window.localStorage.clear('checked_status');
+        window.localStorage.setItem('checked_status', checkbox_status);
+        console.log('Checkbox has been set to '+ checkbox_status);
+    }
 }
 
-function retreive_checkbox(id){//retrieve the saved value
+
+//This function receives the value of the checkbox from the 
+//local storage, set it to true if there is no value
+//@params (id) is the id of the checkbox it receives
+//Uses parseBoolean() function to convert the text to boolean
+function retreive_checkbox(id){
     if(window.localStorage){
         var checked_value = window.localStorage.getItem('checked_status');
         //console.log(checked_value);
@@ -149,39 +147,21 @@ function retreive_checkbox(id){//retrieve the saved value
         }else{
             var bool_checked;
             bool_checked = parseBoolean(checked_value);//converts it too boolean using the function 
-                 
-            console.log('The checkbox is '+ bool_checked);
-            set_item.checked = bool_checked;//set the checkbox to the value
-
-          // change(id);
+            
+            if(bool_checked !== undefined){//makes sure that the function return value is not undefined
+                console.log('The checkbox is '+ bool_checked);
+                set_item.checked = bool_checked;//set the checkbox to the value
+            }else{
+                console.error('Value of checkbox is undefined');
+            }
+        
         }
     }
 }
 
 
-
-
-//jquery functions
-$(document).ready(function() {
-    animate_objects();
-});
-
-function animate_objects() {
-    // $('h1').hide() //hide h1 first then show it 
-    // .fadeIn('slow')//make the h1 fade in 
-    // .fadeTo('slow',0.5)
-    $('h1')
-    .slideUp('slow')
-    .slideDown('slow')
-    .css('opacity', '70%');
-
-    setTimeout(function () {
-        $('h1').css('opacity', '100%');
-    }, 3000); 
-}
-
-
-//convert to boolean function
+//This function converts a string to boolean function
+//@param (string) is the value to change to a boolean value 
 function parseBoolean(string) {
     switch (String(string).toLowerCase()) {
         case "true":
@@ -199,24 +179,100 @@ function parseBoolean(string) {
     }
 }
 
+//This function replaces the generic footer text with date added to new one
 function footer_text(){
 // Display the footer text with current year
 var text_element = document.getElementById('foot_text_id');
 var current_year = new Date().getFullYear();
-console.log(current_year);
 text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
 }
 
+//An object that stores and connect to the database has its properties
+//This object is a database connect object, it values only connects to database
+var getDBResults = { 
+        getSBUresult: function (){
+            downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
+                var table = document.getElementById('sbuOptions');
+                table.innerHTML = result; //render result to html
+            });
+        },
+        getDirectiveTable: function(){
+            downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
+            var result_element;
+            if (document.getElementById('directive_table')){
+                result_element = document.getElementById('directive_table');
+                result_element.innerHTML = result; //render result to html
 
-var add_button = document.getElementById('add-to-database');
-add_button.addEventListener('click', function () {
-    console.log('');
-});//open_add();
+            }else{
+                result_element = document.createElement('div');
+                result_element.id = 'directive_table';
+                result_element.innerHTML = result; //render result to html
+
+                //var res =  document.querySelector('body');//parent element to add  element   
+                var add_dir = document.querySelector('#open-modal');//gets the add_directive div
+                add_dir.before(result_element);//insert new node before the add_directive div
+            }
+           
+        });
+    }
+};
+
+// Modal functions
+//Controls all the functions to open and close the modal
+function modalFunc(){
+    var modal = document.getElementById('addModal');
 
 
-function open_add() {
-alertDOM('error', 'input-directive-textbox');
-var form_class = document.querySelector('.add-to-database-form');
-form_class.style.display = '';
-// tableID.classList.remove('hidden');
+    //Button to open modal
+    var modalbtn = document.getElementById('open-modal');
+
+    //When you click modal Button
+    modalbtn.onclick = function(){
+        modal.style.display = 'block';
+        getDBResults.getSBUresult();//use the object to connect to the SBU table
+    };
+    
+    // Span close
+    var span = document.getElementsByClassName('close')[0];
+    
+
+    // When you click close
+    span.onclick = function(){
+        AskBeforeExit(modal);//Confirms you want to exit Modal
+    };
+    
+
+    //if you click outside of the modal
+    window.onclick = function(event){
+        if(event.target == modal){
+            AskBeforeExit(modal);//Confirms you want to exit Modal
+        }
+    };
 }
+
+//This function confirms if the use wants to exit the Modal
+//@param (modal) is the variable pointing to the Modal element
+//Returns the display value at the instance
+function AskBeforeExit(modal) {
+    var question = confirm('Are you sure you want to exit? You might loose the your values!');
+    if (question == true){
+        modal.style.display = 'none';
+    }
+    return  modal.style.display;
+}
+
+
+// Still in test phase functions
+
+//Center the switch Button
+function centerSwitch(){
+//This function is to center align the switch Button
+var switch_button = document.getElementsByClassName('onoffswitch')[0];
+console.log(switch_button.style.width);
+console.log(Number(switch_button.style.width));
+var window_width = window.screen.width;
+}
+//End of test Phase functions
+
+window.onload = showTime(),  retreive_checkbox('myonoffswitch'), change('myonoffswitch'), modalFunc(), footer_text();
+//This onload is at the buttom because it uses varaiables that are in the middle of the code
