@@ -8,7 +8,7 @@
 </head>
 
 <body>
-    <h1>Welcome to NTB Database</h1>
+    <h1>NTB Database</h1>
     <p id='showtime'>Time</p>
     
 
@@ -51,7 +51,7 @@
 
             <!-- Body of the Modal -->
             <div class="modal-body">
-                <form method="POST" class="add-to-database-form">
+                <form method="POST" id="add-to-database-form">
                     <label for="description">Directive Description</label>
                         <input id='description' class="input-directive" type="text" placeholder="Directive Description" name="description"/>
 
@@ -77,6 +77,8 @@
 
                     <label for='status'>Status Update</label>
                         <input id='status' class="input-directive" type="text" placeholder="Status Update" name="status"/>
+
+                    <input type="submit" name="submit" onclick="return false;" id="submit"/>
                 </form>
             </div>
             <!-- Footer of the Modal -->

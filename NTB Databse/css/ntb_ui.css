@@ -10,11 +10,10 @@ body{/*the body element*/
     background:-webkit-gradient(linear, left top, left bottom, from(rgb(93, 150, 211)), to(#2e68b4));  
     text-align: center;
     color: white;  
-    scrollbar-3dlight-color: rgb(93, 150, 211);
 }
 
 h1{
-    margin: 1.5%;
+    margin: 1%;
 }
 #showtime{/*the element for time (p)*/
     font-weight: bolder;
@@ -174,7 +173,7 @@ h1{
 /* Modal styling */
 .modal{
     display: none;
-    position: fixed;
+    position: absolute;
     z-index: 1;
     padding-top: .5%;
     left: 0;
@@ -197,7 +196,6 @@ text-align: center;
 .modal-body{
     padding: 2px 16px;
     align-content: center;
-    overflow: auto;
 }
 
 .input-directive{/*All inputs for the add to table*/
@@ -205,23 +203,42 @@ text-align: center;
     padding: .5%;
     display: block;
     border-radius: 2px;
-    box-shadow:2px 2px 6px gray;
+    box-shadow: 1.5px 1.5px 4px gray;
     margin: 1%;
     width: 60%;
     margin-left: 20%;
 }
 .input-directive:focus{
-    border: 2px solid #4890dd;
     box-shadow: none;
 }
 .add-to-database-form label{/*Label for each input*/
     font-weight: bold;
 }
+#submit{/*Submit button in form */
+    border: none;
+    background-color: #224c83;
+    color: white;
+    text-align: center;
+    padding: 1%;
+    border-radius: 4px;
+    margin: .5%;
+    font-weight: bold;
+}
+#submit:hover,
+#submit:focus{
+background-color: #2e68b4;
+}
+.input_error{
+    border: 2px solid red;
+}
+.input_good{
+    border: 2px solid green;
+}
 /* Modal Content */
 .modal-content{
     position: relative;
     background: whitesmoke;
-    margin: auto;
+    margin: auto auto 1%;
     padding: 0;
     border-radius: 10px;
     width:70%;
@@ -231,8 +248,6 @@ text-align: center;
     animation-name: animatetop;
     animation-duration: 0.6s;
     color: #224c83;
-    overflow: auto;
-    margin-bottom: 10%;
 }
 /* Add Animation */
 @-webkit-keyframes animatetop{

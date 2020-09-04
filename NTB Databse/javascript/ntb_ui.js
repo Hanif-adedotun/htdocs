@@ -1,6 +1,30 @@
 // Javascript for NTB_UI 
 
 
+//Object to hold all Id and Class names
+var AllIdNames = {
+    time_id : 'showtime',//Id for time used by animate_objects();
+
+    input_SBUoptions_id: 'sbuOptions', //Id for input in Modal used by getDBResults.getSBUresult();
+    directiveTable_id: 'directive_table', //directive table div id used in getDBResults.getDirectiveTable();
+
+    switch_id: 'myonoffswitch',//On and Off switch id
+
+    Modal_id: 'addModal',
+    OpenModal_id: 'open-modal', //open Modal;
+    
+    form_id: 'add-to-database-form',
+
+    footer_text_id: 'foot_text_id',//Footer text id
+
+
+};
+
+var AllClassNames = {
+    close_className : 'close',
+    input_values_className: 'input-directive',//Input elements values 
+};
+
 //jquery functions
 $(document).ready(function() {
     animate_objects();
@@ -43,9 +67,9 @@ function showTime() {
 
     }
     var Totaltime = currentHour + ' : ' + currentMinute + ' ' + meridian;
-    toString(Totaltime);
+    String(Totaltime); //Converts the time to a String
 
-    document.getElementById('showtime').innerHTML = '<b>' + Totaltime + '</b>';
+    document.getElementById(AllIdNames.time_id).innerHTML = '<b>' + Totaltime + '</b>';
 
     setTimeout(function () {
         showTime();
@@ -54,12 +78,13 @@ function showTime() {
 }
 
 
-var time_label = document.getElementById('showtime');
+var time_label = document.getElementById(AllIdNames.time_id);
 time_label.onmouseout = function (){
-    say_hi();//Greeting message depending on the time of the day
+    say_hi(time_label);//Greeting message depending on the time of the day
 };
 
-function say_hi(){//Greeting message depending on the time of the day
+//Greeting message displayed depending on the time of the day
+function say_hi(time_label){
     var currentDate = new Date();
     var currentHour = currentDate.getHours();
 
@@ -85,26 +110,27 @@ function say_hi(){//Greeting message depending on the time of the day
 //An object that stores and connect to the database has its properties
 //This object is a database connect object, it values only connects to database
 var getDBResults = { 
-    getSBUresult: function (){
+    getSBUresult: function(){
         downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
-            var table = document.getElementById('sbuOptions');
+            var table = document.getElementById(AllIdNames.input_SBUoptions_id);//gets the id from object (AllIdNames)
             table.innerHTML = result; //render result to html
+            return result;
         });
     },
+
     getDirectiveTable: function(){
         downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
         var result_element;
-        if (document.getElementById('directive_table')){
+        if (document.getElementById(AllIdNames.directiveTable_id)){//directive table id in (AllIdNames) object
             result_element = document.getElementById('directive_table');
             result_element.innerHTML = result; //render result to html
 
         }else{
             result_element = document.createElement('div');
-            result_element.id = 'directive_table';
+            result_element.id = AllIdNames.directiveTable_id;//directive table id in (AllIdNames) object
             result_element.innerHTML = result; //render result to html
 
-            //var res =  document.querySelector('body');//parent element to add  element   
-            var add_dir = document.querySelector('#open-modal');//gets the add_directive div
+            var add_dir = document.getElementById(AllIdNames.OpenModal_id);//gets the add_directive div
             add_dir.before(result_element);//insert new node before the add_directive div
         }
        
@@ -135,7 +161,7 @@ function parseBoolean(string) {
 // When the value of the checkbox is changed it calls two function
 // @function change(this.id) is to either show or remove the table
 //@function save_checkbox(this.is) is to save the value to the localStorage
-var directive_checkbox = document.getElementById('myonoffswitch');
+var directive_checkbox = document.getElementById(AllIdNames.switch_id);
 directive_checkbox.onchange = function () {
     change(this.id);//shows the table is checkbox is true
     save_checkbox(this.id);//Saves the value to the localStorage
@@ -158,7 +184,7 @@ var checked_status = document.getElementById(id).checked;
         
 
     }else if(checked_status === false){
-        var table_div = document.querySelector('#directive_table');
+        var table_div = document.getElementById(AllIdNames.directiveTable_id);
         
         if(table_div){//if it exists in the DOM tree, remove it 
             table_div.remove();
@@ -212,37 +238,32 @@ function retreive_checkbox(id){
 }
 
 
-//This function replaces the generic footer text with date added to new one
-function footer_text(){
-// Display the footer text with current year
-var text_element = document.getElementById('foot_text_id');
-var current_year = new Date().getFullYear();
-text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
-}
 
 
 // Modal functions
 //Controls all the functions to open and close the modal
 //It uses 'object.hasOwnProperty()' to check if the property is part of the particular object
 function modalFunc(){
-    var modal = document.getElementById('addModal');
+    var modal = document.getElementById(AllIdNames.Modal_id);//Modal id 
 
 
     //Button to open modal
-    var modalbtn = document.getElementById('open-modal');
+    var modalbtn = document.getElementById(AllIdNames.OpenModal_id);
 
     //When you click modal Button
     modalbtn.onclick = function(){
         modal.style.display = 'block';
 
         if (getDBResults.hasOwnProperty('getSBUresult')){
-            getDBResults.getSBUresult();//use the object to connect to the SBU table
+     
+            getDBResults.getSBUresult(); //use the object to connect to the SBU table, returns the result
+            
         }
         
     };
     
     // Span close
-    var span = document.getElementsByClassName('close')[0];
+    var span = document.getElementsByClassName(AllClassNames.close_className)[0];
     
 
     // When you click close
@@ -270,6 +291,110 @@ function AskBeforeExit(modal) {
     return  modal.style.display;
 }
 
+//Validating each input against the main validator
+// var input_values = document.getElementsByClassName(AllClassNames.input_values_className);
+// input_values.onfocus = function () {
+//     console.log('hello');
+// };
+
+var form = document.getElementById(AllIdNames.form_id);//Get form 
+    Array.from(form.children).forEach(function (element) {
+        //event.preventDefault();//prevent default
+
+        if(element.type == ('date' || 'select-one') ){
+            element.onblur = function(){
+                console.log(element.id);
+                validate_input(element);
+            };
+        }else{
+            element.onkeyup = function () {
+                console.log(element.id);
+                validate_input(element);
+            };
+        }
+    });
+
+
+//Function to validate each input as they are clicked
+var tester;
+function validate_input(element){
+    // if(element.value == ''){
+    //     element.classList.add('input_error');
+       
+    // }else{
+    //     element.classList.remove('input_error');
+    //     element.classList.add('input_good');
+    // }
+
+    if (element.type == 'text') { //if input is a text
+        if (element.value.length < 120) {
+            tester = true;
+
+            element.classList.remove('input_error');
+            element.classList.add('input_good');
+            
+            console.log(element.value+' is okay.');
+
+        } else {
+            tester = false;
+            //error.innerHTML = '<b>Enter a valid text</b>';
+        }
+    } else if (element.type == 'number') { //if input is a number
+         if (element.value.length < 9) {
+            tester = true;
+
+            element.classList.remove('input_error');
+            element.classList.add('input_good');
+            
+            console.log(element.value+' is okay.');
+        } else {
+            tester = false;
+            element.classList.add('input_error');
+           // error.innerHTML = '<b>Enter a valid number</b>';
+        }
+
+    } else if (element.type == 'date') { //if input is a date
+        toString(element.value);
+        console.log(element.value);
+
+        if (element.value.length < 11) {
+            tester = true;
+
+            element.classList.remove('input_error');
+            element.classList.add('input_good');
+            
+            console.log(element.value+' is okay.');
+        } else {
+            tester = false;
+            element.classList.add('input_error');
+            //error.innerHTML = '<b>Enter a valid date</b>';
+
+        }
+    }else if(element.type == 'select-one'){
+        if (element.value != '') {
+            tester = true;
+            
+            element.classList.remove('input_error');
+            element.classList.add('input_good');
+
+            console.log(element.value+' is selected.');
+        } else {
+            tester = false;
+            element.classList.add('input_error');
+            //error.innerHTML = '<b>Enter a valid option</b>';
+        }
+    }else {
+        tester = false;
+    }
+    return tester;
+}
+//This function replaces the generic footer text with date added to new one
+function footer_text(){
+    // Display the footer text with current year
+    var text_element = document.getElementById(AllIdNames.footer_text_id);
+    var current_year = new Date().getFullYear();
+    text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
+}
 
 // Still in test phase functions
 
@@ -288,6 +413,7 @@ var idName = elem.id;
 var classname = elem.className;
 return idName;
 }
+
 
 //End of test Phase functions
 
