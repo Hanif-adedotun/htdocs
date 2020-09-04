@@ -141,23 +141,22 @@ h1{
     margin-left: 1%;
     margin-right: 1%;
 }
-.delete{
+.delete{/*Delete button */
     background: white;
     font-weight: bold;
     color: #224c83;
     border:none;
     border-radius: 4px;
-    padding: 5%;
+    padding: 8%;
 }
 .delete:hover{
-    border-style: solid;
-    border-width: medium;
-    border-color: #224c83;
-    border-radius: 6px;
+    /* background-color: #224c83; */
+    background-color: #305c96;
+    color: white;
 }
 /*End of table styling*/
 
-#open-modal{/*container for form input fields to the table*/
+#open-modal{/*button to open modal*/
     margin-top: 4%;
     background-color: #224c83;
     padding: 1%;
@@ -177,12 +176,11 @@ h1{
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 5%;
+    padding-top: .5%;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
-    overflow: auto;
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -194,26 +192,31 @@ background-color: #224c83;
 color: white;
 text-align: center;
 }
+
 /* Modal Body */
 .modal-body{
     padding: 2px 16px;
     align-content: center;
+    overflow: auto;
 }
 
 .input-directive{/*All inputs for the add to table*/
     border: 2px solid gray;
-    padding: .2%;
+    padding: .5%;
     display: block;
     border-radius: 2px;
-    /* box-shadow:2px 2px 5px gray; */
+    box-shadow:2px 2px 6px gray;
     margin: 1%;
     width: 60%;
     margin-left: 20%;
 }
 .input-directive:focus{
     border: 2px solid #4890dd;
+    box-shadow: none;
 }
-
+.add-to-database-form label{/*Label for each input*/
+    font-weight: bold;
+}
 /* Modal Content */
 .modal-content{
     position: relative;
@@ -228,6 +231,8 @@ text-align: center;
     animation-name: animatetop;
     animation-duration: 0.6s;
     color: #224c83;
+    overflow: auto;
+    margin-bottom: 10%;
 }
 /* Add Animation */
 @-webkit-keyframes animatetop{
@@ -249,8 +254,8 @@ text-align: center;
 .close{
     color: whitesmoke;
     float: right;
-    font-size: large;
-    font-weight: bold;
+    font-size: x-large;
+    font-weight: bolder;
 }
 .close:hover,
 .close:focus{

@@ -82,13 +82,59 @@ function say_hi(){//Greeting message depending on the time of the day
 }
 
 
+//An object that stores and connect to the database has its properties
+//This object is a database connect object, it values only connects to database
+var getDBResults = { 
+    getSBUresult: function (){
+        downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
+            var table = document.getElementById('sbuOptions');
+            table.innerHTML = result; //render result to html
+        });
+    },
+    getDirectiveTable: function(){
+        downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
+        var result_element;
+        if (document.getElementById('directive_table')){
+            result_element = document.getElementById('directive_table');
+            result_element.innerHTML = result; //render result to html
 
+        }else{
+            result_element = document.createElement('div');
+            result_element.id = 'directive_table';
+            result_element.innerHTML = result; //render result to html
+
+            //var res =  document.querySelector('body');//parent element to add  element   
+            var add_dir = document.querySelector('#open-modal');//gets the add_directive div
+            add_dir.before(result_element);//insert new node before the add_directive div
+        }
+       
+    });
+}
+};
+
+//This function converts a string to boolean function
+//@param (string) is the value to change to a boolean value 
+function parseBoolean(string) {
+    switch (String(string).toLowerCase()) {
+        case "true":
+        case "1":
+        case "yes":
+        case "y":
+            return true;
+        case "false":
+        case "0":
+        case "no":
+        case "n":
+            return false;
+        default:
+            return undefined;
+    }
+}
 
 // Event Listener to check if the checkbox has been changed
 // When the value of the checkbox is changed it calls two function
 // @function change(this.id) is to either show or remove the table
 //@function save_checkbox(this.is) is to save the value to the localStorage
-
 var directive_checkbox = document.getElementById('myonoffswitch');
 directive_checkbox.onchange = function () {
     change(this.id);//shows the table is checkbox is true
@@ -97,13 +143,19 @@ directive_checkbox.onchange = function () {
 
 //This function is to either show or remove the table depending on the value of the checkbox
 //@param (id) is the id value of the checkbox
+//It uses 'object.hasOwnProperty()' to check if the property is part of the particular object
 function change(id){
 
 var checked_status = document.getElementById(id).checked;
 
-    if (checked_status === true){    
-        getDBResults.getDirectiveTable();//call the function to show the table 
-        console.log('Showing directive table');
+    if (checked_status === true){   
+
+        if(getDBResults.hasOwnProperty('getDirectiveTable')){
+            getDBResults.getDirectiveTable();//call the function to show the table 
+            console.log('Showing directive table');
+        } 
+        
+        
 
     }else if(checked_status === false){
         var table_div = document.querySelector('#directive_table');
@@ -160,25 +212,6 @@ function retreive_checkbox(id){
 }
 
 
-//This function converts a string to boolean function
-//@param (string) is the value to change to a boolean value 
-function parseBoolean(string) {
-    switch (String(string).toLowerCase()) {
-        case "true":
-        case "1":
-        case "yes":
-        case "y":
-            return true;
-        case "false":
-        case "0":
-        case "no":
-        case "n":
-            return false;
-        default:
-            return undefined;
-    }
-}
-
 //This function replaces the generic footer text with date added to new one
 function footer_text(){
 // Display the footer text with current year
@@ -187,38 +220,10 @@ var current_year = new Date().getFullYear();
 text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
 }
 
-//An object that stores and connect to the database has its properties
-//This object is a database connect object, it values only connects to database
-var getDBResults = { 
-        getSBUresult: function (){
-            downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
-                var table = document.getElementById('sbuOptions');
-                table.innerHTML = result; //render result to html
-            });
-        },
-        getDirectiveTable: function(){
-            downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
-            var result_element;
-            if (document.getElementById('directive_table')){
-                result_element = document.getElementById('directive_table');
-                result_element.innerHTML = result; //render result to html
-
-            }else{
-                result_element = document.createElement('div');
-                result_element.id = 'directive_table';
-                result_element.innerHTML = result; //render result to html
-
-                //var res =  document.querySelector('body');//parent element to add  element   
-                var add_dir = document.querySelector('#open-modal');//gets the add_directive div
-                add_dir.before(result_element);//insert new node before the add_directive div
-            }
-           
-        });
-    }
-};
 
 // Modal functions
 //Controls all the functions to open and close the modal
+//It uses 'object.hasOwnProperty()' to check if the property is part of the particular object
 function modalFunc(){
     var modal = document.getElementById('addModal');
 
@@ -229,7 +234,11 @@ function modalFunc(){
     //When you click modal Button
     modalbtn.onclick = function(){
         modal.style.display = 'block';
-        getDBResults.getSBUresult();//use the object to connect to the SBU table
+
+        if (getDBResults.hasOwnProperty('getSBUresult')){
+            getDBResults.getSBUresult();//use the object to connect to the SBU table
+        }
+        
     };
     
     // Span close
@@ -272,6 +281,14 @@ console.log(switch_button.style.width);
 console.log(Number(switch_button.style.width));
 var window_width = window.screen.width;
 }
+
+//This function returns the ID and/or Class name, use in Validating input
+function returnId(elem){
+var idName = elem.id;
+var classname = elem.className;
+return idName;
+}
+
 //End of test Phase functions
 
 window.onload = showTime(),  retreive_checkbox('myonoffswitch'), change('myonoffswitch'), modalFunc(), footer_text();

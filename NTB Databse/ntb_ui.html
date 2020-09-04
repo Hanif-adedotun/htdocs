@@ -36,7 +36,7 @@
     </div> -->
 
     <!-- Button to open Modal -->
-    <button id="open-modal">Add to Database</button>
+    <button id="open-modal" >Add to Database</button>
 
     <!-- The Modal -->
     <div id='addModal' class='modal'>
@@ -52,16 +52,31 @@
             <!-- Body of the Modal -->
             <div class="modal-body">
                 <form method="POST" class="add-to-database-form">
-                    <label for="first_input">First input</label>
-                    <input id='first_input' class="input-directive" type="text" placeholder="First input" name="first"/>
-                    
-                    <label for='second_input'>Second input</label>
-                        <input id='second_input' class="input-directive" type="text" placeholder="Second input" name="Second"/>
+                    <label for="description">Directive Description</label>
+                        <input id='description' class="input-directive" type="text" placeholder="Directive Description" name="description"/>
 
                     <label for='sbuOptions'>Action Party</label><!--onblur='alertDOM(document.getElementById("NewTableresult"), this.className)'-->
-                    <select class='addval input-directive' id='sbuOptions'  name="party">
-                        <option value="">SBU/CSU Options:</option>
-                    </select>
+                        <select class='addval input-directive' id='sbuOptions'  name="party">
+                            <option value="">SBU/CSU Options:</option>
+                        </select>
+                    
+                    <label for='directiveDate'>Directive Date</label>
+                        <input id='directiveDate' class="input-directive" type="date" placeholder="dd-mm-yyyy" name="directiveDate"/>
+
+                    <label for='meetingNumber'>NTB Meeting Number</label>
+                        <input id='meetingNumber' class="input-directive" type="number" placeholder="Meeting Number" name="meetingNumber"/>
+
+                    <label for='directiveDeadline'>Directive Deadline</label>
+                        <input id='directiveDeadline' class="input-directive" type="date" placeholder="dd-mm-yyyy" name="directiveDeadline"/>
+                    
+                    <label for='revertDate'>Revert Date</label>
+                        <input id='revertDate' class="input-directive" type="date" placeholder="dd-mm-yyyy" name="revertDate"/>
+
+                    <label for='remark'>Remark</label>
+                        <input id='remark' class="input-directive" type="text" placeholder="Remark" name="remark"/>
+
+                    <label for='status'>Status Update</label>
+                        <input id='status' class="input-directive" type="text" placeholder="Status Update" name="status"/>
                 </form>
             </div>
             <!-- Footer of the Modal -->

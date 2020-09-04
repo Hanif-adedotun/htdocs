@@ -19,7 +19,8 @@ while($optionRow=mysqli_fetch_array($resultNew, MYSQLI_BOTH)){//while the rows a
     $sbu_abbreviation = $optionRow['SBU/CSU Abbreviation'];
     $sbu_id = $optionRow['ID'];
     
-     echo '<option value='.$sbu_abbreviation.'>'.$sbu_id.' - '.$sbu_abbreviation.'</option>';//Show options in the values
+    //(.$sbu_id.' - ') to show id along value
+     echo '<option value='.$sbu_abbreviation.'>'.$sbu_abbreviation.'</option>';//Show options in the values
   
  }
  
