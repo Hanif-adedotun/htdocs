@@ -147,3 +147,39 @@ Sunday, August 30th, 2020 - 13:35:29 pm [Error]: Incorrect table name '' File(/N
 Sunday, August 30th, 2020 - 13:35:37 pm [Error]: Incorrect table name '' File(/NTB%20Databse/database.php?document=table1)
 Sunday, August 30th, 2020 - 13:35:45 pm [Error]: Incorrect table name '' File(/NTB%20Databse/database.php?document=table1)
 Sunday, August 30th, 2020 - 13:35:55 pm [Error]: Incorrect table name '' File(/NTB%20Databse/database.php?document=table1)
+Saturday, September 5th, 2020 - 23:33:47 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:33:47 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:33:52 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:33:52 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:24 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:24 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:25 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:25 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:26 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:26 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:26 pm [Error]: 0  File(/NTB%20Databse/uploadData.php)
+Saturday, September 5th, 2020 - 23:37:27 pm [Error]: Error: Call to undefined method mysqli::prepre() in C:\xampp\htdocs\NTB Databse\uploadData.php:49
+Stack trace:
+#0 C:\xampp\htdocs\NTB Databse\openUploadDB.php(13): addRecord('directive table')
+#1 C:\xampp\htdocs\NTB Databse\uploadData.php(3): require('C:\\xampp\\htdocs...')
+#2 {main} File(/NTB%20Databse/uploadData.php)

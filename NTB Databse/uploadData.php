@@ -51,8 +51,8 @@ function addRecord($databaseName){ //in the other script add addRecord('directiv
       $sql->execute();
       echo "Added to database";
       
-      echo "The id number of " .$party." is " .$sbu_id;
-      echo "<br><b>The id for the new row is " . mysqli_insert_id($conn). "</b>";
+      // echo "The id number of " .$party." is " .$sbu_id;
+      // echo "<br><b>The id for the new row is " . mysqli_insert_id($conn). "</b>";
      
       //COMMIT
       $conn->query("COMMIT");

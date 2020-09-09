@@ -228,12 +228,18 @@ text-align: center;
 #submit:focus{
 background-color: #2e68b4;
 }
+/* Error for the inputs */
 .input_error{
     border: 2px solid red;
 }
 .input_good{
     border: 2px solid green;
 }
+.span_error{
+    color: red;
+}
+/* End of input error*/
+
 /* Modal Content */
 .modal-content{
     position: relative;

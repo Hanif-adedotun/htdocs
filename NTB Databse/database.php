@@ -88,7 +88,8 @@ recordError($conn->error);//record error to error.log file
 
         }
         //The delete button for each row in each table
-        echo "<td contenteditable='false'><button  value='". $primaryKey . "'class='delete' onclick='delTable(this.value, `".$databaseName."`); return false;'>Delete</button></td>";
+        echo "<td contenteditable='false'><button  value='". $primaryKey . "'class='delete' >Delete</button></td>";
+        //onclick='delTable(this.value, `".$databaseName."`); return false;'
        
     }
     echo "</tr>";

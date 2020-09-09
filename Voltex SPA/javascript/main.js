@@ -22,20 +22,17 @@ $(document).ready(function(){
    logoFadeIn();
    footer_text();
 
-   $('h2').hover(function(){
-    $(this).addClass('bigger');
-   },function(){
-    $(this).removeClass('bigger');
-   });
+ }); 
+//    //To show Netlify content
+//    $('#subscribe_form').submit(function(e){
+//       e.preventDefault();
 
-   $('.footImg').hover(function(){
-      $(this).addClass('ImgBigger');
-     },function(){
-      $(this).removeClass('ImgBigger');
-     });
+//       var $form = $(this);
+//       $.post($form.attr('action'), $form.serialize()).then(function(){
+//          alert('Subscribed Successfully');
+//       });
+//    });
 
-
-}); 
 
 function logoFadeIn(){
    $('#head-logo')

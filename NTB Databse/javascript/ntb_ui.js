@@ -4,6 +4,7 @@
 //Object to hold all Id and Class names
 var AllIdNames = {
     time_id : 'showtime',//Id for time used by animate_objects();
+    db_name_id: 'directive table',//id for h2 which contains db name
 
     input_SBUoptions_id: 'sbuOptions', //Id for input in Modal used by getDBResults.getSBUresult();
     directiveTable_id: 'directive_table', //directive table div id used in getDBResults.getDirectiveTable();
@@ -14,6 +15,8 @@ var AllIdNames = {
     OpenModal_id: 'open-modal', //open Modal;
     
     form_id: 'add-to-database-form',
+    submit_id: 'submit',
+    form_error_id: 'formError',//form error
 
     footer_text_id: 'foot_text_id',//Footer text id
 
@@ -23,6 +26,7 @@ var AllIdNames = {
 var AllClassNames = {
     close_className : 'close',
     input_values_className: 'input-directive',//Input elements values 
+    delete_className: 'delete',//All the delete buttons 
 };
 
 //jquery functions
@@ -107,22 +111,20 @@ function say_hi(time_label){
 }
 
 
-//An object that stores and connect to the database has its properties
-//This object is a database connect object, it values only connects to database
-var getDBResults = { 
-    getSBUresult: function(){
+//A Class that stores and connect to the database has its properties
+//This classs is a database connect class, it values only connects to database, and render the results
+class Connect_Database { 
+    getSBUresult(table) {
         downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
-            var table = document.getElementById(AllIdNames.input_SBUoptions_id);//gets the id from object (AllIdNames)
             table.innerHTML = result; //render result to html
-            return result;
         });
-    },
+    }
 
-    getDirectiveTable: function(){
+
+    getDirectiveTable(result_element, next_sibling) {
         downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
-        var result_element;
-        if (document.getElementById(AllIdNames.directiveTable_id)){//directive table id in (AllIdNames) object
-            result_element = document.getElementById('directive_table');
+        
+        if (result_element){//directive table id in (AllIdNames) object
             result_element.innerHTML = result; //render result to html
 
         }else{
@@ -130,13 +132,80 @@ var getDBResults = {
             result_element.id = AllIdNames.directiveTable_id;//directive table id in (AllIdNames) object
             result_element.innerHTML = result; //render result to html
 
-            var add_dir = document.getElementById(AllIdNames.OpenModal_id);//gets the add_directive div
-            add_dir.before(result_element);//insert new node before the add_directive div
+            next_sibling.before(result_element);//insert new node before the add_directive div
+        }
+
+        if(document.getElementById(AllIdNames.directiveTable_id)){//if the element exists only
+            activate_delete();//Activate the delete function only when the table is showing       
         }
        
-    });
+        });
+
+    
+    }
+
+    //Uploads the data to the database
+    //@params (dataF) is the form data from all the inputs
+    //@params (form) is the form
+    UploadDirectiveTable(dataF, form){
+
+        downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function (result) {
+ 
+            if (result.includes('Added')){
+                alert(result);//Displays the result in an alert form
+                location.reload();
+           }else{
+               //if an error occur from the database or any reply from the database
+
+                var error_span = document.getElementById(AllIdNames.form_error_id);
+
+                if (error_span){
+                    error_span.innerHTML = result;
+                }else{
+
+                    error_span = document.createElement('p');//create element for error
+                    error_span.id = AllIdNames.form_error_id;//creates and id from our id object
+                    error_span.classList.add('derror');//adds the error class
+                    span_error.innerHTML = result;//append console.error(); from database
+                    var span_error = form.after(error_span);//parent element to add error element
+                    
+                }
+            
+           }
+          
+        });
+    }
+
+    //Delete from database
+    //Function to delete a value from the specific database
+    //@param (value) is the id of the particular row of the table
+    //@param (databasename) is the particular database that the button is in
+    delTable(value, databasename) {
+
+        console.log('Deleting value...');
+
+        downloadHTML('../NTB Databse/database.php?document=delete&database=' + databasename + '&deletekey=' + value + '', function (result) {
+            
+            if(result.includes('Succesfully Deleted!')){
+                alert(result);
+               location.reload();
+            }else{
+                var error_span = document.getElementById('delete_error');
+                 if (error_span){//if error exist before
+                     error_span.innerHTML = result;
+                 }else{
+                    error_span = document.createElement('p');//create element for error
+                    error_span.id = 'delete_error';
+                    error_span.classList.add('derror');//adds the error class
+                    var span_error =  document.getElementById(AllIdNames.directiveTable_id).after(error_span);//parent element to add error element
+                    span_error.append(result);//append result from database
+                 }
+            }
+            
+        });
+
+    }
 }
-};
 
 //This function converts a string to boolean function
 //@param (string) is the value to change to a boolean value 
@@ -169,22 +238,27 @@ directive_checkbox.onchange = function () {
 
 //This function is to either show or remove the table depending on the value of the checkbox
 //@param (id) is the id value of the checkbox
+//activate_delete() function is used to activate the delete fuction
 //It uses 'object.hasOwnProperty()' to check if the property is part of the particular object
 function change(id){
 
 var checked_status = document.getElementById(id).checked;
+var table_div = document.getElementById(AllIdNames.directiveTable_id);
 
     if (checked_status === true){   
 
-        if(getDBResults.hasOwnProperty('getDirectiveTable')){
-            getDBResults.getDirectiveTable();//call the function to show the table 
-            console.log('Showing directive table');
-        } 
-        
-        
+        // Calls the Connect_Database class, and gets the SBU results
+        //Gives the classs an element to render the values onto 
+        var result_placeholder = document.getElementById(AllIdNames.directiveTable_id);//gets the element to write it to
+        var next_sibling = document.getElementById(AllIdNames.OpenModal_id);//gets the next sibling
+       
+        var Database = new Connect_Database();//Calls the class to connect to the database
+        Database.getDirectiveTable(result_placeholder, next_sibling);//call the function to show the table 
+            
+       
+        console.log('Showing directive table');
 
-    }else if(checked_status === false){
-        var table_div = document.getElementById(AllIdNames.directiveTable_id);
+    }else{       
         
         if(table_div){//if it exists in the DOM tree, remove it 
             table_div.remove();
@@ -243,6 +317,7 @@ function retreive_checkbox(id){
 // Modal functions
 //Controls all the functions to open and close the modal
 //It uses 'object.hasOwnProperty()' to check if the property is part of the particular object
+var tester;//tester variable used in validate_input(element);
 function modalFunc(){
     var modal = document.getElementById(AllIdNames.Modal_id);//Modal id 
 
@@ -254,12 +329,13 @@ function modalFunc(){
     modalbtn.onclick = function(){
         modal.style.display = 'block';
 
-        if (getDBResults.hasOwnProperty('getSBUresult')){
-     
-            getDBResults.getSBUresult(); //use the object to connect to the SBU table, returns the result
-            
-        }
+        // Calls the Connect_Database class, and gets the SBU results
+        //Gives the classs a select element to render the values onto 
+        var Database = new Connect_Database();
+        var result_placeholder = document.getElementById(AllIdNames.input_SBUoptions_id);//gets the id from object (AllIdNames)
+        Database.getSBUresult(result_placeholder);   //use the object to connect to the SBU table, returns the result
         
+        check_inputs();//activate check inputs function, to start seeing values
     };
     
     // Span close
@@ -297,60 +373,70 @@ function AskBeforeExit(modal) {
 //     console.log('hello');
 // };
 
-var form = document.getElementById(AllIdNames.form_id);//Get form 
-    Array.from(form.children).forEach(function (element) {
+//Function to check inputs and call the validate function 
+//Start seeing and communicating to the validate function 
+function check_inputs(){
+
+var input_elements = document.getElementsByClassName(AllClassNames.input_values_className);//Get inputs from the form
+//console.log(input_elements);
+    Array.from(input_elements).forEach(function (element) {
         //event.preventDefault();//prevent default
 
-        if(element.type == ('date' || 'select-one') ){
-            element.onblur = function(){
+        tester = false;
+
+        var error = document.createElement('p');//creates error elemen to be appended to the input
+        error.className = 'span_error';
+        element.after(error);
+
+        if(element.type == 'date' || element.type == 'select-one'){
+           
+            element.onblur = function(){//When the input looses focus
                 console.log(element.id);
-                validate_input(element);
+                validate_input(element, error);
             };
         }else{
-            element.onkeyup = function () {
+            element.onkeyup = function () {//When the user types into input 
                 console.log(element.id);
-                validate_input(element);
+                validate_input(element, error);
             };
         }
     });
-
+}
 
 //Function to validate each input as they are clicked
-var tester;
-function validate_input(element){
-    // if(element.value == ''){
-    //     element.classList.add('input_error');
-       
-    // }else{
-    //     element.classList.remove('input_error');
-    //     element.classList.add('input_good');
-    // }
 
+function validate_input(element, error){
+   
     if (element.type == 'text') { //if input is a text
-        if (element.value.length < 120) {
+        if (element.value.length < 50) {
             tester = true;
 
             element.classList.remove('input_error');
             element.classList.add('input_good');
             
+            error.innerHTML = '';
             console.log(element.value+' is okay.');
 
         } else {
             tester = false;
-            //error.innerHTML = '<b>Enter a valid text</b>';
+            element.classList.remove('input_good');
+            element.classList.add('input_error');
+            error.innerHTML = '<b>Text is too long</b>';
         }
     } else if (element.type == 'number') { //if input is a number
-         if (element.value.length < 9) {
+         if (element.value.length < 10) {
             tester = true;
 
             element.classList.remove('input_error');
             element.classList.add('input_good');
-            
+
+            error.innerHTML = '';            
             console.log(element.value+' is okay.');
         } else {
             tester = false;
+            element.classList.remove('input_good');
             element.classList.add('input_error');
-           // error.innerHTML = '<b>Enter a valid number</b>';
+            error.innerHTML = '<b>Number is too long</b>';
         }
 
     } else if (element.type == 'date') { //if input is a date
@@ -363,11 +449,13 @@ function validate_input(element){
             element.classList.remove('input_error');
             element.classList.add('input_good');
             
+            error.innerHTML = '';
             console.log(element.value+' is okay.');
         } else {
             tester = false;
+            element.classList.remove('input_good');
             element.classList.add('input_error');
-            //error.innerHTML = '<b>Enter a valid date</b>';
+            error.innerHTML = '<b>Enter a valid date</b>';
 
         }
     }else if(element.type == 'select-one'){
@@ -377,17 +465,88 @@ function validate_input(element){
             element.classList.remove('input_error');
             element.classList.add('input_good');
 
+            error.innerHTML = '';
             console.log(element.value+' is selected.');
         } else {
             tester = false;
+            element.classList.remove('input_good');
             element.classList.add('input_error');
-            //error.innerHTML = '<b>Enter a valid option</b>';
+            error.innerHTML = '<b>Enter a valid option</b>';
         }
     }else {
         tester = false;
     }
     return tester;
 }
+
+//When the submit button of the form has been clicked
+var submit_button = document.getElementById(AllIdNames.submit_id);
+submit_button.onclick = function (event){
+    event.preventDefault();
+    console.log(tester);
+    uploadInputs();//Uploads the inputs to the database 
+};
+
+
+//This function uploads the form inputs to the database
+function uploadInputs(){
+    var form_elem = document.getElementById(AllIdNames.form_id);//Form element
+    
+    if (tester === true){
+        console.log('Talking to the server...');
+
+        var dbname = AllIdNames.db_name_id;//gets the id of the h2 which has the database name
+        
+
+        var formData = new FormData(form_elem);//create form data of the form
+        formData.append('DatabaseName', dbname);//appends the name of the database and sends it to the validor to check for the database to add to
+
+        var database = new Connect_Database();//Connects to the database, creates a new class
+        database.UploadDirectiveTable(formData, form_elem);//Connects to the object //error
+    
+    }else{
+
+        var error_span = document.createElement('p');//create element for error
+        error_span.classList.add('derror');//adds the error class
+        error_span.innerHTML = '<b>One or more fields are without values. Input values!</b>';
+        form_elem.after(error_span);//append result from database
+
+    }
+
+
+}
+
+//Button to delete particular row from the database
+
+function activate_delete() {
+
+    var delete_buttons = document.getElementsByClassName(AllClassNames.delete_className);
+    // console.log(delete_buttons.length);
+
+    Array.from(delete_buttons).forEach(function (element) {
+        //console.log(element);
+        element.onclick = function(event){
+            event.preventDefault();
+            console.log('Delete '+ element.value);
+            
+            
+        var con = confirm("Are you sure you want to delete this field?");
+            
+            if (con === true) {
+                var database_name = AllIdNames.db_name_id;//name of database
+                var database = new Connect_Database();
+                database.delTable(element.value, database_name);//talk to delete function
+                console.log('Deleting...');
+            } else {
+                alert("Okay");
+            }
+        };
+    });
+}
+
+
+
+
 //This function replaces the generic footer text with date added to new one
 function footer_text(){
     // Display the footer text with current year
@@ -396,7 +555,10 @@ function footer_text(){
     text_element.innerHTML = '&copy;' + ' Voltex Designs ' + current_year;
 }
 
+
 // Still in test phase functions
+
+//Test tester element
 
 //Center the switch Button
 function centerSwitch(){
@@ -407,15 +569,14 @@ console.log(Number(switch_button.style.width));
 var window_width = window.screen.width;
 }
 
-//This function returns the ID and/or Class name, use in Validating input
-function returnId(elem){
-var idName = elem.id;
-var classname = elem.className;
-return idName;
-}
-
-
 //End of test Phase functions
 
-window.onload = showTime(),  retreive_checkbox('myonoffswitch'), change('myonoffswitch'), modalFunc(), footer_text();
-//This onload is at the buttom because it uses varaiables that are in the middle of the code
+document.addEventListener('readystatechange', function(){
+    if(document.readyState === 'complete'){
+        showTime();  //Show the time at the top of the table
+        retreive_checkbox(AllIdNames.switch_id); //set the value of the checkbox from local storage
+        change(AllIdNames.switch_id);//show the table if the checkbox is true
+        modalFunc(); //Load all the Modal functions
+        footer_text(); //Replace the generic footer with a dynamic footer tha changes date according to the current
+    }
+});

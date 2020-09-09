@@ -18,7 +18,18 @@ body{
     font-size: medium;
 }
 
+h1{
+    padding-top: 0.5em;
+}
 
+
+h2 {
+   margin-top: 1em;
+   margin-bottom: .5em;
+}
+span{
+    color: white;
+}
 
 .sticky {
     position: fixed;
@@ -29,7 +40,7 @@ body{
 
 #voltex_navigation{
     /* background-color: rgb(44, 120, 190); */
-    background-color: whitesmoke;
+    background-color: transparent;
     border: none; 
 }
 
@@ -48,12 +59,7 @@ body{
     border: none;
    
 }
-/* #myTabs li a:hover{
-    color: rgb(44, 120, 190);
-}
-#myTabs li .active{
-    color: white;
-} */
+
 .tab-pane{
     margin-bottom: 5em;
     margin-left: 2.5%;
@@ -62,8 +68,9 @@ body{
 #carousel-container{ /*The size of the image slider*/
 height: 100%;
 width: 70%; 
-
+margin-top: 1.5em;
 }
+
 #voltex_modal{
     margin-bottom: 2em;
 }
@@ -99,7 +106,7 @@ width: 70%;
 
 /*footer of the page*/
 .footer {
-    margin: 5em 0em 1em 0em;
+    padding-bottom: 1%;
     text-align: center;
     width: 100%;
     background-color: transparent;
@@ -114,46 +121,31 @@ width: 70%;
     width: 3%;
     margin-left: .5%;
 }
+.footImg:focus, .footImg:hover{
+    border-style: solid;
+    border-color: rgb(44, 120, 190);
+    border-radius: 100%;
+    border-width: 4px;
+    border-spacing: 0;
+}
 #footer-text{
     text-align: center; 
-    padding: 1em; 
+    padding: 1.5%; 
     margin: 2% ; 
     margin-bottom: 0;
-    font-weight: bold;
+    /* font-weight: bold; */
     background-color:rgb(44, 120, 190); 
     color: white;
     border-radius: 5px;
+    bottom: 0;
 }
-.glyphicon-cloud{
-    color: rgb(44, 120, 190);
-    /* background-color: black; */
-}
-
 
 /* End of bootstrap */
 
- h1{
-     padding-top: 0.5em;
- }
- 
-
-h2 {
-    margin-top: 1em;
-    margin-bottom: .5em;
-}
- span{
-     color: white;
- }
 
 
 
-.Titterlinks {
-    position: absolute;
-    padding-left: 15%;
-    text-align: center;
-    width: 70%;
-   
-}
+
 
 /*It is rendered from from the js file to animate the H1*/
 .bigger{ 
@@ -166,27 +158,10 @@ h2 {
 }
 
 
-
-
-.ImgBigger{
-
-    border-style: solid;
-    border-color: rgb(44, 120, 190);
-    border-radius: 100%;
-    border-width: 4px;
-    border-spacing: 0;
-}
-
-#news{
-    width: 10%;
-    text-align: right;
-}
-
-
 /*Use this code to develope all the feautures you want
  for your mobile website/application. e.g the navigation
  and the footer*/
- @media only screen and (max-width: 600px) {
+@media only screen and (max-width: 600px) {
     #carousel-container{
         height: 50%;
         width: 100%; 
@@ -204,6 +179,15 @@ h2 {
         width: 9%;
         margin-left: 1%;
     }
+    #head-logo{
+        margin: auto;
+        display: flex;
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
+    .navbar-brand{
+        margin-bottom: 2%;
+    }
+}
 
  
