@@ -113,15 +113,16 @@ function say_hi(time_label){
 
 //A Class that stores and connect to the database has its properties
 //This classs is a database connect class, it values only connects to database, and render the results
-class Connect_Database { 
-    getSBUresult(table) {
+function Connect_Database() { 
+    
+    this.getSBUresult = function(table) {
         downloadHTML('../NTB Databse/database.php?document=SBUoptions', function (result) { //Directive Table
             table.innerHTML = result; //render result to html
         });
-    }
+    };
 
 
-    getDirectiveTable(result_element, next_sibling) {
+    this.getDirectiveTable = function(result_element, next_sibling) {
         downloadHTML('../NTB Databse/database.php?document=table1', function (result) { //Directive Table
         
         if (result_element){//directive table id in (AllIdNames) object
@@ -142,12 +143,12 @@ class Connect_Database {
         });
 
     
-    }
+    };
 
     //Uploads the data to the database
     //@params (dataF) is the form data from all the inputs
     //@params (form) is the form
-    UploadDirectiveTable(dataF, form){
+    this.UploadDirectiveTable = function(dataF, form){
 
         downloadHTMLPost('../NTB Databse/uploadData.php', dataF, function (result) {
  
@@ -174,13 +175,13 @@ class Connect_Database {
            }
           
         });
-    }
+    };
 
     //Delete from database
     //Function to delete a value from the specific database
     //@param (value) is the id of the particular row of the table
     //@param (databasename) is the particular database that the button is in
-    delTable(value, databasename) {
+    this.delTable = function(value, databasename) {
 
         console.log('Deleting value...');
 
@@ -204,7 +205,7 @@ class Connect_Database {
             
         });
 
-    }
+    };
 }
 
 //This function converts a string to boolean function
